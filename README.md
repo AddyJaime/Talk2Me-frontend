@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://github.com/AddyJaime/Talk2Me-frontend/blob/main/Talk2Me/src/assets/images/Talk2me-logo.png?raw=true" alt="" width="250"/>
+  <img src="https://github.com/AddyJaime/Talk2Me-frontend/blob/main/Talk2Me/src/assets/images/Talk2me-logo.png?raw=true" alt="" width="500"/>
 </p>
 
 # 📱 Talk2Me - Real-Time Chat Application (Frontend)
