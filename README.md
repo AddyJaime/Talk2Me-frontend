@@ -1,3 +1,5 @@
+![Talk2Me Logo](assets/images/Talk2me-logo.png)
+
 # 📱 Talk2Me - Real-Time Chat Application (Frontend)
 
 🚀 **Talk2Me** is a real-time chat application built with **React Native, Expo, WebSockets, and PostgreSQL**.  
