@@ -2,25 +2,25 @@
   "extends": "expo/tsconfig.base",
   "compilerOptions": {
     "strict": true,
-    "noImplicitAny": true
+    "noImplicitAny": true,
+    "baseUrl": "./src",
+    "paths": {
+      "@api/*": ["api/*"],
+      "@assets/*": ["assets/*"],
+      "@components/*": ["components/*"],
+      "@constants/*": ["Constants/*"],
+      "@contexts/*": ["contexts/*"],
+      "@hooks/*": ["hooks/*"],
+      "@navigation/*": ["navigation/*"],
+      "@routes/*": ["Routes/*"],
+      "@screens/*": ["screens/*"],
+      "@styles/*": ["styles/*"],
+      "@utils/*": ["utils/*"]
+    },
+    "noUnusedLocals": true, //delete variables that are not being used
+    "noImplicitReturns": true, //force every function to return something
+    "forceConsistentCasingInFileNames": true, //force consistent casing file name
+    "resolveJsonModule": true //allow import json files
   },
-  "baseUrl": "./src",
-  "paths": {
-    "@api/*": ["api/*"],
-    "@assets/*": ["assets/*"],
-    "@components/*": ["components/*"],
-    "@constants/*": ["Constants/*"],
-    "@contexts/*": ["contexts/*"],
-    "@hooks/*": ["hooks/*"],
-    "@navigation/*": ["navigation/*"],
-    "@routes/*": ["Routes/*"],
-    "@screens/*": ["screens/*"],
-    "@styles/*": ["styles/*"],
-    "@utils/*": ["utils/*"]
-  },
-  "noUnusedLocals": true, //delete variables that are not being used
-  "noImplicitReturns": true, //force every function to return something
-  "forceConsistentCasingInFileNames": true, //force consistent casing file name
-  "resolveJsonModule": true, //allow import json files
   "exclude": ["node_modules", "babel.config.js", "metro.config.js"] //when typscript compile excluse this
 }
