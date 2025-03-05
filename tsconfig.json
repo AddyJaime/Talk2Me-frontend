@@ -15,7 +15,8 @@
       "@routes/*": ["Routes/*"],
       "@screens/*": ["screens/*"],
       "@styles/*": ["styles/*"],
-      "@utils/*": ["utils/*"]
+      "@utils/*": ["utils/*"],
+      "@types/*": ["types/*"]
     },
     "noUnusedLocals": true, //delete variables that are not being used
     "noImplicitReturns": true, //force every function to return something
