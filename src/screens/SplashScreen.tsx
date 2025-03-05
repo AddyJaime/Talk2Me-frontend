@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { Image, View, Text, StyleSheet, Dimensions } from 'react-native';
 
 // Navigation
 import { NavigationProp, useNavigation } from '@react-navigation/native';
@@ -7,29 +7,37 @@ import { NavigationProp, useNavigation } from '@react-navigation/native';
 // types
 import { RootStackParamList } from 'types';
 
+// image
+import logo from '@assets/images/Talk2me-logo.png';
+
+// Obtener dimensiones de la pantalla
+const { width, height } = Dimensions.get('window');
+
 const SplashScreen: React.FC = () => {
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
 
   useEffect(() => {
     setTimeout(() => {
       navigation.navigate('Login');
-    }, 3000);
+    });
   }, []);
 
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>here goes the splash screen</Text>
+      <Image source={logo} style={styles.logo} />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    padding: 10,
-    backgroundColor: '#eee',
+    flex: 1,
   },
-  text: {
-    fontSize: 16,
+  logo: {
+    width: width * 0.9,
+    height: height * 0.9,
+    resizeMode: 'contain',
+    alignSelf: 'center',
   },
 });
 
