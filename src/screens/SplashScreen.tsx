@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Image, View, StyleSheet, ActivityIndicator } from 'react-native';
-import { StatusBar } from 'native-base';
+import { StatusBar } from 'react-native';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { RootStackParamList } from 'types';
 import logo from '@assets/images/Talk2me-logo.png';
@@ -8,12 +8,12 @@ import logo from '@assets/images/Talk2me-logo.png';
 const SplashScreen: React.FC = () => {
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
 
-  // useEffect(() => {
-  //   const timeoutId = setTimeout(() => {
-  //     navigation.navigate('Login');
-  //   }, 3000);
-  //   return () => clearTimeout(timeoutId);
-  // }, [navigation]);
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      navigation.navigate('Login');
+    }, 3000);
+    return () => clearTimeout(timeoutId);
+  }, [navigation]);
 
   return (
     <View style={styles.container}>

@@ -13,14 +13,31 @@
     },
     "ios": {
       "supportsTablet": true,
-      "jsEngine": "jsc"
+      "jsEngine": "jsc",
+      "newArchEnabled": true
     },
     "android": {
       "adaptiveIcon": {
         "backgroundColor": "#ffffff"
       },
-      "jsEngine": "jsc"
+      "jsEngine": "jsc",
+      "newArchEnabled": true
     },
-    "web": {}
+    "web": {},
+    "plugins": [
+      [
+        "expo-build-properties",
+        {
+          "ios": {
+            "newArchEnabled": true,
+            "bridgeless": true
+          },
+          "android": {
+            "newArchEnabled": true,
+            "bridgeless": true
+          }
+        }
+      ]
+    ]
   }
 }
