@@ -9,35 +9,21 @@
     "splash": {
       "image": "./src/assets/images/Talk2me-logo.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#0f2034"
     },
     "ios": {
       "supportsTablet": true,
       "jsEngine": "jsc",
-      "newArchEnabled": true
+      "newArchEnabled": false
     },
     "android": {
       "adaptiveIcon": {
-        "backgroundColor": "#ffffff"
+        "backgroundColor": "#0f2034"
       },
       "jsEngine": "jsc",
-      "newArchEnabled": true
+      "newArchEnabled": false
     },
     "web": {},
-    "plugins": [
-      [
-        "expo-build-properties",
-        {
-          "ios": {
-            "newArchEnabled": true,
-            "bridgeless": true
-          },
-          "android": {
-            "newArchEnabled": true,
-            "bridgeless": true
-          }
-        }
-      ]
-    ]
+    "plugins": []
   }
 }

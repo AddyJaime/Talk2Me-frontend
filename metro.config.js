@@ -1,12 +1,14 @@
 const { getDefaultConfig } = require('@expo/metro-config');
 
-const defaultConfig = getDefaultConfig(__dirname);
+module.exports = (() => {
+  const config = getDefaultConfig(__dirname);
 
-defaultConfig.resolver.assetExts = [...defaultConfig.resolver.assetExts, 'cjs'];
-defaultConfig.resolver.sourceExts = [
-  ...defaultConfig.resolver.sourceExts,
-  'cjs',
-  'mjs',
-];
+  config.resolver.assetExts = [...config.resolver.assetExts, 'cjs'];
+  config.resolver.sourceExts = [...config.resolver.sourceExts, 'cjs', 'mjs'];
 
-module.exports = defaultConfig;
+  config.resolver.assetExts = config.resolver.assetExts.filter(
+    (ext) => ext !== 'flow',
+  );
+
+  return config;
+})();
