@@ -5,15 +5,22 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#EDEDED',
+    backgroundColor: '#EAEAEA',
   },
   logo: {
-    width: 100,
-    height: 100,
+    width: 200,
+    height: 200,
     borderRadius: 10,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 10 },
+    shadowOpacity: 0.9,
+    shadowRadius: 8,
+    marginBottom: 100,
   },
   form: {
     width: '80%',
+
+    marginBottom: 150,
   },
   input: {
     height: 45,
