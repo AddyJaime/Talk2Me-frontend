@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
     width: 200,
     height: 200,
     borderRadius: 10,
-    marginBottom: 150,
+    marginBottom: 120,
   },
   backgroundImage: {
     ...StyleSheet.absoluteFillObject,
@@ -38,18 +38,16 @@ const styles = StyleSheet.create({
   },
   form: {
     width: '75%',
-
-    marginBottom: 120,
+    marginBottom: 20,
   },
   input: {
     height: 45,
-    borderColor: '#ccc',
+    borderColor: '#ddd',
     borderWidth: 1,
     borderRadius: 8,
     paddingHorizontal: 10,
     marginBottom: 20,
-    backgroundColor: 'white',
-    color: 'black',
+    backgroundColor: '#fff',
   },
   button: {
     width: '70%',
@@ -63,6 +61,19 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 16,
     fontWeight: 'bold',
+  },
+  signUpLink: {
+    textAlign: 'center',
+    justifyContent: 'center',
+    flexDirection: 'row',
+    paddingRight: 30,
+    margin: 20,
+  },
+  signUpButton: {
+    color: '#0f2034',
+    fontWeight: 'bold',
+    paddingLeft: 5,
+    fontSize: 15,
   },
 });
 

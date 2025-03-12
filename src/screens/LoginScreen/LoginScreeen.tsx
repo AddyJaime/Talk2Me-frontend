@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   View,
   TextInput,
@@ -34,6 +34,7 @@ const LoginScreen: React.FC = () => {
             <TextInput
               style={styles.input}
               placeholder="Email address"
+              placeholderTextColor="#888"
               keyboardType="email-address"
               onChangeText={field.onChange}
               value={field.value}
@@ -47,8 +48,10 @@ const LoginScreen: React.FC = () => {
             <TextInput
               style={styles.input}
               placeholder="Password"
+              placeholderTextColor="#888"
               onChange={field.onChange}
               value={field.value}
+              secureTextEntry={true}
             />
           )}
         />
@@ -59,6 +62,12 @@ const LoginScreen: React.FC = () => {
         >
           <Text style={styles.buttonText}>Login</Text>
         </TouchableOpacity>
+        <View style={styles.signUpLink}>
+          <Text>Don't have an account?</Text>
+          <TouchableOpacity>
+            <Text style={styles.signUpButton}>SignUp</Text>
+          </TouchableOpacity>
+        </View>
         <StatusBar backgroundColor="black" />
       </View>
     </View>
