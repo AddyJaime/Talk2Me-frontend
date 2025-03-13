@@ -9,12 +9,17 @@ import {
 } from 'react-native';
 import { Controller, useForm } from 'react-hook-form';
 import styles from '@screens/LoginScreen/styles';
+import Iconicons from 'react-native-vector-icons/Ionicons';
 import talk2meBgOff from '@assets/images/Talk2me-Background-Off.png';
 import backgroundImage from '@assets/images/background.png';
 import lightImage from '@assets/images/light.png';
 
+// Animations
+import Animated, { FadeIn, FadeInUp, FadeOut } from 'react-native-reanimated';
+
 const LoginScreen: React.FC = () => {
   const { control, handleSubmit } = useForm();
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
   const onSubmit = () => {
     console.log('Data');
@@ -22,7 +27,11 @@ const LoginScreen: React.FC = () => {
 
   return (
     <View style={styles.container}>
-      <Image source={backgroundImage} style={styles.backgroundImage} />
+      <Animated.Image
+        entering={FadeInUp.delay(200).duration(1000)}
+        source={backgroundImage}
+        style={styles.backgroundImage}
+      />
       <Image source={lightImage} style={styles.lightImage} />
       <Image source={lightImage} style={styles.lightImageTwo} />
       <Image source={talk2meBgOff} style={styles.logo} />
@@ -51,10 +60,20 @@ const LoginScreen: React.FC = () => {
               placeholderTextColor="#888"
               onChange={field.onChange}
               value={field.value}
-              secureTextEntry={true}
+              secureTextEntry={!isPasswordVisible}
             />
           )}
         />
+
+        <TouchableOpacity
+          onPress={() => setIsPasswordVisible(!isPasswordVisible)}
+        >
+          <Iconicons
+            name={isPasswordVisible ? 'eye-off' : 'eye'}
+            size={22}
+            color="#888"
+          />
+        </TouchableOpacity>
 
         <TouchableOpacity
           style={styles.button}
@@ -68,7 +87,7 @@ const LoginScreen: React.FC = () => {
             <Text style={styles.signUpButton}>SignUp</Text>
           </TouchableOpacity>
         </View>
-        <StatusBar backgroundColor="black" />
+        <StatusBar barStyle="light-content" />
       </View>
     </View>
   );
