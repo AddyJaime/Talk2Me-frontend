@@ -15,7 +15,12 @@ import backgroundImage from '@assets/images/background.png';
 import lightImage from '@assets/images/light.png';
 
 // Animations
-import Animated, { FadeIn, FadeInUp, FadeOut } from 'react-native-reanimated';
+import Animated, {
+  FadeIn,
+  FadeInDown,
+  FadeInUp,
+  FadeOut,
+} from 'react-native-reanimated';
 
 const LoginScreen: React.FC = () => {
   const { control, handleSubmit } = useForm();
@@ -27,13 +32,17 @@ const LoginScreen: React.FC = () => {
 
   return (
     <View style={styles.container}>
+      <Image source={backgroundImage} style={styles.backgroundImage} />
       <Animated.Image
-        entering={FadeInUp.delay(200).duration(1000)}
-        source={backgroundImage}
-        style={styles.backgroundImage}
+        entering={FadeInUp.delay(200).duration(1000).springify().damping(3)}
+        source={lightImage}
+        style={styles.lightImage}
       />
-      <Image source={lightImage} style={styles.lightImage} />
-      <Image source={lightImage} style={styles.lightImageTwo} />
+      <Animated.Image
+        entering={FadeInUp.delay(400).duration(1000).springify().damping(3)}
+        source={lightImage}
+        style={styles.lightImageTwo}
+      />
       <Image source={talk2meBgOff} style={styles.logo} />
       <View style={styles.form}>
         <Controller
@@ -79,12 +88,19 @@ const LoginScreen: React.FC = () => {
           style={styles.button}
           onPress={handleSubmit(onSubmit)}
         >
-          <Text style={styles.buttonText}>Login</Text>
+          <Animated.Text
+            entering={FadeInUp.duration(1000).springify()}
+            style={styles.buttonText}
+          >
+            Login
+          </Animated.Text>
         </TouchableOpacity>
         <View style={styles.signUpLink}>
-          <Text>Don't have an account?</Text>
+          <Animated.Text entering={FadeInDown.duration(200)}>
+            Don't have an account?
+          </Animated.Text>
           <TouchableOpacity>
-            <Text style={styles.signUpButton}>SignUp</Text>
+            <Animated.Text style={styles.signUpButton}>SignUp</Animated.Text>
           </TouchableOpacity>
         </View>
         <StatusBar barStyle="light-content" />
