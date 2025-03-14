@@ -34,47 +34,51 @@ const LoginScreen: React.FC = () => {
     <View style={styles.container}>
       <Image source={backgroundImage} style={styles.backgroundImage} />
       <Animated.Image
-        entering={FadeInUp.delay(200).duration(1000).springify().damping(3)}
+        entering={FadeInUp.delay(1000).duration(1000).springify().damping(3)}
         source={lightImage}
         style={styles.lightImage}
       />
       <Animated.Image
-        entering={FadeInUp.delay(400).duration(1000).springify().damping(3)}
+        entering={FadeInUp.delay(1000).duration(1000).springify().damping(3)}
         source={lightImage}
         style={styles.lightImageTwo}
       />
       <Image source={talk2meBgOff} style={styles.logo} />
       <View style={styles.form}>
-        <Controller
-          control={control}
-          name="Email"
-          render={({ field }) => (
-            <TextInput
-              style={styles.input}
-              placeholder="Email address"
-              placeholderTextColor="#888"
-              keyboardType="email-address"
-              onChangeText={field.onChange}
-              value={field.value}
-            />
-          )}
-        />
-        <Controller
-          control={control}
-          name="password"
-          render={({ field }) => (
-            <TextInput
-              style={styles.input}
-              placeholder="Password"
-              placeholderTextColor="#888"
-              onChange={field.onChange}
-              value={field.value}
-              secureTextEntry={!isPasswordVisible}
-            />
-          )}
-        />
+        <Animated.View
+          entering={FadeInUp.delay(1000).duration(1000).springify().damping(3)}
+        >
+          <Controller
+            control={control}
+            name="Email"
+            render={({ field }) => (
+              <TextInput
+                style={styles.input}
+                placeholder="Email address"
+                placeholderTextColor="black"
+                keyboardType="email-address"
+                onChangeText={field.onChange}
+                value={field.value}
+              />
+            )}
+          />
+          <Controller
+            control={control}
+            name="password"
+            render={({ field }) => (
+              <TextInput
+                style={styles.input}
+                placeholder="Password"
+                placeholderTextColor="black"
+                onChange={field.onChange}
+                value={field.value}
+                secureTextEntry={!isPasswordVisible}
+              />
+            )}
+          />
+        </Animated.View>
 
-        <TouchableOpacity
+        {/* <TouchableOpacity
           onPress={() => setIsPasswordVisible(!isPasswordVisible)}
         >
           <Iconicons
@@ -82,7 +86,7 @@ const LoginScreen: React.FC = () => {
             size={22}
             color="#888"
           />
-        </TouchableOpacity>
+        </TouchableOpacity> */}
 
         <TouchableOpacity
           style={styles.button}
@@ -95,14 +99,16 @@ const LoginScreen: React.FC = () => {
             Login
           </Animated.Text>
         </TouchableOpacity>
-        <View style={styles.signUpLink}>
-          <Animated.Text entering={FadeInDown.duration(200)}>
-            Don't have an account?
-          </Animated.Text>
-          <TouchableOpacity>
-            <Animated.Text style={styles.signUpButton}>SignUp</Animated.Text>
-          </TouchableOpacity>
-        </View>
+        <Animated.View
+          entering={FadeInUp.delay(1000).duration(1000).springify().damping(3)}
+        >
+          <View style={styles.signUpLink}>
+            <Text style={styles.signUpText}>Don't have an account?</Text>
+            <TouchableOpacity>
+              <Text style={styles.signUpButton}>SignUp</Text>
+            </TouchableOpacity>
+          </View>
+        </Animated.View>
         <StatusBar barStyle="light-content" />
       </View>
     </View>

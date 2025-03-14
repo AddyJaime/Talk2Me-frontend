@@ -42,12 +42,13 @@ const styles = StyleSheet.create({
   },
   input: {
     height: 45,
-    borderColor: '#ddd',
+    borderColor: 'black',
     borderWidth: 1,
     borderRadius: 8,
     paddingHorizontal: 10,
     marginBottom: 20,
     backgroundColor: '#fff',
+    fontSize: 20,
   },
   button: {
     width: '70%',
@@ -68,12 +69,16 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     paddingRight: 30,
     margin: 20,
+    fontSize: 20,
+  },
+  signUpText: {
+    fontSize: 20,
   },
   signUpButton: {
     color: '#0f2034',
     fontWeight: 'bold',
     paddingLeft: 5,
-    fontSize: 15,
+    fontSize: 20,
   },
 });
 
