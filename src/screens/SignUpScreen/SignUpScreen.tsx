@@ -1,11 +1,12 @@
 import React from 'react';
+
 // react components
 import {
   View,
+  Text,
   TextInput,
   Image,
   TouchableOpacity,
-  Text,
   StatusBar,
 } from 'react-native';
 
@@ -13,7 +14,7 @@ import {
 import { Controller, useForm } from 'react-hook-form';
 
 // Styles
-import styles from '@screens/LoginScreen/styles';
+import styles from '@screens/SignUpScreen/styles';
 
 // images
 import talk2meBgOff from '@assets/images/Talk2me-Background-Off.png';
@@ -23,83 +24,96 @@ import lightImage from '@assets/images/light.png';
 // Animations
 import Animated, { FadeInUp } from 'react-native-reanimated';
 
-// navigation
-import { NavigationProp, useNavigation } from '@react-navigation/native';
-
-import { RootStackParamList } from 'types';
-
-const LoginScreen: React.FC = () => {
+const SignUpScreen: React.FC = () => {
   const { control, handleSubmit } = useForm();
-  const navigation = useNavigation<NavigationProp<RootStackParamList>>();
 
   const onSubmit = () => {
-    console.log('Data');
+    console.log('data');
   };
 
   return (
     <View style={styles.container}>
       <Image source={backgroundImage} style={styles.backgroundImage} />
       <Animated.Image
-        entering={FadeInUp.delay(1000).duration(1000).springify().damping(2)}
         source={lightImage}
+        entering={FadeInUp.delay(1000).duration(1000).springify().damping(2)}
         style={styles.lightImage}
       />
+
       <Animated.Image
-        entering={FadeInUp.delay(1000).duration(1000).springify().damping(2)}
         source={lightImage}
+        entering={FadeInUp.delay(1000).duration(1000).springify().damping(2)}
         style={styles.lightImageTwo}
       />
       <Image source={talk2meBgOff} style={styles.logo} />
+
       <View style={styles.form}>
         <Animated.View
           entering={FadeInUp.delay(3000).duration(1000).springify().damping(3)}
         >
           <Controller
             control={control}
-            name="Email"
+            name="Full name"
             render={({ field }) => (
               <TextInput
                 style={styles.input}
-                placeholder="Email address"
+                placeholder="Full Name"
                 placeholderTextColor="black"
-                keyboardType="email-address"
-                onChangeText={field.onChange}
+                onChange={field.onChange}
                 value={field.value}
               />
             )}
           />
+
           <Controller
             control={control}
-            name="password"
+            name="Email Address"
+            render={({ field }) => (
+              <TextInput
+                style={styles.input}
+                placeholder="Email "
+                placeholderTextColor="black"
+                onChange={field.onChange}
+                value={field.value}
+              />
+            )}
+          />
+
+          <Controller
+            control={control}
+            name="Password"
             render={({ field }) => (
               <TextInput
                 style={styles.input}
                 placeholder="Password"
+                secureTextEntry={true}
                 placeholderTextColor="black"
                 onChange={field.onChange}
                 value={field.value}
-                secureTextEntry={true}
               />
             )}
           />
-        </Animated.View>
-        <Animated.View
-          entering={FadeInUp.delay(3000).duration(1000).springify().damping(3)}
-        >
-          <TouchableOpacity
-            style={styles.button}
-            onPress={handleSubmit(onSubmit)}
+          <Animated.View
+            entering={FadeInUp.delay(3000)
+              .duration(1000)
+              .springify()
+              .damping(3)}
           >
-            <Text style={styles.buttonText}>Login</Text>
-          </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.button}
+              onPress={handleSubmit(onSubmit)}
+            >
+              <Text style={styles.buttonText}>SIgnUp</Text>
+            </TouchableOpacity>
+          </Animated.View>
         </Animated.View>
         <Animated.View
           entering={FadeInUp.delay(3000).duration(1000).springify().damping(3)}
         >
-          <View style={styles.signUpLink}>
-            <Text style={styles.signUpText}>Don't have an account?</Text>
-            <TouchableOpacity onPress={() => navigation.navigate('SignUp')}>
-              <Text style={styles.signUpButton}>SignUp</Text>
+          <View style={styles.loginLink}>
+            <Text style={styles.loginText}>Already have an account?</Text>
+            <TouchableOpacity>
+              <Text style={styles.loginButton}>Login</Text>
             </TouchableOpacity>
           </View>
         </Animated.View>
@@ -109,4 +123,4 @@ const LoginScreen: React.FC = () => {
   );
 };
 
-export default LoginScreen;
+export default SignUpScreen;

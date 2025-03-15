@@ -5,6 +5,8 @@ import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { RootStackParamList } from 'types';
 import logo from '@assets/images/Talk2me-logo.png';
 
+import styles from '@screens/SplashScreen/styles';
+
 const SplashScreen: React.FC = () => {
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
 
@@ -25,28 +27,5 @@ const SplashScreen: React.FC = () => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#0f2034',
-  },
-  content: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingBottom: 120,
-  },
-  logo: {
-    width: 600,
-    height: 600,
-    resizeMode: 'contain',
-    marginBottom: 20,
-  },
-  loader: {
-    marginTop: -80,
-  },
-});
 
 export default SplashScreen;

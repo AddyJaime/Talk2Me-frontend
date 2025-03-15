@@ -63,16 +63,16 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
   },
-  signUpLink: {
+  loginLink: {
     flexDirection: 'row',
     marginTop: 20,
   },
-  signUpText: {
+  loginText: {
     fontSize: 18,
     color: '#455A64',
     marginLeft: 20,
   },
-  signUpButton: {
+  loginButton: {
     fontSize: 18,
     fontWeight: 'bold',
     color: '#007AFF',
