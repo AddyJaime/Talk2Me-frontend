@@ -24,8 +24,15 @@ import lightImage from '@assets/images/light.png';
 // Animations
 import Animated, { FadeInUp } from 'react-native-reanimated';
 
+// navigation
+import { NavigationProp, useNavigation } from '@react-navigation/native';
+
+// Param
+import { RootStackParamList } from 'types';
+
 const SignUpScreen: React.FC = () => {
   const { control, handleSubmit } = useForm();
+  const navigation = useNavigation<NavigationProp<RootStackParamList>>();
 
   const onSubmit = () => {
     console.log('data');
@@ -36,20 +43,20 @@ const SignUpScreen: React.FC = () => {
       <Image source={backgroundImage} style={styles.backgroundImage} />
       <Animated.Image
         source={lightImage}
-        entering={FadeInUp.delay(1000).duration(1000).springify().damping(2)}
+        entering={FadeInUp.delay(500).duration(1000).springify().damping(2)}
         style={styles.lightImage}
       />
 
       <Animated.Image
         source={lightImage}
-        entering={FadeInUp.delay(1000).duration(1000).springify().damping(2)}
+        entering={FadeInUp.delay(500).duration(1000).springify().damping(2)}
         style={styles.lightImageTwo}
       />
       <Image source={talk2meBgOff} style={styles.logo} />
 
       <View style={styles.form}>
         <Animated.View
-          entering={FadeInUp.delay(3000).duration(1000).springify().damping(3)}
+          entering={FadeInUp.delay(500).duration(1000).springify().damping(3)}
         >
           <Controller
             control={control}
@@ -94,10 +101,7 @@ const SignUpScreen: React.FC = () => {
             )}
           />
           <Animated.View
-            entering={FadeInUp.delay(3000)
-              .duration(1000)
-              .springify()
-              .damping(3)}
+            entering={FadeInUp.delay(500).duration(1000).springify().damping(3)}
           >
             <TouchableOpacity
               style={styles.button}
@@ -108,11 +112,11 @@ const SignUpScreen: React.FC = () => {
           </Animated.View>
         </Animated.View>
         <Animated.View
-          entering={FadeInUp.delay(3000).duration(1000).springify().damping(3)}
+          entering={FadeInUp.delay(500).duration(1000).springify().damping(3)}
         >
           <View style={styles.loginLink}>
             <Text style={styles.loginText}>Already have an account?</Text>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.navigate('Login')}>
               <Text style={styles.loginButton}>Login</Text>
             </TouchableOpacity>
           </View>

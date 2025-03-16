@@ -40,19 +40,19 @@ const LoginScreen: React.FC = () => {
     <View style={styles.container}>
       <Image source={backgroundImage} style={styles.backgroundImage} />
       <Animated.Image
-        entering={FadeInUp.delay(1000).duration(1000).springify().damping(2)}
+        entering={FadeInUp.delay(500).duration(1000).springify().damping(2)}
         source={lightImage}
         style={styles.lightImage}
       />
       <Animated.Image
-        entering={FadeInUp.delay(1000).duration(1000).springify().damping(2)}
+        entering={FadeInUp.delay(500).duration(1000).springify().damping(2)}
         source={lightImage}
         style={styles.lightImageTwo}
       />
       <Image source={talk2meBgOff} style={styles.logo} />
       <View style={styles.form}>
         <Animated.View
-          entering={FadeInUp.delay(3000).duration(1000).springify().damping(3)}
+          entering={FadeInUp.delay(500).duration(1000).springify().damping(3)}
         >
           <Controller
             control={control}
@@ -84,7 +84,7 @@ const LoginScreen: React.FC = () => {
           />
         </Animated.View>
         <Animated.View
-          entering={FadeInUp.delay(3000).duration(1000).springify().damping(3)}
+          entering={FadeInUp.delay(500).duration(1000).springify().damping(3)}
         >
           <TouchableOpacity
             style={styles.button}
@@ -94,7 +94,7 @@ const LoginScreen: React.FC = () => {
           </TouchableOpacity>
         </Animated.View>
         <Animated.View
-          entering={FadeInUp.delay(3000).duration(1000).springify().damping(3)}
+          entering={FadeInUp.delay(500).duration(1000).springify().damping(3)}
         >
           <View style={styles.signUpLink}>
             <Text style={styles.signUpText}>Don't have an account?</Text>
