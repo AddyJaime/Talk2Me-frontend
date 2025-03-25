@@ -29,13 +29,25 @@ import { NavigationProp, useNavigation } from '@react-navigation/native';
 
 // Param
 import { RootStackParamList } from 'types';
+import { registerUser } from '@api/authApi';
 
 const SignUpScreen: React.FC = () => {
   const { control, handleSubmit } = useForm();
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
 
-  const onSubmit = () => {
-    console.log('data');
+  const onSubmit = async (data: any) => {
+    console.log('on submit fue llamado', data);
+    try {
+      const response = await registerUser(
+        data.FullName,
+        data.Email,
+        data.Password,
+      );
+      console.log(response.user);
+      navigation.navigate('Chat');
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -60,7 +72,8 @@ const SignUpScreen: React.FC = () => {
         >
           <Controller
             control={control}
-            name="Full name"
+            name="FullName"
+            rules={{ required: true }}
             render={({ field }) => (
               <TextInput
                 style={styles.input}
@@ -74,7 +87,8 @@ const SignUpScreen: React.FC = () => {
 
           <Controller
             control={control}
-            name="Email Address"
+            name="Email"
+            rules={{ required: true }}
             render={({ field }) => (
               <TextInput
                 style={styles.input}

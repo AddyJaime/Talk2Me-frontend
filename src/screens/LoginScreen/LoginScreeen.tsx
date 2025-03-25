@@ -28,12 +28,21 @@ import { NavigationProp, useNavigation } from '@react-navigation/native';
 
 import { RootStackParamList } from 'types';
 
+import { loginUser } from '@api/authApi';
+
 const LoginScreen: React.FC = () => {
   const { control, handleSubmit } = useForm();
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
 
-  const onSubmit = () => {
-    console.log('Data');
+  const onSubmit = async (data: any) => {
+    try {
+      const { token, user } = await loginUser(data.Email, data.password);
+      console.log(token);
+      console.log(user);
+      navigation.navigate('Chat');
+    } catch (error) {
+      console.log('Error login in', error);
+    }
   };
 
   return (
