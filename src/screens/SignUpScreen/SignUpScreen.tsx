@@ -35,10 +35,11 @@ const SignUpScreen: React.FC = () => {
   const { control, handleSubmit } = useForm();
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
 
-  const onSubmit = async (data: any) => {
+  const onSubmit = async (formValues: any) => {
     try {
-      const response = await registerUser(data);
-      console.log(response.user);
+      // esto es lo quew pasa aqui ahora que se que tu con register user ya agregaste al usuario ahora dejam dejarlo pasar
+      const backendData = await registerUser(formValues);
+      console.log(backendData.user);
       navigation.navigate('Chat');
     } catch (error) {
       console.log(error);

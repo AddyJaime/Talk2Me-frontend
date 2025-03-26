@@ -12,18 +12,24 @@ export const loginUser = async (email: string, password: string) => {
   }
 };
 
-export const registerUser = async (data: {
+type RegisterForm = {
   fullName: string;
   email: string;
   password: string;
-}) => {
+};
+
+// aqui hay que indicarle a typscript que tipo de datos son por esa razon se le especific wue tipo de datos son
+export const registerUser = async (formValues: RegisterForm) => {
   try {
-    const response = await API.post('/auth/register', {
-      fullName: data.fullName,
-      email: data.email,
-      password: data.password,
+    // aqui axios necesita recibir el cuerpo del req (body) como un objecto json no solo como una variable, pero si los datos ya estan listo se pueden enviar como formvalues y listo
+    const axiosResponse = await API.post('/auth/register', {
+      fullName: formValues.fullName,
+      email: formValues.email,
+      password: formValues.password,
     });
-    return response.data;
+    const backendData = axiosResponse.data;
+    // replyData se vuelve serverReply en la funcion que lo llamo que es onsubmit
+    return backendData;
   } catch (error: any) {
     console.log(
       'Error registering user',
