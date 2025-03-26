@@ -12,16 +12,16 @@ export const loginUser = async (email: string, password: string) => {
   }
 };
 
-export const registerUser = async (
-  fullName: string,
-  email: string,
-  password: string,
-) => {
+export const registerUser = async (data: {
+  fullName: string;
+  email: string;
+  password: string;
+}) => {
   try {
     const response = await API.post('/auth/register', {
-      fullName,
-      email,
-      password,
+      fullName: data.fullName,
+      email: data.email,
+      password: data.password,
     });
     return response.data;
   } catch (error: any) {

@@ -36,13 +36,8 @@ const SignUpScreen: React.FC = () => {
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
 
   const onSubmit = async (data: any) => {
-    console.log('on submit fue llamado', data);
     try {
-      const response = await registerUser(
-        data.FullName,
-        data.Email,
-        data.Password,
-      );
+      const response = await registerUser(data);
       console.log(response.user);
       navigation.navigate('Chat');
     } catch (error) {
@@ -79,7 +74,7 @@ const SignUpScreen: React.FC = () => {
                 style={styles.input}
                 placeholder="Full Name"
                 placeholderTextColor="black"
-                onChange={field.onChange}
+                onChangeText={field.onChange}
                 value={field.value}
               />
             )}
@@ -94,7 +89,7 @@ const SignUpScreen: React.FC = () => {
                 style={styles.input}
                 placeholder="Email "
                 placeholderTextColor="black"
-                onChange={field.onChange}
+                onChangeText={field.onChange}
                 value={field.value}
               />
             )}
@@ -109,7 +104,7 @@ const SignUpScreen: React.FC = () => {
                 placeholder="Password"
                 secureTextEntry={true}
                 placeholderTextColor="black"
-                onChange={field.onChange}
+                onChangeText={field.onChange}
                 value={field.value}
               />
             )}

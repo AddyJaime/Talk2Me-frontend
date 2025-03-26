@@ -32,7 +32,7 @@ const StackNavigator: React.FC = () => {
       <Stack.Screen
         name="Chat"
         component={ChatScreen}
-        options={{ headerShown: false }}
+        options={{ headerShown: true }}
       />
     </Stack.Navigator>
   );
