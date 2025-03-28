@@ -40,16 +40,7 @@ const styles = StyleSheet.create({
     width: '85%',
     marginBottom: -40,
   },
-  input: {
-    height: 55,
-    borderColor: '#B0BEC5',
-    borderWidth: 1,
-    borderRadius: 10,
-    paddingHorizontal: 15,
-    marginBottom: 15,
-    backgroundColor: '#fff',
-    fontSize: 18,
-  },
+
   button: {
     width: '70%',
     backgroundColor: '#0f2034',
@@ -78,10 +69,15 @@ const styles = StyleSheet.create({
     color: '#007AFF',
     marginLeft: 10,
   },
-  clearIcon: {
-    position: 'absolute',
-    right: 10,
-    top: '35%',
+  input: {
+    height: 55,
+    borderColor: '#B0BEC5',
+    borderWidth: 1,
+    borderRadius: 10,
+    paddingHorizontal: 15,
+    marginBottom: 15,
+    backgroundColor: '#fff',
+    fontSize: 18,
   },
 });
 

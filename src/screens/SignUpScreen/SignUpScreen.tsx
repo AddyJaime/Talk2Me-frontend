@@ -32,7 +32,8 @@ import { RootStackParamList } from 'types';
 import { registerUser } from '@api/authApi';
 
 // icons
-import { Feather } from '@expo/vector-icons';
+
+import ClearableInput from '@components/ClearableInput/ClearableInput';
 
 const SignUpScreen: React.FC = () => {
   const { control, handleSubmit } = useForm();
@@ -74,21 +75,12 @@ const SignUpScreen: React.FC = () => {
             rules={{ required: true }}
             render={({ field }) => (
               <View>
-                <TextInput
-                  style={styles.input}
+                <ClearableInput
                   placeholder="Full Name"
                   placeholderTextColor="black"
                   onChangeText={field.onChange}
                   value={field.value}
                 />
-                {field.value?.length > 0 && (
-                  <TouchableOpacity
-                    onPress={() => field.onChange('')}
-                    style={styles.clearIcon}
-                  >
-                    <Feather name="x-circle" size={20} color="gray" />
-                  </TouchableOpacity>
-                )}
               </View>
             )}
           />
