@@ -78,6 +78,11 @@ const styles = StyleSheet.create({
     color: '#007AFF',
     marginLeft: 10,
   },
+  clearIcon: {
+    position: 'absolute',
+    right: 10,
+    top: '35%',
+  },
 });
 
 export default styles;

@@ -31,13 +31,15 @@ import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { RootStackParamList } from 'types';
 import { registerUser } from '@api/authApi';
 
+// icons
+import { Feather } from '@expo/vector-icons';
+
 const SignUpScreen: React.FC = () => {
   const { control, handleSubmit } = useForm();
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
 
   const onSubmit = async (formValues: any) => {
     try {
-      // esto es lo quew pasa aqui ahora que se que tu con register user ya agregaste al usuario ahora dejam dejarlo pasar
       const backendData = await registerUser(formValues);
       console.log(backendData.user);
       navigation.navigate('Chat');
@@ -71,13 +73,23 @@ const SignUpScreen: React.FC = () => {
             name="FullName"
             rules={{ required: true }}
             render={({ field }) => (
-              <TextInput
-                style={styles.input}
-                placeholder="Full Name"
-                placeholderTextColor="black"
-                onChangeText={field.onChange}
-                value={field.value}
-              />
+              <View>
+                <TextInput
+                  style={styles.input}
+                  placeholder="Full Name"
+                  placeholderTextColor="black"
+                  onChangeText={field.onChange}
+                  value={field.value}
+                />
+                {field.value?.length > 0 && (
+                  <TouchableOpacity
+                    onPress={() => field.onChange('')}
+                    style={styles.clearIcon}
+                  >
+                    <Feather name="x-circle" size={20} color="gray" />
+                  </TouchableOpacity>
+                )}
+              </View>
             )}
           />
 
