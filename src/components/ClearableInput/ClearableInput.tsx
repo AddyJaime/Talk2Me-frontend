@@ -7,8 +7,8 @@ import { TextInput } from 'react-native-gesture-handler';
 
 interface ClearableInputProps {
   value: string;
+  // void signifca que la funcion no devuelve ningun valor, cuando escribo algo en los inputs la funcion se activa y aqui el string viene siendo lo que escribes
   onChangeText: (text: string) => void;
-  style?: any;
   placeholder: string;
   placeholderTextColor: string;
 }
@@ -16,13 +16,12 @@ interface ClearableInputProps {
 const ClearableInput: React.FC<ClearableInputProps> = ({
   value,
   onChangeText,
-  style,
   ...rest
 }) => {
   return (
     <View>
       <TextInput
-        style={[styles.input, style]}
+        style={styles.input}
         value={value}
         onChangeText={onChangeText}
         {...rest}
