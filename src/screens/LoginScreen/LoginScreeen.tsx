@@ -36,7 +36,7 @@ const LoginScreen: React.FC = () => {
 
   const onSubmit = async (data: any) => {
     try {
-      const { token, user } = await loginUser(data.Email, data.password);
+      const { token, user } = await loginUser(data);
       console.log(token);
       console.log(user);
       navigation.navigate('Chat');

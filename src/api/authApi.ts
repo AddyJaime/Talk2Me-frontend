@@ -1,8 +1,16 @@
 import API from './axios';
 
-export const loginUser = async (email: string, password: string) => {
+type loginForm = {
+  email: string;
+  password: string;
+};
+
+export const loginUser = async (data: loginForm) => {
   try {
-    const response = await API.post('/auth/login', { email, password });
+    const response = await API.post('/auth/login', {
+      email: data.email,
+      password: data.password,
+    });
     const { token, user } = response.data;
     // cuando aqui se retrona solo se retorna solo donde esa funcion serautilizanda
     return { token, user };
