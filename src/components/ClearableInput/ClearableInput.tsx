@@ -11,6 +11,7 @@ interface ClearableInputProps {
   onChangeText: (text: string) => void;
   placeholder: string;
   placeholderTextColor: string;
+  secureTextEntry?: boolean;
 }
 
 const ClearableInput: React.FC<ClearableInputProps> = ({

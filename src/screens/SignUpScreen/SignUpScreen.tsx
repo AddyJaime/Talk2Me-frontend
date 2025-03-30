@@ -90,8 +90,7 @@ const SignUpScreen: React.FC = () => {
             name="Email"
             rules={{ required: true }}
             render={({ field }) => (
-              <TextInput
-                style={styles.input}
+              <ClearableInput
                 placeholder="Email "
                 placeholderTextColor="black"
                 onChangeText={field.onChange}
@@ -104,8 +103,7 @@ const SignUpScreen: React.FC = () => {
             control={control}
             name="Password"
             render={({ field }) => (
-              <TextInput
-                style={styles.input}
+              <ClearableInput
                 placeholder="Password"
                 secureTextEntry={true}
                 placeholderTextColor="black"
