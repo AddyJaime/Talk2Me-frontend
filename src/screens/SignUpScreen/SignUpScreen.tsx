@@ -1,14 +1,7 @@
 import React from 'react';
 
 // react components
-import {
-  View,
-  Text,
-  TextInput,
-  Image,
-  TouchableOpacity,
-  StatusBar,
-} from 'react-native';
+import { View, Text, Image, TouchableOpacity, StatusBar } from 'react-native';
 
 // hooks
 import { Controller, useForm } from 'react-hook-form';
@@ -28,7 +21,7 @@ import Animated, { FadeInUp } from 'react-native-reanimated';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 
 // Param
-import { RootStackParamList } from 'types';
+import { RootStackParamList } from '../../types';
 import { registerUser } from '@api/authApi';
 
 // icons
@@ -36,13 +29,18 @@ import { registerUser } from '@api/authApi';
 import ClearableInput from '@components/ClearableInput/ClearableInput';
 
 const SignUpScreen: React.FC = () => {
-  const { control, handleSubmit } = useForm();
+  const { control, handleSubmit, reset } = useForm();
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
 
   const onSubmit = async (formValues: any) => {
     try {
       const backendData = await registerUser(formValues);
       console.log(backendData.user);
+      reset({
+        FullName: formValues.FullName,
+        Email: formValues.Email,
+        Password: '',
+      });
       navigation.navigate('Chat');
     } catch (error) {
       console.log(error);
@@ -105,7 +103,7 @@ const SignUpScreen: React.FC = () => {
             render={({ field }) => (
               <ClearableInput
                 placeholder="Password"
-                secureTextEntry={true}
+                secureTextEntry={false}
                 placeholderTextColor="black"
                 onChangeText={field.onChange}
                 value={field.value}

@@ -26,19 +26,26 @@ import Animated, { FadeInUp } from 'react-native-reanimated';
 // navigation
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 
-import { RootStackParamList } from 'types';
+import { RootStackParamList } from '../../types';
 
 import { loginUser } from '@api/authApi';
+import ClearableInput from '@components/ClearableInput/ClearableInput';
+
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const LoginScreen: React.FC = () => {
-  const { control, handleSubmit } = useForm();
+  const { control, handleSubmit, reset } = useForm();
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
 
   const onSubmit = async (data: any) => {
     try {
-      const { token, user } = await loginUser(data);
-      console.log(token);
-      console.log(user);
+      const { token } = await loginUser(data);
+
+      await AsyncStorage.setItem('authToken', token);
+      reset({
+        Email: data.Email,
+        Password: '',
+      });
       navigation.navigate('Chat');
     } catch (error) {
       console.log('Error login in', error);
@@ -67,8 +74,7 @@ const LoginScreen: React.FC = () => {
             control={control}
             name="Email"
             render={({ field }) => (
-              <TextInput
-                style={styles.input}
+              <ClearableInput
                 placeholder="Email address"
                 placeholderTextColor="black"
                 keyboardType="email-address"
@@ -81,13 +87,12 @@ const LoginScreen: React.FC = () => {
             control={control}
             name="password"
             render={({ field }) => (
-              <TextInput
-                style={styles.input}
+              <ClearableInput
                 placeholder="Password"
                 placeholderTextColor="black"
                 onChangeText={field.onChange}
                 value={field.value}
-                secureTextEntry={true}
+                secureTextEntry={false}
               />
             )}
           />

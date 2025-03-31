@@ -4,15 +4,7 @@ import { Feather } from '@expo/vector-icons';
 
 import styles from './styles';
 import { TextInput } from 'react-native-gesture-handler';
-
-interface ClearableInputProps {
-  value: string;
-  // void signifca que la funcion no devuelve ningun valor, cuando escribo algo en los inputs la funcion se activa y aqui el string viene siendo lo que escribes
-  onChangeText: (text: string) => void;
-  placeholder: string;
-  placeholderTextColor: string;
-  secureTextEntry?: boolean;
-}
+import { ClearableInputProps } from 'types';
 
 const ClearableInput: React.FC<ClearableInputProps> = ({
   value,

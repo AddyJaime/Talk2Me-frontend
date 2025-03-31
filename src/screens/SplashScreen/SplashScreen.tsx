@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Image, View, StyleSheet, ActivityIndicator } from 'react-native';
 import { StatusBar } from 'react-native';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
-import { RootStackParamList } from 'types';
+import { RootStackParamList } from '@types/types';
 import logo from '@assets/images/Talk2me-logo.png';
 
 import styles from '@screens/SplashScreen/styles';

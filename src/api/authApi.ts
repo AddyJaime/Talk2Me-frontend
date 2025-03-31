@@ -1,9 +1,5 @@
 import API from './axios';
-
-type loginForm = {
-  email: string;
-  password: string;
-};
+import { loginForm } from '@types/auth.ds';
 
 export const loginUser = async (data: loginForm) => {
   try {
