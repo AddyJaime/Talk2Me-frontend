@@ -37,9 +37,9 @@ const SignUpScreen: React.FC = () => {
       const backendData = await registerUser(formValues);
       console.log(backendData.user);
       reset({
-        FullName: formValues.FullName,
-        Email: formValues.Email,
-        Password: '',
+        fullName: formValues.fullName,
+        email: formValues.email,
+        password: '',
       });
       navigation.navigate('Chat');
     } catch (error) {
@@ -69,7 +69,7 @@ const SignUpScreen: React.FC = () => {
         >
           <Controller
             control={control}
-            name="FullName"
+            name="fullName"
             rules={{ required: true }}
             render={({ field }) => (
               <View>
@@ -85,7 +85,7 @@ const SignUpScreen: React.FC = () => {
 
           <Controller
             control={control}
-            name="Email"
+            name="email"
             rules={{ required: true }}
             render={({ field }) => (
               <ClearableInput
@@ -99,7 +99,7 @@ const SignUpScreen: React.FC = () => {
 
           <Controller
             control={control}
-            name="Password"
+            name="password"
             render={({ field }) => (
               <ClearableInput
                 placeholder="Password"

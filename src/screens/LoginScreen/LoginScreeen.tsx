@@ -1,13 +1,6 @@
 import React from 'react';
 // react components
-import {
-  View,
-  TextInput,
-  Image,
-  TouchableOpacity,
-  Text,
-  StatusBar,
-} from 'react-native';
+import { View, Image, TouchableOpacity, Text, StatusBar } from 'react-native';
 
 // hooks
 import { Controller, useForm } from 'react-hook-form';
@@ -43,8 +36,8 @@ const LoginScreen: React.FC = () => {
 
       await AsyncStorage.setItem('authToken', token);
       reset({
-        Email: data.Email,
-        Password: '',
+        email: data.email,
+        password: '',
       });
       navigation.navigate('Chat');
     } catch (error) {
@@ -72,7 +65,7 @@ const LoginScreen: React.FC = () => {
         >
           <Controller
             control={control}
-            name="Email"
+            name="email"
             render={({ field }) => (
               <ClearableInput
                 placeholder="Email address"

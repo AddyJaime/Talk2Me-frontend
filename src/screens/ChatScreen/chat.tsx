@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import React from 'react';
-import { View, TouchableOpacity } from 'react-native';
+import { View, TouchableOpacity, Text } from 'react-native';
 import styles from './styles';
 
 import { NavigationProp, useNavigation } from '@react-navigation/native';
@@ -22,9 +22,15 @@ const ChatScreen: React.FC = () => {
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={handleLogout}>Cerrar Sesión</TouchableOpacity>
+      <TouchableOpacity style={styles.button} onPress={handleLogout}>
+        <Text style={styles.buttonText}> Cerrar Sesión</Text>
+      </TouchableOpacity>
     </View>
   );
 };
 
 export default ChatScreen;
+
+// brad martinez
+// 123456789
+// b@gmail.com

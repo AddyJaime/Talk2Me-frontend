@@ -1,6 +1,6 @@
 import { KeyboardTypeOptions } from 'react-native';
 
-export type loginForm = {
+export type LoginForm = {
   email: string;
   password: string;
 };
