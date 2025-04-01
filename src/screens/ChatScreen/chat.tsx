@@ -5,6 +5,7 @@ import styles from './styles';
 
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { RootStackParamList } from 'types';
+import { StatusBar } from 'react-native';
 
 const ChatScreen: React.FC = () => {
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
@@ -23,8 +24,9 @@ const ChatScreen: React.FC = () => {
   return (
     <View style={styles.container}>
       <TouchableOpacity style={styles.button} onPress={handleLogout}>
-        <Text style={styles.buttonText}> Cerrar Sesión</Text>
+        <Text style={styles.buttonText}>Sign out</Text>
       </TouchableOpacity>
+      <StatusBar barStyle="dark-content" />
     </View>
   );
 };
