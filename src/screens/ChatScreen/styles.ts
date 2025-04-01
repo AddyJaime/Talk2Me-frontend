@@ -24,6 +24,11 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     alignItems: 'center',
   },
+  settingsIcon: {
+    position: 'absolute',
+    right: 10,
+    top: 50,
+  },
 });
 
 export default styles;

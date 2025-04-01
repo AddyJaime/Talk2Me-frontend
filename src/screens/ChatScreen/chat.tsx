@@ -6,6 +6,7 @@ import styles from './styles';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { RootStackParamList } from 'types';
 import { StatusBar } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 
 const ChatScreen: React.FC = () => {
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
@@ -21,10 +22,18 @@ const ChatScreen: React.FC = () => {
     }
   };
 
+  const handleSettings = async () => {
+    try {
+    } catch (error) {}
+  };
+
   return (
     <View style={styles.container}>
       <TouchableOpacity style={styles.button} onPress={handleLogout}>
         <Text style={styles.buttonText}>Sign out</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.settingsIcon} onPress={handleSettings}>
+        <Ionicons name="settings-outline" size={40} color="black" />
       </TouchableOpacity>
       <StatusBar barStyle="dark-content" />
     </View>
