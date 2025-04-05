@@ -10,13 +10,14 @@
       "@components/*": ["components/*"],
       "@constants/*": ["Constants/*"],
       "@contexts/*": ["contexts/*"],
-      "@hooks/*": ["hooks/*"],
+      "@hooks": ["hooks/index.ts"],
       "@navigation/*": ["navigation/*"],
       "@routes/*": ["Routes/*"],
       "@screens/*": ["screens/*"],
       "@styles/*": ["styles/*"],
       "@utils/*": ["utils/*"],
-      "@types/*": ["types/*"]
+      "@types/*": ["types/*"],
+      "@redux": ["redux/index.ts"]
     },
     "noUnusedLocals": true, //delete variables that are not being used
     "noImplicitReturns": true, //force every function to return something
