@@ -1,9 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-type useAsyncStorageType = {
-	deleteItem: Function
-	getItem: Function
-}
+import { useAsyncStorageType } from 'types';
 
 const useAsyncStorage = (): useAsyncStorageType => {
 

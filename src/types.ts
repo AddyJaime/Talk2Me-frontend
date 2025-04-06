@@ -21,3 +21,8 @@ export type ClearableInputProps = {
   secureTextEntry?: boolean;
   keyboardType?: KeyboardTypeOptions;
 };
+
+export type useAsyncStorageType = {
+  deleteItem: Function
+  getItem: Function
+}

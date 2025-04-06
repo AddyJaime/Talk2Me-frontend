@@ -23,18 +23,18 @@ import { RootStackParamList } from '../../types';
 
 import { loginUser } from '@api/authApi';
 import ClearableInput from '@components/ClearableInput/ClearableInput';
-
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useAsyncStorage } from '@hooks';
 
 const LoginScreen: React.FC = () => {
   const { control, handleSubmit, reset } = useForm();
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
+  const { getItem } = useAsyncStorage();
 
   const onSubmit = async (data: any) => {
     try {
       const { token } = await loginUser(data);
 
-      await AsyncStorage.setItem('authToken', token);
+      await getItem('authToken', token);
       reset({
         email: data.email,
         password: '',

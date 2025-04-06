@@ -33,7 +33,3 @@ const ChatScreen: React.FC = () => {
 };
 
 export default ChatScreen;
-
-// brad martinez
-// 123456789
-// b@gmail.com
