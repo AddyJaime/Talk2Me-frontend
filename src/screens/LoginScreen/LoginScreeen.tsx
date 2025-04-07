@@ -25,6 +25,8 @@ import { loginUser } from '@api/authApi';
 import ClearableInput from '@components/ClearableInput/ClearableInput';
 import { useAsyncStorage } from '@hooks';
 
+import { UseDispatch } from 'react-redux';
+
 const LoginScreen: React.FC = () => {
   const { control, handleSubmit, reset } = useForm();
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
@@ -35,6 +37,7 @@ const LoginScreen: React.FC = () => {
       const { token } = await loginUser(data);
 
       await getItem('authToken', token);
+      // here goes redux
       reset({
         email: data.email,
         password: '',

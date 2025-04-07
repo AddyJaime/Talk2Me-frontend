@@ -1,11 +1,13 @@
 
-// esta funcion que nos va a permitir  crear store que va a guardar el estado global de la app
+// configure store es una funcion que nos da redux, sirve para crear el store de redux, que es donde se va a guardar todo el estado global de la app, usuario logueado por ejemplo
 import { configureStore } from '@reduxjs/toolkit'
+import authReducer from "./auth/authSlice"
 
 
 export const store = configureStore({
-  // reducer es una propiedad que nos va a permitir decir a redux que parte del estado vamos a manejar 
+  // reducer es una propiedad que nos va a permitir decir a redux que parte del estado vamos a manejar , y dentro va los slices como auth y los slices son pequenas porciones de estado 
   reducer: {
+    auth: authReducer
 
   }
 
