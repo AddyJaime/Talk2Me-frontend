@@ -25,19 +25,30 @@ import { loginUser } from '@api/authApi';
 import ClearableInput from '@components/ClearableInput/ClearableInput';
 import { useAsyncStorage } from '@hooks';
 
-import { UseDispatch } from 'react-redux';
+import { AppDispatch } from '../../redux/store';
+import { login } from 'redux/auth/authSlice';
+import { useDispatch } from 'react-redux';
 
 const LoginScreen: React.FC = () => {
   const { control, handleSubmit, reset } = useForm();
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
   const { getItem } = useAsyncStorage();
+  // Sirve para que cuando uses dispatch(...), TypeScript te ayude con autocompletado y te diga si estás mandando algo mal.
+  const dispatch = useDispatch<AppDispatch>();
 
   const onSubmit = async (data: any) => {
     try {
-      const { token } = await loginUser(data);
+      const { token, user } = await loginUser(data);
 
       await getItem('authToken', token);
-      // here goes redux
+      // aqui estan los datos que le mando a login cuando el usario hace login
+      // disptach es una fuin que te da redux para enviar accion al store es lo que le pide a store hey cambia esto
+      dispatch(
+        login({
+          id: user.id,
+          email: user.email,
+        }),
+      );
       reset({
         email: data.email,
         password: '',
