@@ -20,5 +20,6 @@ export const store = configureStore({
 // Y en TypeScript, cuando usamos estos tipos especiales, se escriben usando los signos de menor y mayor que (< >) para pasarle otros tipos como argumento, no valores.
 // Tú me das una función, y yo te devuelvo el tipo de dato que esa función retorna."
 // <> (menor y mayor)	Se usan para pasar tipos como argumentos, no valores
+// esto son tipos de typscript no tiene que ver con nada de lo quje esdtmso haciendo 
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch
