@@ -40,5 +40,6 @@ const authSlice = createSlice({
 })
 
 
+// aqui action s me retonra login y logout 
 export const { login, logout } = authSlice.actions
 export default authSlice.reducer

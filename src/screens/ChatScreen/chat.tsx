@@ -6,14 +6,25 @@ import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { RootStackParamList } from 'types';
 import { useAsyncStorage } from '@hooks';
 
+import { logout } from 'redux/auth/authSlice';
+import { useDispatch } from 'react-redux';
+import { RootState } from 'redux/store';
+
 const ChatScreen: React.FC = () => {
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
   const { deleteItem } = useAsyncStorage();
+  const dispatch = useDispatch();
+
+  // probando que el estadpo cambio
+  const authState = (state: RootState) => state.auth;
+  console.log(authState);
 
   const handleLogout = async () => {
     try {
       await deleteItem('authToken');
-      // await AsyncStorage.removeItem('authToken');
+
+      dispatch(logout());
+
       navigation.reset({
         index: 0,
         routes: [{ name: 'Login' }],
