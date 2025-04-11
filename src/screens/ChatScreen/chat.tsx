@@ -21,7 +21,7 @@ const ChatScreen: React.FC = () => {
   const handleLogout = async () => {
     try {
       await deleteItem('authToken');
-
+      // “Redux, por favor borra el usuario del estado y marca que ya no está logueado.”
       dispatch(logout());
     } catch (error) {
       console.log('Error to log out', error);

@@ -9,7 +9,7 @@ const Stack = createStackNavigator();
 // flujo de no autenticaco
 const AuthNavigator: React.FC = () => {
   return (
-    <Stack.Navigator initialRouteName="Splash">
+    <Stack.Navigator initialRouteName="Login">
       <Stack.Screen
         name="Splash"
         component={SplashScreen}

@@ -44,20 +44,19 @@ const LoginScreen: React.FC = () => {
       const { token, user } = await loginUser(data);
 
       await getItem('authToken', token);
-      // aqui estan los datos que le mando a login cuando el usario hace login
-      // disptach es una fuin que te da redux para enviar accion al store es lo que le pide a store hey cambia esto
-      // aqui le estamos mandao esa informacion al store
+      // "Redux, aquí está el usuario que hizo login. Guárdalo como el usuario actual, y marca que está autenticado."
       dispatch(
         login({
           id: user.id,
           email: user.email,
         }),
       );
+
       reset({
         email: data.email,
         password: '',
       });
-      navigation.navigate('Chat');
+      // navigation.navigate('Chat');
     } catch (error) {
       console.log('Error login in', error);
     }

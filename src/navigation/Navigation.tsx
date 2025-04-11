@@ -4,8 +4,10 @@ import { RootState } from 'redux/store';
 import AppNavigator from './AppNavigator';
 
 const Navigation = () => {
-  const isAuthenticated = useSelector((state: RootState) => state.auth);
-  return isAuthenticated ? <AuthNavigator /> : <AppNavigator />;
+  const isAuthenticated = useSelector(
+    (state: RootState) => state.auth.isAuthenticated,
+  );
+  return isAuthenticated ? <AppNavigator /> : <AuthNavigator />;
 };
 
 export default Navigation;
