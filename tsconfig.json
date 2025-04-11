@@ -16,7 +16,7 @@
       "@screens/*": ["screens/*"],
       "@styles/*": ["styles/*"],
       "@utils/*": ["utils/*"],
-      "@types/*": ["types/*"],
+      "@types": ["types.ts"],
       "@redux": ["redux/index.ts"]
     },
     "noUnusedLocals": true, //delete variables that are not being used

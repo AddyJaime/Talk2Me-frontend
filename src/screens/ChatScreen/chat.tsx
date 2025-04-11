@@ -21,6 +21,7 @@ const ChatScreen: React.FC = () => {
   const handleLogout = async () => {
     try {
       await deleteItem('authToken');
+
       dispatch(logout());
     } catch (error) {
       console.log('Error to log out', error);

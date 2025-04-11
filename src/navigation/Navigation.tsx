@@ -5,7 +5,7 @@ import AppNavigator from './AppNavigator';
 
 const Navigation = () => {
   const isAuthenticated = useSelector((state: RootState) => state.auth);
-  return isAuthenticated ? <AppNavigator /> : <AuthNavigator />;
+  return isAuthenticated ? <AuthNavigator /> : <AppNavigator />;
 };
 
 export default Navigation;
