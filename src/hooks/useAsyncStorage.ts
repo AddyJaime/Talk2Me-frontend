@@ -4,7 +4,7 @@ import { useAsyncStorageType } from 'types';
 
 const useAsyncStorage = (): useAsyncStorageType => {
 	// set es para guardar 
-	// 	valjue El dato que quieres guardar, como object
+	// 	value es El dato que quieres guardar, como object
 	// value aqui representa objecto pero lo voy a dejar asi
 	const setItem = async (key: string, value: any): Promise<void> => {
 		try {
@@ -26,9 +26,10 @@ const useAsyncStorage = (): useAsyncStorageType => {
 			console.log('Error to log out', error);
 		}
 	};
-	// para leer 
+	// para leer por esa razon es solo key porque estas lyendo lo que hay en el asynchSotrage 
 	const getItem = async (key: string): Promise<any | null> => {
 		try {
+			// convertirt aqui value en un objecto
 			const value = await AsyncStorage.getItem(key);
 			return value ? JSON.parse(value) : null
 		} catch (error: any) {
