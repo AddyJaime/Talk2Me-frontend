@@ -25,4 +25,6 @@ export type ClearableInputProps = {
 export type useAsyncStorageType = {
   deleteItem: Function
   getItem: Function
+  setItem: Function
+
 }
