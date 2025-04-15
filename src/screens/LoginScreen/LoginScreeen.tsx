@@ -44,14 +44,8 @@ const LoginScreen: React.FC = () => {
       const { token, user } = await loginUser(data);
       // guardar el user y el token
       await setItem('authToken', { token, user });
-      console.log(token, user);
       // "Redux, aquí está el usuario que hizo login. Guárdalo como el usuario actual, y marca que está autenticado."
-      dispatch(
-        login({
-          id: user.id,
-          email: user.email,
-        }),
-      );
+      dispatch(login(user));
 
       reset({
         email: data.email,
