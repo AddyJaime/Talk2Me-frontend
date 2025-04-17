@@ -23,6 +23,13 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     alignItems: 'center',
   },
+  title: {
+    marginVertical: 80,
+    marginHorizontal: 18,
+    fontSize: 35
+  }
+
+
 })
 
 

@@ -1,22 +1,12 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-
+import { View, Text } from 'react-native';
+import styles from './styles';
 const StatusScreen: React.FC = () => {
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Your Text Here</Text>
+      <Text style={styles.statusText}>Status</Text>
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    padding: 10,
-    backgroundColor: '#eee',
-  },
-  text: {
-    fontSize: 16,
-  },
-});
 
 export default StatusScreen;
