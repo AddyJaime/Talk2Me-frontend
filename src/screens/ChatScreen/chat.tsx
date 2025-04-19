@@ -11,18 +11,42 @@ const ChatScreen: React.FC = () => {
       fullName: 'Carlos Santana',
       email: 'carlos@email.com',
       online: true,
+      message: ['Hola'],
     },
     {
       id: '2',
       fullName: 'Camila Reyes',
       email: 'camila@email.com',
       online: false,
+      message: ['Hola'],
     },
     {
       id: '3',
       fullName: 'Pedro Mendez',
       email: 'pedro@email.com',
       online: true,
+      message: ['Hola'],
+    },
+    {
+      id: '4',
+      fullName: 'Albert',
+      email: 'albert@email.com',
+      online: true,
+      message: ['Que tal?'],
+    },
+    {
+      id: '5',
+      fullName: 'Pedro Martinez',
+      email: 'pedro@email.com',
+      online: false,
+      message: ['Whats up big dog?'],
+    },
+    {
+      id: '6',
+      fullName: 'Milo Little',
+      email: 'milo@email.com',
+      online: true,
+      message: ['Hey'],
     },
   ];
 
@@ -49,11 +73,13 @@ const ChatScreen: React.FC = () => {
           // los parentesis aqui ejecutan codigo
           filteredChats.map((chat) => (
             <View style={styles.chatsBox} key={chat.id}>
-              <Text>{chat.fullName}</Text>
-              <Text>{chat.email}</Text>
-              <Text style={{ color: chat.online ? 'green' : 'red' }}>
-                {chat.online ? 'Online' : 'Desconectado'}
-              </Text>
+              <View style={styles.rowBetween}>
+                <Text style={styles.name}>{chat.fullName}</Text>
+                <Text style={chat.online ? styles.online : styles.offline}>
+                  {chat.online ? 'Online' : 'Offline'}
+                </Text>
+              </View>
+              <Text style={styles.message}>{chat.message}</Text>
             </View>
           ))
         )}

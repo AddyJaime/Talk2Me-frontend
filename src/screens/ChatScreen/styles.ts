@@ -1,5 +1,6 @@
 import { StyleSheet } from 'react-native';
 
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -12,15 +13,46 @@ const styles = StyleSheet.create({
   },
   input: {
     borderWidth: 1,
-    width: 350,
-    padding: 5,
-    marginLeft: 20
+    borderColor: 'ccc',
+    borderRadius: 10,
+    paddingVertical: 8,
+    paddingHorizontal: 12,
+    fontSize: 16,
+    marginHorizontal: 20,
+    marginBottom: 10,
+    backgroundColor: 'fff'
+
   },
   chatsBox: {
-    marginTop: 40,
-    marginLeft: 40,
-    marginBottom: 16
-  }
+    marginTop: 30,
+    marginLeft: 20,
+    marginBottom: 2,
+
+  },
+  rowBetween: {
+    flexDirection: "row",
+    justifyContent: 'space-between',
+    alignItems: "center"
+
+  },
+  name: {
+    fontSize: 16,
+    fontWeight: "bold"
+  },
+  message: {
+    fontSize: 14,
+    color: '#555',
+    marginTop: 6,
+  },
+
+  online: {
+    color: 'green',
+    marginRight: 20
+
+  }, offline: {
+    color: "red",
+    marginRight: 20
+  },
 
 });
 
