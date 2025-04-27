@@ -2,16 +2,18 @@ import React, { useState } from 'react';
 import { View, Text } from 'react-native';
 import styles from './styles';
 import { TextInput } from 'react-native';
+import { Chat } from '@types';
 
 const ChatScreen: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
-  const dummyChats = [
+  const dummyChats: Chat[] = [
     {
       id: '1',
       fullName: 'Carlos Santana',
       email: 'carlos@email.com',
       online: true,
-      message: ['Hola'],
+      message: ['Hola, como estas?'],
+      unreadCount: 1,
     },
     {
       id: '2',
@@ -19,6 +21,7 @@ const ChatScreen: React.FC = () => {
       email: 'camila@email.com',
       online: false,
       message: ['Hola'],
+      unreadCount: 1,
     },
     {
       id: '3',
@@ -26,6 +29,7 @@ const ChatScreen: React.FC = () => {
       email: 'pedro@email.com',
       online: true,
       message: ['Hola'],
+      unreadCount: 3,
     },
     {
       id: '4',
@@ -33,6 +37,7 @@ const ChatScreen: React.FC = () => {
       email: 'albert@email.com',
       online: true,
       message: ['Que tal?'],
+      unreadCount: 4,
     },
     {
       id: '5',
@@ -40,6 +45,7 @@ const ChatScreen: React.FC = () => {
       email: 'pedro@email.com',
       online: false,
       message: ['Whats up big dog?'],
+      unreadCount: 2,
     },
     {
       id: '6',
@@ -47,6 +53,7 @@ const ChatScreen: React.FC = () => {
       email: 'milo@email.com',
       online: true,
       message: ['Hey'],
+      unreadCount: 4,
     },
   ];
 
@@ -78,6 +85,11 @@ const ChatScreen: React.FC = () => {
                 <Text style={chat.online ? styles.online : styles.offline}>
                   {chat.online ? 'Online' : 'Offline'}
                 </Text>
+                {chat.unreadCount > 0 && (
+                  <View style={styles.circule}>
+                    <Text style={styles.circuleText}>{chat.unreadCount}</Text>
+                  </View>
+                )}
               </View>
               <Text style={styles.message}>{chat.message}</Text>
             </View>
