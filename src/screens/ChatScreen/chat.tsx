@@ -77,7 +77,6 @@ const ChatScreen: React.FC = () => {
         {filteredChats.length === 0 ? (
           <Text>There is not chat</Text>
         ) : (
-          // los parentesis aqui ejecutan codigo
           filteredChats.map((chat) => (
             <View style={styles.chatsBox} key={chat.id}>
               <View style={styles.rowBetween}>
