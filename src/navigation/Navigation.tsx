@@ -20,7 +20,7 @@ const Navigation = () => {
   // usefecct es una funcion que se utiliza para cuando un componente se actualice, o se monte
   // “React no quiere que useEffect sea async directamente porque eso rompe el ciclo de vida del componente”.
   useEffect(() => {
-    // async y await significa que una funcion va a trabajr con tareas de necesitan esperar
+    // async y await significa que una funcion va a trabajr con tareas de necesitan
     const checkAuth = async () => {
       try {
         // de aqui no se puede destruturar  el token y user porque getitem devuelve un string solamente
