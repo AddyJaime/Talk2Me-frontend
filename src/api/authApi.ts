@@ -39,3 +39,5 @@ export const registerUser = async (formValues: RegisterForm) => {
     throw error;
   }
 };
+
+
