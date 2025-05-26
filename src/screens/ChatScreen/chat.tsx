@@ -1,10 +1,20 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text } from 'react-native';
 import styles from './styles';
 import { TextInput } from 'react-native';
 import { Chat } from '@types';
+import { fetchConversations } from '@api/conversationApi';
+import { useDispatch } from 'react-redux';
+import { AppDispatch, RootState } from 'redux/store';
+import { useSelector } from 'react-redux';
+import moment from 'moment';
 
 const ChatScreen: React.FC = () => {
+  const dispatch = useDispatch<AppDispatch>();
+  const { conversations } = useSelector(
+    (state: RootState) => state.conversations,
+  );
+
   const [searchTerm, setSearchTerm] = useState('');
   const dummyChats: Chat[] = [
     {
@@ -63,6 +73,15 @@ const ChatScreen: React.FC = () => {
       chat.email.toLowerCase().includes(searchTerm.toLowerCase()),
   );
 
+  const getConversations = async () => {
+    await dispatch(fetchConversations());
+  };
+
+  useEffect(() => {
+    getConversations();
+    console.log({ conversations });
+  }, []);
+
   return (
     <View style={styles.container}>
       <Text style={styles.text}>Chats</Text>
@@ -77,12 +96,12 @@ const ChatScreen: React.FC = () => {
         {filteredChats.length === 0 ? (
           <Text>There is not chat</Text>
         ) : (
-          filteredChats.map((chat) => (
+          conversations.map((chat: any) => (
             <View style={styles.chatsBox} key={chat.id}>
               <View style={styles.rowBetween}>
-                <Text style={styles.name}>{chat.fullName}</Text>
+                <Text style={styles.name}>{chat.participant.fullName}</Text>
                 <Text style={chat.online ? styles.online : styles.offline}>
-                  {chat.online ? 'Online' : 'Offline'}
+                  {moment(chat.messages[0].createdAt).fromNow()}
                 </Text>
                 {chat.unreadCount > 0 && (
                   <View style={styles.circule}>
@@ -90,7 +109,7 @@ const ChatScreen: React.FC = () => {
                   </View>
                 )}
               </View>
-              <Text style={styles.message}>{chat.message}</Text>
+              <Text style={styles.message}> {chat.messages[0].text}</Text>
             </View>
           ))
         )}
