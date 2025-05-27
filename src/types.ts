@@ -11,6 +11,8 @@ export type RootStackParamList = {
   Login: undefined;
   SignUp: undefined;
   Chat: undefined;
+  SearchUsers: undefined
+
 };
 
 export type ClearableInputProps = {

@@ -1,21 +1,47 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 import styles from './styles';
 import { TextInput } from 'react-native';
-import { Chat } from '@types';
+import { Chat, RootStackParamList } from '@types';
 import { fetchConversations } from '@api/conversationApi';
 import { useDispatch } from 'react-redux';
 import { AppDispatch, RootState } from 'redux/store';
 import { useSelector } from 'react-redux';
 import moment from 'moment';
+import {
+  NavigationProp,
+  useFocusEffect,
+  useNavigation,
+} from '@react-navigation/native';
+
+import { Ionicons } from '@expo/vector-icons';
 
 const ChatScreen: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
+  const navigation = useNavigation<NavigationProp<RootStackParamList>>();
   const { conversations } = useSelector(
     (state: RootState) => state.conversations,
   );
 
   const [searchTerm, setSearchTerm] = useState('');
+
+  useFocusEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (
+        <TouchableOpacity onPress={() => navigation.navigate('SearchUsers')}>
+          <Ionicons
+            name="search"
+            size={20}
+            color="black"
+            style={{ marginRight: 15 }}
+          />
+        </TouchableOpacity>
+      ),
+      headerShown: true,
+      title: 'Chats',
+    });
+  });
+
   const dummyChats: Chat[] = [
     {
       id: '1',

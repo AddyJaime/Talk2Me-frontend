@@ -9,8 +9,8 @@ const SearchUserScreen: React.FC = () => {
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={() => navigation.navigate('')}>
-        <Ionicons name="search" size={20} />
+      <TouchableOpacity onPress={() => navigation.navigate('SearchUsers')}>
+        <Ionicons name="search" size={20} color="black" />
       </TouchableOpacity>
     </View>
   );
