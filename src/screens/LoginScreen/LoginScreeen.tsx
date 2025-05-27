@@ -34,17 +34,17 @@ const LoginScreen: React.FC = () => {
   const { control, handleSubmit, reset } = useForm();
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
   const { setItem } = useAsyncStorage();
-  // Sirve para que cuando uses dispatch(...), TypeScript te ayude con autocompletado y te diga si estás mandando algo mal.
+
   const dispatch = useDispatch<AppDispatch>();
-  // rootstate es solo un tipo de typscript y state es el parametro del estado el cual contiene el estado actual
+
   const authState = useSelector((state: RootState) => state.auth);
   console.log(authState);
   const onSubmit = async (data: any) => {
     try {
       const { token, user } = await loginUser(data);
-      // guardar el user y el token
+
       await setItem('authToken', { token, user });
-      // "Redux, aquí está el usuario que hizo login. Guárdalo como el usuario actual, y marca que está autenticado."
+
       dispatch(login(user));
 
       reset({
