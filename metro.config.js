@@ -18,6 +18,7 @@ module.exports = (() => {
     ...transformer,
     babelTransformerPath: require.resolve('react-native-svg-transformer'),
   };
+  config.resolver.unstable_enablePackageExports = false;
 
   return config;
 })();

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useLayoutEffect, useState } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import styles from './styles';
 import { TextInput } from 'react-native';
@@ -8,11 +8,7 @@ import { useDispatch } from 'react-redux';
 import { AppDispatch, RootState } from 'redux/store';
 import { useSelector } from 'react-redux';
 import moment from 'moment';
-import {
-  NavigationProp,
-  useFocusEffect,
-  useNavigation,
-} from '@react-navigation/native';
+import { NavigationProp, useNavigation } from '@react-navigation/native';
 
 import { Ionicons } from '@expo/vector-icons';
 
@@ -25,7 +21,7 @@ const ChatScreen: React.FC = () => {
 
   const [searchTerm, setSearchTerm] = useState('');
 
-  useFocusEffect(() => {
+  useLayoutEffect(() => {
     navigation.setOptions({
       headerRight: () => (
         <TouchableOpacity onPress={() => navigation.navigate('SearchUsers')}>
