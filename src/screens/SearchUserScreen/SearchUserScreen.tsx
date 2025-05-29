@@ -1,17 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, TouchableOpacity } from 'react-native';
 import styles from './style';
 import { Ionicons } from '@expo/vector-icons';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { RootStackParamList } from '@types';
+import { TextInput } from 'react-native-gesture-handler';
 
 const SearchUserScreen: React.FC = () => {
+  const [searchUser, setsearchUser] = useState('');
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={() => navigation.navigate('SearchUsers')}>
-        <Ionicons name="search" size={20} color="black" />
-      </TouchableOpacity>
+      <TouchableOpacity
+        onPress={() => navigation.navigate('SearchUsers')}
+      ></TouchableOpacity>
+      <Ionicons name="search" size={20} color="black" />
+      <TextInput
+        style={styles.input}
+        placeholder="Search Users"
+        value={searchUser}
+        onChangeText={setsearchUser}
+      />
     </View>
   );
 };
