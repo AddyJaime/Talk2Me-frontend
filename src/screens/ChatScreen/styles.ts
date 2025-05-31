@@ -13,14 +13,14 @@ const styles = StyleSheet.create({
   },
   input: {
     borderWidth: 1,
-    borderColor: 'ccc',
+    borderColor: '#ccc',
     borderRadius: 10,
     paddingVertical: 8,
     paddingHorizontal: 12,
     fontSize: 16,
     marginHorizontal: 20,
     marginBottom: 10,
-    backgroundColor: 'fff'
+    backgroundColor: '#fff'
 
   },
   chatsBox: {

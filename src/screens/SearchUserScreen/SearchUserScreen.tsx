@@ -9,6 +9,9 @@ import { TextInput } from 'react-native-gesture-handler';
 const SearchUserScreen: React.FC = () => {
   const [searchUser, setsearchUser] = useState('');
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
+
+  // aqui utiliza el useffect para hacer una petcion
+
   return (
     <View style={styles.container}>
       <TouchableOpacity

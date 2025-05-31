@@ -2,7 +2,7 @@ import React, { useEffect, useLayoutEffect, useState } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import styles from './styles';
 import { TextInput } from 'react-native';
-import { Chat, RootStackParamList } from '@types';
+import { RootStackParamList } from '@types';
 import { fetchConversations } from '@api/conversationApi';
 import { useDispatch } from 'react-redux';
 import { AppDispatch, RootState } from 'redux/store';
@@ -38,62 +38,17 @@ const ChatScreen: React.FC = () => {
     });
   });
 
-  const dummyChats: Chat[] = [
-    {
-      id: '1',
-      fullName: 'Carlos Santana',
-      email: 'carlos@email.com',
-      online: true,
-      message: ['Hola, como estas?'],
-      unreadCount: 1,
-    },
-    {
-      id: '2',
-      fullName: 'Camila Reyes',
-      email: 'camila@email.com',
-      online: false,
-      message: ['Hola'],
-      unreadCount: 1,
-    },
-    {
-      id: '3',
-      fullName: 'Pedro Mendez',
-      email: 'pedro@email.com',
-      online: true,
-      message: ['Hola'],
-      unreadCount: 3,
-    },
-    {
-      id: '4',
-      fullName: 'Albert',
-      email: 'albert@email.com',
-      online: true,
-      message: ['Que tal?'],
-      unreadCount: 4,
-    },
-    {
-      id: '5',
-      fullName: 'Pedro Martinez',
-      email: 'pedro@email.com',
-      online: false,
-      message: ['Whats up big dog?'],
-      unreadCount: 2,
-    },
-    {
-      id: '6',
-      fullName: 'Milo Little',
-      email: 'milo@email.com',
-      online: true,
-      message: ['Hey'],
-      unreadCount: 4,
-    },
-  ];
-
-  const filteredChats = dummyChats.filter(
-    (chat) =>
-      chat.fullName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      chat.email.toLowerCase().includes(searchTerm.toLowerCase()),
-  );
+  const filteredChats = Array.isArray(conversations)
+    ? conversations.filter(
+        (conversation) =>
+          conversation.participant.fullName.includes(
+            searchTerm.toLowerCase(),
+          ) ||
+          conversation.participant.email
+            .toLowerCase()
+            .includes(searchTerm.toLowerCase()),
+      )
+    : [];
 
   const getConversations = async () => {
     await dispatch(fetchConversations());

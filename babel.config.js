@@ -1,8 +1,8 @@
 module.exports = function (api) {
   api.cache(true);
   return {
-    // react native 0.78 does not use "metro-react-native-babel-preset", this happens so that bael does not depend a lot from metro and has more dependency
-    presets: ['module:@react-native/babel-preset'],
+    // no es necesario importar babel-preset porque expo ya lo trae,
+    presets: ['babel-preset-expo'],
     plugins: [
       [
         'module-resolver',
@@ -23,8 +23,6 @@ module.exports = function (api) {
           },
         },
       ],
-      ['module:react-native-dotenv'],
-      ['@babel/plugin-transform-flow-strip-types'],
       'react-native-reanimated/plugin',
     ],
   };

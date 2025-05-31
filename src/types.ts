@@ -1,5 +1,5 @@
 import { KeyboardTypeOptions } from 'react-native';
-import { string } from 'zod';
+
 
 export type LoginForm = {
   email: string;
@@ -32,6 +32,32 @@ export type useAsyncStorageType = {
 
 }
 
+export type Message = {
+  id: number,
+  text: string,
+  senderId: number,
+  receiverId: number,
+  createdAt: string,
+  updatedAt: string,
+  conversationId: number
+}
+
+export type participant = {
+  id: number,
+  fullName: string,
+  email: string
+}
+
+export type Conversation = {
+  id: number;
+  senderId: number;
+  receiverId: number;
+  createdAt: string;
+  updatedAt: string;
+  participant: participant;
+  messages: Message[];
+}
+
 export type Chat = {
   id: string,
   fullName: string,
@@ -40,3 +66,4 @@ export type Chat = {
   message: string[],
   unreadCount: number
 }
+

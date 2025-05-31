@@ -1,7 +1,15 @@
 import { fetchConversations } from "@api/conversationApi";
 import { createSlice } from "@reduxjs/toolkit";
+import { Conversation } from '@types';
 
-const initialState = {
+
+
+interface ConversationsState {
+  conversations: Conversation[];
+  loading: boolean;
+}
+
+const initialState: ConversationsState = {
   conversations: [],
   loading: false
 }
@@ -17,6 +25,7 @@ const conversationsSlice = createSlice({
 
       state.conversations = action.payload
       state.loading = false
+      console.log(action.payload)
 
     })
     builder.addCase(fetchConversations.rejected, (state, action: any) => {

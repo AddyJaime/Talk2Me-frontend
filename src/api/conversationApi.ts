@@ -4,7 +4,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 export const fetchConversations = createAsyncThunk("fetchConversations", async (): Promise<any> => {
   try {
     const { data } = await API.get("/conversations")
-    console.log({ data });
+    // console.log({ data });
 
     return data
 
