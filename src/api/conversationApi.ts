@@ -1,16 +1,13 @@
 import API from "./axios";
-import { createAsyncThunk } from "@reduxjs/toolkit";
+import { Conversation } from "@types";
 
-export const fetchConversations = createAsyncThunk("fetchConversations", async (): Promise<any> => {
+export const fetchConversations = async (): Promise<Conversation[] | undefined> => {
   try {
-    const { data } = await API.get("/conversations")
-    // console.log({ data });
-
-    return data
-
+    const response = await API.get("/conversations");
+    console.log(response)
+    return response.data;
   } catch (error) {
     console.log({ fetchConversations: error });
-    // throw error
-
+    return undefined;
   }
-})
+};

@@ -11,6 +11,7 @@ import moment from 'moment';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 
 import { Ionicons } from '@expo/vector-icons';
+import { setConversations } from 'redux/conversations/conversationsSlice';
 
 const ChatScreen: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -50,13 +51,12 @@ const ChatScreen: React.FC = () => {
       )
     : [];
 
-  const getConversations = async () => {
-    await dispatch(fetchConversations());
-  };
-
   useEffect(() => {
-    getConversations();
-    console.log({ conversations });
+    const getData = async () => {
+      const data = await fetchConversations();
+      dispatch(setConversations(data ?? []));
+    };
+    getData();
   }, []);
 
   return (
