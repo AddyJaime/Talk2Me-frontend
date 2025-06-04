@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Conversation } from "@types";
 
+
 interface ConversationsState {
   conversations: Conversation[];
 }
@@ -13,7 +14,7 @@ const conversationsSlice = createSlice({
   name: "conversations",
   initialState,
   reducers: {
-    setConversations(state, action: PayloadAction<Conversation[]>) {
+    setConversations: (state, action: PayloadAction<Conversation[]>) => {
       state.conversations = action.payload;
     },
   },

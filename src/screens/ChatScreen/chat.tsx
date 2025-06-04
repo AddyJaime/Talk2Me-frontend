@@ -16,9 +16,7 @@ import { setConversations } from 'redux/conversations/conversationsSlice';
 const ChatScreen: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
-  const { conversations } = useSelector(
-    (state: RootState) => state.conversations,
-  );
+  const conversations = useSelector((state: RootState) => state.conversations);
 
   const [searchTerm, setSearchTerm] = useState('');
 
@@ -54,6 +52,7 @@ const ChatScreen: React.FC = () => {
   useEffect(() => {
     const getData = async () => {
       const data = await fetchConversations();
+      console.log(data);
       dispatch(setConversations(data ?? []));
     };
     getData();
