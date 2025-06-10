@@ -8,6 +8,6 @@ export const fetchConversations = async (): Promise<Conversation[] | undefined> 
     return response.data;
   } catch (error) {
     console.log({ fetchConversations: error });
-    return undefined;
+    return []
   }
 };
