@@ -56,6 +56,8 @@ export type Conversation = {
   updatedAt: string;
   participant: participant;
   messages: Message[];
+  online: string,
+  unreadCount: number
 }
 
 export type Chat = {
@@ -66,4 +68,7 @@ export type Chat = {
   message: string[],
   unreadCount: number
 }
-
+export type User = {
+  id: number,
+  fullName: string
+}

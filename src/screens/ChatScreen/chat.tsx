@@ -2,7 +2,7 @@ import React, { useEffect, useLayoutEffect, useState } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import styles from './styles';
 import { TextInput } from 'react-native';
-import { RootStackParamList } from '@types';
+import { Conversation, RootStackParamList } from '@types';
 import { fetchConversations } from '@api/conversationApi';
 import { useDispatch } from 'react-redux';
 import { AppDispatch, RootState } from 'redux/store';
@@ -54,7 +54,7 @@ const ChatScreen: React.FC = () => {
   useEffect(() => {
     const getData = async () => {
       const data = await fetchConversations();
-      console.log(data);
+      // console.log(data);
       dispatch(setConversations(data ?? []));
     };
     getData();
@@ -74,7 +74,7 @@ const ChatScreen: React.FC = () => {
         {filteredChats.length === 0 ? (
           <Text>There is not chat</Text>
         ) : (
-          conversations.map((chat: any) => (
+          conversations.map((chat: Conversation) => (
             <View style={styles.chatsBox} key={chat.id}>
               <View style={styles.rowBetween}>
                 <Text style={styles.name}>{chat.participant.fullName}</Text>

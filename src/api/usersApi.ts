@@ -1,14 +1,14 @@
-// import { createAsyncThunk } from "@reduxjs/toolkit";
-// import API from "./axios";
+import API from "./axios";
+import { User } from "@types";
+
+export const fetchUsers = async (): Promise<User[] | undefined> => {
+  try {
+    const response = await API.get("/users/search")
+    return response.data
+  } catch (error) {
+    console.log("Error getting users", error)
+    return undefined
+  }
+}
 
 
-// export const fetchUsers = createAsyncThunk("fetchUsers", async (): Promise<any> => {
-//   try {
-//     const data = await API.get("/search/:search")
-//     console.log({ data })
-
-//     return data
-//   } catch (error) {
-//     console.log({ fetchUsers: error })
-//   }
-// })

@@ -3,13 +3,15 @@
 import { configureStore } from '@reduxjs/toolkit'
 import authReducer from "./auth/authSlice"
 import { conversationReducers } from "./conversations/conversationsSlice"
+import { userReducers } from './users/usersSlice';
 
 
 export const store = configureStore({
 
   reducer: {
     auth: authReducer,
-    conversations: conversationReducers
+    conversations: conversationReducers,
+    users: userReducers
   }
 
 })
