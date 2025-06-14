@@ -10,7 +10,9 @@ export type RootStackParamList = {
   Splash: undefined;
   Login: undefined;
   SignUp: undefined;
-  Chat: undefined;
+  Conversations: undefined; // TODO" change to Conversations and finish view to that screen, add index to every screen.
+  Chat: undefined; // TODO: change to Chats
+
   SearchUsers: undefined
 
 };

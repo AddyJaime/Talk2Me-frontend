@@ -1,5 +1,5 @@
 import React from 'react';
-import ChatScreen from '@screens/ChatScreen/chat';
+import ConversationScreen from '@screens/ConversationScreen';
 import SettingScreen from '@screens/SettingScreen/SettingScreen';
 import StatusScreen from '@screens/StatusScreen/StatusScreen';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -15,7 +15,7 @@ const MainTabs: React.FC = () => {
         return {
           tabBarIcon: ({ color }) => {
             let iconName;
-            if (route.name === 'Chat') {
+            if (route.name === 'Conversations') {
               iconName = 'chatbubbles-outline';
             } else if (route.name === 'Setting') {
               iconName = 'time-outline';
@@ -30,9 +30,9 @@ const MainTabs: React.FC = () => {
       }}
     >
       <Tab.Screen
-        name="Chat"
-        options={{ headerShown: false }}
-        component={ChatScreen}
+        name="Conversations"
+        options={{ headerShown: false, title: 'Conversations' }}
+        component={ConversationScreen}
       />
       <Tab.Screen
         name="Setting"

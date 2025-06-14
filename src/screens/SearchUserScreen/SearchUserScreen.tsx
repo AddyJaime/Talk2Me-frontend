@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, TouchableOpacity, Text } from 'react-native';
+import { View, TouchableOpacity, Text, ScrollView } from 'react-native';
 import styles from './style';
 import { Ionicons } from '@expo/vector-icons';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
@@ -10,6 +10,7 @@ import { RootState } from 'redux/store';
 import { fetchUsers } from '@api/usersApi';
 import { useDispatch } from 'react-redux';
 import { setUsers } from 'redux/users/usersSlice';
+import UserAvatar from 'react-native-user-avatar';
 
 const SearchUserScreen: React.FC = () => {
   const [searchUser, setsearchUser] = useState('');
@@ -35,26 +36,76 @@ const SearchUserScreen: React.FC = () => {
       <TouchableOpacity
         onPress={() => navigation.navigate('SearchUsers')}
       ></TouchableOpacity>
-      <Ionicons name="search" size={20} color="black" />
-      <TextInput
-        style={styles.input}
-        placeholder="Search Users"
-        value={searchUser}
-        onChangeText={setsearchUser}
-      />
+      <View
+        style={{
+          height: 45,
+          flexDirection: 'row',
+          alignItems: 'center',
+          backgroundColor: '#ebebeb',
+          padding: 5,
+          paddingLeft: 15,
+          marginBottom: 10,
+          borderRadius: 25,
+        }}
+      >
+        <Ionicons name="search" size={20} color="gray" />
+        <TextInput
+          style={styles.input}
+          placeholder="Search Users"
+          placeholderTextColor={'gray'}
+          value={searchUser}
+          onChangeText={setsearchUser}
+        />
+      </View>
       <View>
         {users.length === 0 ? (
           <Text>There is not users</Text>
         ) : (
-          users.map((user: User) => (
-            <View key={user.id}>
-              <Text>{user.fullName}</Text>
-            </View>
-          ))
+          <ScrollView>
+            {users.map((user: User) => (
+              <TouchableOpacity
+                onPress={() => navigation.navigate('Chat')}
+                key={user.id}
+              >
+                <View
+                  style={{
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    // backgroundColor: 'white',
+                    marginBottom: 5,
+                    height: 50,
+                    paddingVertical: 5,
+                  }}
+                >
+                  <View style={{ width: 50, height: 50 }}>
+                    <UserAvatar size={50} name={user.fullName} />
+                  </View>
+                  <Text
+                    style={{ fontSize: 18, fontWeight: '600', paddingLeft: 5 }}
+                  >
+                    {user.fullName}
+                  </Text>
+                </View>
+              </TouchableOpacity>
+            ))}
+          </ScrollView>
         )}
       </View>
     </View>
   );
 };
-// to do mostrar los datos en pantalla con un useffect y utlizar mi funcion
+// siguinete paso aqui agregar un estaod de online o off y por lo menos un avatar falso
+
 export default SearchUserScreen;
+
+// include
+// where
+// Operadores
+// Op.ne: not equal
+// Op.eq: equal
+// Op.like: contiene texto
+// Op.in: array de valores
+// Op.or: uno u otro
+// Op.and: ambos
+// Relaciones
+// params

@@ -1,5 +1,5 @@
 import React, { useEffect, useLayoutEffect, useState } from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, Image, TouchableOpacity } from 'react-native';
 import styles from './styles';
 import { TextInput } from 'react-native';
 import { Conversation, RootStackParamList } from '@types';
@@ -12,8 +12,9 @@ import { NavigationProp, useNavigation } from '@react-navigation/native';
 
 import { Ionicons } from '@expo/vector-icons';
 import { setConversations } from 'redux/conversations/conversationsSlice';
+import logo from '@assets/images/Talk2me-logo.png';
 
-const ChatScreen: React.FC = () => {
+const ConversationScreen: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
   const conversations = useSelector(
@@ -24,6 +25,11 @@ const ChatScreen: React.FC = () => {
 
   useLayoutEffect(() => {
     navigation.setOptions({
+      headerLeft: () => (
+        // <View>
+        <Image style={{ height: 30, width: 100 }} source={logo} />
+        // </View>
+      ),
       headerRight: () => (
         <TouchableOpacity onPress={() => navigation.navigate('SearchUsers')}>
           <Ionicons
@@ -35,7 +41,8 @@ const ChatScreen: React.FC = () => {
         </TouchableOpacity>
       ),
       headerShown: true,
-      title: 'Chats',
+
+      title: 'Conversations',
     });
   });
 
@@ -75,7 +82,11 @@ const ChatScreen: React.FC = () => {
           <Text>There is not chat</Text>
         ) : (
           conversations.map((chat: Conversation) => (
-            <View style={styles.chatsBox} key={chat.id}>
+            <TouchableOpacity
+              onPress={() => navigation.navigate('Chat')}
+              style={styles.chatsBox}
+              key={chat.id}
+            >
               <View style={styles.rowBetween}>
                 <Text style={styles.name}>{chat.participant.fullName}</Text>
                 <Text style={chat.online ? styles.online : styles.offline}>
@@ -88,7 +99,7 @@ const ChatScreen: React.FC = () => {
                 )}
               </View>
               <Text style={styles.message}> {chat.messages[0].text}</Text>
-            </View>
+            </TouchableOpacity>
           ))
         )}
       </View>
@@ -96,4 +107,4 @@ const ChatScreen: React.FC = () => {
   );
 };
 
-export default ChatScreen;
+export default ConversationScreen;

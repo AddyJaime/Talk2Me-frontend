@@ -3,22 +3,39 @@ import { StyleSheet } from "react-native"
 const styles = StyleSheet.create({
   container: {
     padding: 10,
-    backgroundColor: '#eee'
+    backgroundColor: 'white'
   },
   text: {
     fontSize: 16,
   },
   input: {
-    borderWidth: 1,
-    borderColor: '#ccc',
+    // borderWidth: 1,
+    // borderColor: '#ccc',
     borderRadius: 10,
-    paddingVertical: 8,
-    paddingHorizontal: 12,
+    // paddingVertical: 8,
+    // paddingHorizontal: 12,
     fontSize: 16,
-    marginHorizontal: 20,
-    marginBottom: 10,
-    backgroundColor: "#fff"
-  }
+    marginHorizontal: 5,
+    // marginBottom: 10,
+    // backgroundColor: "#fff"
+  },
+  fullNameText: {
+    fontSize: 16,
+    paddingVertical: 12,
+    paddingHorizontal: 20,
+    backgroundColor: "#fff",
+    marginBottom: 8,
+    color: "#333",
+    fontWeight: "500",
+    shadowColor: "#000",
+    shadowOpacity: 0.1,
+    shadowOffset: { width: 0, height: 1 },
+    shadowRadius: 3,
+    elevation: 2
+
+
+  },
+
 
 })
 export default styles
