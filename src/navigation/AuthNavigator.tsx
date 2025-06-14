@@ -1,7 +1,4 @@
-import LoginScreen from '@screens/LoginScreen/LoginScreeen';
-import SignUpScreen from '@screens/SignUpScreen/SignUpScreen';
-import SplashScreen from '@screens/SplashScreen/SplashScreen';
-
+import { LoginScreen, SignUpScreen, SplashScreen } from '@/screens';
 import { createStackNavigator } from '@react-navigation/stack';
 import React from 'react';
 

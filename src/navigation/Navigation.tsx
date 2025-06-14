@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { useAsyncStorage } from '@hooks';
 import { login } from 'redux/auth/authSlice';
-import SplashScreen from '@screens/SplashScreen/SplashScreen';
+import { SplashScreen } from '@/screens';
 
 const Navigation = () => {
   const dispatch = useDispatch<AppDispatch>();

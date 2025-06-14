@@ -30,7 +30,7 @@ import { login } from 'redux/auth/authSlice';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 
-const LoginScreen: React.FC = () => {
+export const LoginScreen: React.FC = () => {
   const { control, handleSubmit, reset } = useForm();
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
   const { setItem } = useAsyncStorage();
@@ -127,7 +127,5 @@ const LoginScreen: React.FC = () => {
     </View>
   );
 };
-
-export default LoginScreen;
 
 // b@gmail.com

@@ -1,7 +1,5 @@
 import React from 'react';
-import ConversationScreen from '@screens/ConversationScreen';
-import SettingScreen from '@screens/SettingScreen/SettingScreen';
-import StatusScreen from '@screens/StatusScreen/StatusScreen';
+import { ConversationScreen, SettingScreen, StatusScreen } from '@/screens';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 

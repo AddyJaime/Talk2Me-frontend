@@ -6,7 +6,7 @@ import logo from '@assets/images/Talk2me-logo.png';
 
 import styles from '@screens/SplashScreen/styles';
 
-const SplashScreen: React.FC = () => {
+export const SplashScreen: React.FC = () => {
   return (
     <View style={styles.container}>
       <StatusBar barStyle="light-content" backgroundColor="#0f2034" />
@@ -17,5 +17,3 @@ const SplashScreen: React.FC = () => {
     </View>
   );
 };
-
-export default SplashScreen;

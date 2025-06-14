@@ -14,7 +14,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { setConversations } from 'redux/conversations/conversationsSlice';
 import logo from '@assets/images/Talk2me-logo.png';
 
-const ConversationScreen: React.FC = () => {
+export const ConversationScreen: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
   const conversations = useSelector(
@@ -106,5 +106,3 @@ const ConversationScreen: React.FC = () => {
     </View>
   );
 };
-
-export default ConversationScreen;

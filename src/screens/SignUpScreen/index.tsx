@@ -28,7 +28,7 @@ import { registerUser } from '@api/authApi';
 
 import ClearableInput from '@components/ClearableInput/ClearableInput';
 
-const SignUpScreen: React.FC = () => {
+export const SignUpScreen: React.FC = () => {
   const { control, handleSubmit, reset } = useForm();
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
 
@@ -137,4 +137,4 @@ const SignUpScreen: React.FC = () => {
   );
 };
 
-export default SignUpScreen;
+;

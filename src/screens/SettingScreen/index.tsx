@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import styles from './styles';
 import { logout } from 'redux/auth/authSlice';
 
-const SettingScreen: React.FC = () => {
+export const SettingScreen: React.FC = () => {
   const { deleteItem } = useAsyncStorage();
   const dispatch = useDispatch();
 
@@ -28,5 +28,3 @@ const SettingScreen: React.FC = () => {
     </View>
   );
 };
-
-export default SettingScreen;

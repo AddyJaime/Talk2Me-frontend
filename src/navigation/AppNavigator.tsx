@@ -1,9 +1,7 @@
 import React from 'react';
-import SearchUserScreen from '@screens/SearchUserScreen/SearchUserScreen';
-
+import { SearchUserScreen, ChatsScreen } from '@/screens';
 import { createStackNavigator } from '@react-navigation/stack';
 import MainTabs from './MainTabs';
-import { ChatsScreen } from '@/screens';
 
 const Stack = createStackNavigator();
 

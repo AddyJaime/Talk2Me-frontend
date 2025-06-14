@@ -18,7 +18,7 @@ import { useDispatch } from 'react-redux';
 import { setUsers } from 'redux/users/usersSlice';
 import UserAvatar from 'react-native-user-avatar';
 
-const SearchUserScreen: React.FC = () => {
+export const SearchUserScreen: React.FC = () => {
   const [searchUser, setsearchUser] = useState('');
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
   const users = useSelector((state: RootState) => state.users.users);
@@ -114,8 +114,6 @@ const SearchUserScreen: React.FC = () => {
   );
 };
 // siguinete paso aqui agregar un estaod de online o off y por lo menos un avatar falso
-
-export default SearchUserScreen;
 
 // include
 // where
