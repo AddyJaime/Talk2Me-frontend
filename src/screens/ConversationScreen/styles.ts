@@ -4,7 +4,7 @@ import { StyleSheet } from 'react-native';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f0f0f0',
+    backgroundColor: 'white',
   },
   text: {
     marginVertical: 80,
@@ -13,29 +13,35 @@ const styles = StyleSheet.create({
   },
   input: {
     borderWidth: 1,
-    borderColor: '#ccc',
+    borderColor: 'rgba(0, 0, 0, 0.1)',
     borderRadius: 10,
     paddingVertical: 8,
     paddingHorizontal: 12,
     fontSize: 16,
     marginHorizontal: 20,
     marginBottom: 10,
-    backgroundColor: '#fff'
+    backgroundColor: '#fff',
+    marginVertical: 20,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.1,
+    shadowRadius: 3,
+    elevation: 2,
 
   },
   chatsBox: {
-    marginHorizontal: 20,
-    backgroundColor: "white",
-    marginVertical: 5,
-    padding: 15,
-    borderRadius: 10,
-    shadowColor: "black",
-    // oscuro o claro
-    shadowOpacity: 0.3,
-    // como la sombra va de arriba hacia bajo o de la derecha izquierda
-    shadowOffset: { width: 0, height: 2 },
-    // dura o suave
-    shadowRadius: 5
+    fontSize: 16,
+    paddingVertical: 12,
+    paddingHorizontal: 20,
+    // backgroundColor: "#fff",
+    marginBottom: -3,
+    color: "#333",
+    fontWeight: "500",
+    shadowColor: "#000",
+    shadowOpacity: 0.1,
+    shadowOffset: { width: 0, height: 1 },
+    shadowRadius: 3,
+    elevation: 2
 
 
   },
@@ -48,12 +54,13 @@ const styles = StyleSheet.create({
   name: {
     fontSize: 16,
     fontWeight: "bold",
-    marginBottom: 20
+    marginBottom: 15
   },
   message: {
     fontSize: 14,
     color: '#555',
-    marginTop: 6,
+    marginTop: -15,
+    marginLeft: -4
   },
 
   online: {
@@ -87,10 +94,10 @@ const styles = StyleSheet.create({
   },
   logo: {
     height: 70,
-    width: 100,
-    resizeMode: "center",
-
-    left: 10
+    width: 120,
+    resizeMode: 'contain',
+    marginLeft: 12,
+    marginTop: 5
   }
 
 });

@@ -30,9 +30,9 @@ export const ConversationScreen: React.FC = () => {
         <TouchableOpacity onPress={() => navigation.navigate('SearchUsers')}>
           <Ionicons
             name="search"
-            size={20}
+            size={25}
             color="black"
-            style={{ marginRight: 15 }}
+            style={{ marginRight: 17 }}
           />
         </TouchableOpacity>
       ),

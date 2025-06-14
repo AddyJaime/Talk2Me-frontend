@@ -29,7 +29,10 @@ const MainTabs: React.FC = () => {
     >
       <Tab.Screen
         name="Conversations"
-        options={{ headerStyle: { backgroundColor: 'white' }, headerTitle: '' }}
+        options={{
+          headerStyle: { backgroundColor: '#fff', shadowOpacity: 0 },
+          headerTitle: '',
+        }}
         component={ConversationScreen}
       />
       <Tab.Screen
