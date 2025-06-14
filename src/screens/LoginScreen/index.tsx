@@ -51,7 +51,6 @@ export const LoginScreen: React.FC = () => {
         email: data.email,
         password: '',
       });
-      // navigation.navigate('Chat');
     } catch (error) {
       console.log('Error login in', error);
     }

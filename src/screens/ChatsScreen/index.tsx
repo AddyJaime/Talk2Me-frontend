@@ -1,6 +1,8 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text } from 'react-native';
+import styles from './style';
 
+// para chatear
 export const ChatsScreen: React.FC = () => {
   return (
     <View style={styles.container}>
@@ -8,13 +10,3 @@ export const ChatsScreen: React.FC = () => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    padding: 10,
-    backgroundColor: '#eee',
-  },
-  text: {
-    fontSize: 16,
-  },
-});

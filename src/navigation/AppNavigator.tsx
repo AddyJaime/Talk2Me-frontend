@@ -20,7 +20,6 @@ const AppNavigator: React.FC = () => {
         options={{
           headerShown: true,
           title: 'Search',
-          // headerBackTitle: 'Back',
         }}
       />
       <Stack.Screen

@@ -12,7 +12,7 @@ import { NavigationProp, useNavigation } from '@react-navigation/native';
 
 import { Ionicons } from '@expo/vector-icons';
 import { setConversations } from 'redux/conversations/conversationsSlice';
-import logo from '@assets/images/Talk2me-logo.png';
+import logo from '@assets/images/ChatGPT Image 14 jun 2025, 01_46_15 p.m..png';
 
 export const ConversationScreen: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -25,11 +25,7 @@ export const ConversationScreen: React.FC = () => {
 
   useLayoutEffect(() => {
     navigation.setOptions({
-      headerLeft: () => (
-        // <View>
-        <Image style={{ height: 30, width: 100 }} source={logo} />
-        // </View>
-      ),
+      headerLeft: () => <Image style={styles.logo} source={logo} />,
       headerRight: () => (
         <TouchableOpacity onPress={() => navigation.navigate('SearchUsers')}>
           <Ionicons
@@ -40,9 +36,6 @@ export const ConversationScreen: React.FC = () => {
           />
         </TouchableOpacity>
       ),
-      headerShown: true,
-
-      title: 'Conversations',
     });
   });
 
@@ -61,7 +54,7 @@ export const ConversationScreen: React.FC = () => {
   useEffect(() => {
     const getData = async () => {
       const data = await fetchConversations();
-      // console.log(data);
+
       dispatch(setConversations(data ?? []));
     };
     getData();
@@ -69,7 +62,6 @@ export const ConversationScreen: React.FC = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Chats</Text>
       <View>
         <TextInput
           style={styles.input}

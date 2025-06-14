@@ -9,15 +9,10 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   input: {
-    // borderWidth: 1,
-    // borderColor: '#ccc',
     borderRadius: 10,
-    // paddingVertical: 8,
-    // paddingHorizontal: 12,
     fontSize: 16,
     marginHorizontal: 5,
-    // marginBottom: 10,
-    // backgroundColor: "#fff"
+
   },
   fullNameText: {
     fontSize: 16,

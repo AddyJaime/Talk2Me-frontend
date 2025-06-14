@@ -84,6 +84,13 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontWeight: "bold",
 
+  },
+  logo: {
+    height: 70,
+    width: 100,
+    resizeMode: "center",
+
+    left: 10
   }
 
 });
