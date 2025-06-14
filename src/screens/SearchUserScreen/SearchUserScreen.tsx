@@ -1,5 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { View, TouchableOpacity, Text, ScrollView } from 'react-native';
+import {
+  View,
+  TouchableOpacity,
+  Text,
+  ScrollView,
+  RefreshControl,
+} from 'react-native';
 import styles from './style';
 import { Ionicons } from '@expo/vector-icons';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
@@ -17,6 +23,7 @@ const SearchUserScreen: React.FC = () => {
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
   const users = useSelector((state: RootState) => state.users.users);
   const dispatch = useDispatch();
+  const [isRefreshing, setIsRefreshing] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -61,7 +68,19 @@ const SearchUserScreen: React.FC = () => {
         {users.length === 0 ? (
           <Text>There is not users</Text>
         ) : (
-          <ScrollView>
+          <ScrollView
+            refreshControl={
+              <RefreshControl
+                onRefresh={() => {
+                  setIsRefreshing(true);
+                  setTimeout(() => {
+                    setIsRefreshing(false);
+                  }, 2000);
+                }}
+                refreshing={isRefreshing}
+              />
+            }
+          >
             {users.map((user: User) => (
               <TouchableOpacity
                 onPress={() => navigation.navigate('Chat')}
