@@ -43,18 +43,7 @@ export const SearchUserScreen: React.FC = () => {
       <TouchableOpacity
         onPress={() => navigation.navigate('SearchUsers')}
       ></TouchableOpacity>
-      <View
-        style={{
-          height: 45,
-          flexDirection: 'row',
-          alignItems: 'center',
-          backgroundColor: '#ebebeb',
-          padding: 5,
-          paddingLeft: 15,
-          marginBottom: 10,
-          borderRadius: 25,
-        }}
-      >
+      <View style={styles.searchUserInput}>
         <Ionicons name="search" size={20} color="gray" />
         <TextInput
           style={styles.input}
@@ -86,24 +75,11 @@ export const SearchUserScreen: React.FC = () => {
                 onPress={() => navigation.navigate('Chat')}
                 key={user.id}
               >
-                <View
-                  style={{
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    // backgroundColor: 'white',
-                    marginBottom: 5,
-                    height: 50,
-                    paddingVertical: 5,
-                  }}
-                >
-                  <View style={{ width: 50, height: 50 }}>
+                <View style={styles.usersBox}>
+                  <View style={styles.circleDimention}>
                     <UserAvatar size={50} name={user.fullName} />
                   </View>
-                  <Text
-                    style={{ fontSize: 18, fontWeight: '600', paddingLeft: 5 }}
-                  >
-                    {user.fullName}
-                  </Text>
+                  <Text style={styles.usersName}>{user.fullName}</Text>
                 </View>
               </TouchableOpacity>
             ))}

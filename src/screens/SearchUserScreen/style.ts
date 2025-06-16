@@ -1,5 +1,6 @@
 import { StyleSheet } from "react-native"
 
+
 const styles = StyleSheet.create({
   container: {
     padding: 10,
@@ -30,6 +31,30 @@ const styles = StyleSheet.create({
 
 
   },
+  searchUserInput: {
+    height: 45,
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#ebebeb',
+    padding: 5,
+    paddingLeft: 15,
+    marginBottom: 10,
+    borderRadius: 25,
+  },
+  usersBox: {
+
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 5,
+    height: 50,
+
+  },
+  circleDimention: {
+    width: 50, height: 50
+  },
+  usersName:
+    { fontSize: 18, fontWeight: '600', paddingLeft: 5 }
+
 
 
 })

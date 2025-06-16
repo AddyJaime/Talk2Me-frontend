@@ -13,6 +13,7 @@ import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
 import { setConversations } from 'redux/conversations/conversationsSlice';
 import logo from '@assets/images/ChatGPT Image 14 jun 2025, 01_46_15 p.m..png';
+import UserAvatar from 'react-native-user-avatar';
 
 export const ConversationScreen: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -81,6 +82,13 @@ export const ConversationScreen: React.FC = () => {
             >
               <View style={styles.rowBetween}>
                 <Text style={styles.name}>{chat.participant.fullName}</Text>
+
+                <UserAvatar
+                  style={styles.avatar}
+                  size={40}
+                  name={chat.participant.fullName}
+                />
+
                 <Text style={chat.online ? styles.online : styles.offline}>
                   {moment(chat.messages[0].createdAt).fromNow()}
                 </Text>

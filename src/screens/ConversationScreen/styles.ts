@@ -33,8 +33,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     paddingVertical: 12,
     paddingHorizontal: 20,
-    // backgroundColor: "#fff",
-    marginBottom: -3,
+    marginBottom: -15,
     color: "#333",
     fontWeight: "500",
     shadowColor: "#000",
@@ -52,15 +51,17 @@ const styles = StyleSheet.create({
 
   },
   name: {
-    fontSize: 16,
+    fontSize: 20,
     fontWeight: "bold",
-    marginBottom: 15
+    marginBottom: 15,
+    left: 30
   },
   message: {
     fontSize: 14,
     color: '#555',
     marginTop: -15,
-    marginLeft: -4
+    marginLeft: 25,
+    width: 100
   },
 
   online: {
@@ -98,6 +99,11 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
     marginLeft: 12,
     marginTop: 5
+  },
+  avatar: {
+    position: "absolute",
+    left: -17,
+    bottom: 5
   }
 
 });
