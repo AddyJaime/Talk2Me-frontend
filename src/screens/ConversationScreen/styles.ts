@@ -99,6 +99,19 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
     marginLeft: 15,
   },
+  searchIcon: {
+
+    marginRight: 25,
+    textShadowColor: 'rgba(0, 0, 0, 0.2)',
+    textShadowOffset: { width: 0, height: 1 },
+    textShadowRadius: 2,
+    transform: [{ rotate: '-5deg' }],
+    padding: 5,
+    borderRadius: 15,
+    borderWidth: 1,
+    borderColor: 'rgba(85, 85, 85, 0.3)',
+
+  }
 });
 
 export default styles

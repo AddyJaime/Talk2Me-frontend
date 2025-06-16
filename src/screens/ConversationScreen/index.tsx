@@ -32,8 +32,8 @@ export const ConversationScreen: React.FC = () => {
           <Ionicons
             name="search"
             size={28}
-            color="black"
-            style={{ marginRight: 17 }}
+            color="#555"
+            style={styles.searchIcon}
           />
         </TouchableOpacity>
       ),
@@ -99,10 +99,9 @@ export const ConversationScreen: React.FC = () => {
                   <Text
                     style={styles.message}
                     numberOfLines={1}
-                    ellipsizeMode="tail"
-
                     // Si el texto es muy largo para la línea, muestra puntos suspensivos al final, así:
                     // "Hola, mucho gus..."
+                    ellipsizeMode="tail"
                   >
                     {chat.messages[0].text}
                   </Text>
