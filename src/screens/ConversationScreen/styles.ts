@@ -1,111 +1,104 @@
-import { StyleSheet } from 'react-native';
-
+import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white',
-  },
-  text: {
-    marginVertical: 80,
-    marginHorizontal: 30,
-    fontSize: 35
+    backgroundColor: '#f8f9fa',
+    paddingHorizontal: 10,
   },
   input: {
     borderWidth: 1,
-    borderColor: 'rgba(0, 0, 0, 0.1)',
-    borderRadius: 10,
-    paddingVertical: 8,
-    paddingHorizontal: 12,
-    fontSize: 16,
-    marginHorizontal: 20,
-    marginBottom: 10,
-    backgroundColor: '#fff',
-    marginVertical: 20,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.1,
-    shadowRadius: 3,
-    elevation: 2,
-
-  },
-  chatsBox: {
-    fontSize: 16,
+    borderColor: '#e1e1e1',
+    borderRadius: 25,
     paddingVertical: 12,
     paddingHorizontal: 20,
-    marginBottom: -15,
-    color: "#333",
-    fontWeight: "500",
-    shadowColor: "#000",
-    shadowOpacity: 0.1,
-    shadowOffset: { width: 0, height: 1 },
-    shadowRadius: 3,
-    elevation: 2
-
-
+    fontSize: 16,
+    marginHorizontal: 15,
+    marginBottom: 15,
+    backgroundColor: '#fff',
+    marginVertical: 15,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.05,
+    shadowRadius: 4,
+    elevation: 2,
+  },
+  chatsBox: {
+    backgroundColor: '#fff',
+    borderRadius: 12,
+    padding: 15,
+    marginBottom: 10,
+    marginHorizontal: 15,
+    shadowColor: '#000',
+    shadowOpacity: 0.05,
+    shadowOffset: { width: 0, height: 2 },
+    shadowRadius: 4,
+    elevation: 2,
   },
   rowBetween: {
-    flexDirection: "row",
+    flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: "center"
-
+    alignItems: 'center',
+    marginBottom: 8,
   },
   name: {
-    fontSize: 20,
-    fontWeight: "bold",
-    marginBottom: 15,
-    left: 30
+    fontSize: 16,
+    fontWeight: '600',
+    color: '#2d3436',
+    flex: 1,
+    marginRight: 10,
   },
   message: {
     fontSize: 14,
-    color: '#555',
-    marginTop: -15,
-    marginLeft: 25,
-    width: 100
+    color: '#636e72',
+    marginTop: 4,
+    marginLeft: 0,
+    flex: 1,
   },
-
   online: {
-    color: 'green',
-    marginRight: 20,
-    marginTop: -20
-
-  }, offline: {
-    color: "red",
-    marginRight: 20,
-    marginBottom: 20
+    color: '#00b894',
+    fontSize: 12,
+    marginRight: 10,
+  },
+  offline: {
+    color: '#d63031',
+    fontSize: 12,
+    marginRight: 10,
+  },
+  time: {
+    fontSize: 12,
+    color: '#b2bec3',
+    marginRight: 10,
   },
   circule: {
-    backgroundColor: 'green',
+    backgroundColor: '#00b894',
     borderRadius: 12,
-    height: 24,
-    minWidth: 24,
+    height: 20,
+    minWidth: 20,
     justifyContent: 'center',
     alignItems: 'center',
-    paddingHorizontal: 6,
-    position: 'absolute',
-    top: 40,
-    left: 300
-
-  }
-  , circuleText: {
-    color: "black",
-    fontSize: 12,
-    fontWeight: "bold",
-
+    paddingHorizontal: 4,
   },
-  logo: {
-    height: 70,
-    width: 120,
-    resizeMode: 'contain',
-    marginLeft: 12,
-    marginTop: 5
+  circuleText: {
+    color: 'white',
+    fontSize: 11,
+    fontWeight: 'bold',
   },
   avatar: {
-    position: "absolute",
-    left: -17,
-    bottom: 5
-  }
-
+    marginRight: 15,
+  },
+  noChatsText: {
+    textAlign: 'center',
+    marginTop: 30,
+    color: '#636e72',
+    fontSize: 16,
+  },
+  logo: {
+    height: 60,
+    width: 120,
+    resizeMode: 'contain',
+    marginLeft: 15,
+  },
 });
 
-export default styles;
+export default styles

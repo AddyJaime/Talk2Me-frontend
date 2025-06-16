@@ -31,7 +31,7 @@ export const ConversationScreen: React.FC = () => {
         <TouchableOpacity onPress={() => navigation.navigate('SearchUsers')}>
           <Ionicons
             name="search"
-            size={25}
+            size={28}
             color="black"
             style={{ marginRight: 17 }}
           />
@@ -63,46 +63,61 @@ export const ConversationScreen: React.FC = () => {
 
   return (
     <View style={styles.container}>
-      <View>
-        <TextInput
-          style={styles.input}
-          placeholder="Search"
-          value={searchTerm}
-          onChangeText={setSearchTerm}
-        />
+      <TextInput
+        style={styles.input}
+        placeholder="Search..."
+        placeholderTextColor="#b2bec3"
+        value={searchTerm}
+        onChangeText={setSearchTerm}
+      />
 
-        {filteredChats.length === 0 ? (
-          <Text>There is not chat</Text>
-        ) : (
-          conversations.map((chat: Conversation) => (
-            <TouchableOpacity
-              onPress={() => navigation.navigate('Chat')}
-              style={styles.chatsBox}
-              key={chat.id}
-            >
-              <View style={styles.rowBetween}>
-                <Text style={styles.name}>{chat.participant.fullName}</Text>
+      {filteredChats.length === 0 ? (
+        <Text style={styles.noChatsText}>No chats found</Text>
+      ) : (
+        filteredChats.map((chat: Conversation) => (
+          <TouchableOpacity
+            onPress={() => navigation.navigate('Chat')}
+            style={styles.chatsBox}
+            key={chat.id}
+          >
+            <View style={styles.rowBetween}>
+              <UserAvatar
+                style={styles.avatar}
+                size={40}
+                name={chat.participant.fullName}
+              />
 
-                <UserAvatar
-                  style={styles.avatar}
-                  size={40}
-                  name={chat.participant.fullName}
-                />
+              <View style={{ flex: 1 }}>
+                <View style={styles.rowBetween}>
+                  <Text style={styles.name}>{chat.participant.fullName}</Text>
+                  <Text style={styles.time}>
+                    {moment(chat.messages[0].createdAt).fromNow()}
+                  </Text>
+                </View>
 
-                <Text style={chat.online ? styles.online : styles.offline}>
-                  {moment(chat.messages[0].createdAt).fromNow()}
-                </Text>
-                {chat.unreadCount > 0 && (
-                  <View style={styles.circule}>
-                    <Text style={styles.circuleText}>{chat.unreadCount}</Text>
-                  </View>
-                )}
+                <View style={styles.rowBetween}>
+                  <Text
+                    style={styles.message}
+                    numberOfLines={1}
+                    ellipsizeMode="tail"
+
+                    // Si el texto es muy largo para la línea, muestra puntos suspensivos al final, así:
+                    // "Hola, mucho gus..."
+                  >
+                    {chat.messages[0].text}
+                  </Text>
+
+                  {chat.unreadCount > 0 && (
+                    <View style={styles.circule}>
+                      <Text style={styles.circuleText}>{chat.unreadCount}</Text>
+                    </View>
+                  )}
+                </View>
               </View>
-              <Text style={styles.message}> {chat.messages[0].text}</Text>
-            </TouchableOpacity>
-          ))
-        )}
-      </View>
+            </View>
+          </TouchableOpacity>
+        ))
+      )}
     </View>
   );
 };
