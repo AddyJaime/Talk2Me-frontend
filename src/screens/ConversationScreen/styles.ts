@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
     minWidth: 20,
     justifyContent: 'center',
     alignItems: 'center',
-    paddingHorizontal: 4,
+    paddingHorizontal: 5,
   },
   circuleText: {
     color: 'white',
