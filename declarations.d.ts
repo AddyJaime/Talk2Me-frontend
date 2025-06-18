@@ -9,3 +9,5 @@ declare module 'react-native-vector-icons/Ionicons' {
 }
 declare module 'react-native-user-avatar'
 
+
+declare module 'react-native-invertible-scroll-view'

@@ -3,7 +3,7 @@ import { View, Text, Image, TouchableOpacity } from 'react-native';
 import styles from './styles';
 import { TextInput } from 'react-native';
 import { Conversation, RootStackParamList } from '@types';
-import { fetchConversations } from '@api/conversationApi';
+import { fetchConversation, fetchConversations } from '@api/conversationApi';
 import { useDispatch } from 'react-redux';
 import { AppDispatch, RootState } from 'redux/store';
 import { useSelector } from 'react-redux';
@@ -11,7 +11,10 @@ import moment from 'moment';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 
 import { Ionicons } from '@expo/vector-icons';
-import { setConversations } from 'redux/conversations/conversationsSlice';
+import {
+  setConversation,
+  setConversations,
+} from 'redux/conversations/conversationsSlice';
 import logo from '@assets/images/ChatGPT Image 14 jun 2025, 01_46_15 p.m..png';
 import UserAvatar from 'react-native-user-avatar';
 
@@ -56,10 +59,22 @@ export const ConversationScreen: React.FC = () => {
     const getData = async () => {
       const data = await fetchConversations();
 
-      dispatch(setConversations(data ?? []));
+      dispatch(setConversations(data));
     };
     getData();
   }, []);
+
+  const onPress = async (id: number) => {
+    try {
+      console.log(id);
+
+      const conversation = await fetchConversation(id);
+      dispatch(setConversation(conversation));
+      navigation.navigate('Chat');
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <View style={styles.container}>
@@ -76,7 +91,7 @@ export const ConversationScreen: React.FC = () => {
       ) : (
         filteredChats.map((chat: Conversation) => (
           <TouchableOpacity
-            onPress={() => navigation.navigate('Chat')}
+            onPress={() => onPress(chat.id)}
             style={styles.chatsBox}
             key={chat.id}
           >
