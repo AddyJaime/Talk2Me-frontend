@@ -6,7 +6,7 @@ export const fetchUsers = async (): Promise<User[] | undefined> => {
     const response = await API.get("/users/search")
     return response.data
   } catch (error) {
-    console.log("Error getting users", error)
+    console.log("Error getting users from back-end", error)
     return undefined
   }
 }
