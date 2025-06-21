@@ -35,13 +35,13 @@ export type useAsyncStorageType = {
 }
 
 export type Message = {
-  id: number,
+
   text: string,
   senderId: number,
   receiverId: number,
   createdAt: string,
-  updatedAt: string,
-  conversationId: number
+  // updatedAt: string,
+  // conversationId: number
 }
 
 export type participant = {

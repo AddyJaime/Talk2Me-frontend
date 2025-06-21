@@ -3,23 +3,20 @@ import { Conversation } from "@types";
 
 interface ConversationsState {
   conversations: Conversation[];
-  conversation?: Conversation;
-  currentConversationId?: number
+  conversation?: Conversation | null;
+
 }
 
 const initialState: ConversationsState = {
   conversations: [],
-  conversation: undefined,
-  currentConversationId: undefined
+  conversation: null,
+
 };
 
 const conversationsSlice = createSlice({
   name: "conversations",
   initialState,
   reducers: {
-    setCurrentConversationId: (state, action: PayloadAction<number | undefined>) => {
-      state.currentConversationId = action.payload;
-    },
     setConversations: (state, action: PayloadAction<Conversation[]>) => {
       state.conversations = action.payload;
     },
@@ -29,5 +26,5 @@ const conversationsSlice = createSlice({
   },
 });
 
-export const { setConversations, setConversation, setCurrentConversationId } = conversationsSlice.actions;
+export const { setConversations, setConversation } = conversationsSlice.actions;
 export const conversationReducers = conversationsSlice.reducer;
