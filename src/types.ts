@@ -35,13 +35,17 @@ export type useAsyncStorageType = {
 }
 
 export type Message = {
-
+  // id aqui es opcional porque la base de dato lo crea solo
+  id?: number
   text: string,
   senderId: number,
   receiverId: number,
-  createdAt: string,
-  // updatedAt: string,
-  // conversationId: number
+  conversationId: number
+  createdAt: string
+  updatedAt: string
+
+
+
 }
 
 export type participant = {

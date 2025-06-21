@@ -82,8 +82,10 @@ export const ChatsScreen: React.FC = () => {
             const messageToSend = {
               text: text,
               senderId: userId,
-
-              conversation: conversation?.id,
+              receiverId: conversation?.receiverId ?? 0,
+              conversationId: conversation?.id ?? 0,
+              createdAt: Date(),
+              updatedAt: Date(),
             };
             sendMessage(messageToSend);
           }}
