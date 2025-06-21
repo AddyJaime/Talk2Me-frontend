@@ -5,8 +5,9 @@ import AppNavigator from './AppNavigator';
 import { useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { useAsyncStorage } from '@hooks';
-import { login } from 'redux/auth/authSlice';
 import { SplashScreen } from '@/screens';
+import { setUser } from '@/redux/users/usersSlice';
+import { login } from '@/redux/auth/authSlice';
 
 const Navigation = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -22,8 +23,12 @@ const Navigation = () => {
     const checkAuth = async () => {
       try {
         const authData = await getItem('authToken');
+
+        console.log(authData);
+
         if (authData?.token && authData?.user) {
-          dispatch(login({ id: authData.id, email: authData.email }));
+          dispatch(setUser(authData.user));
+          dispatch(login(authData.user));
         }
         await new Promise((resolve) => setTimeout(resolve, 3000));
       } catch (error) {

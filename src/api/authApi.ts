@@ -8,7 +8,6 @@ export const loginUser = async (data: LoginForm) => {
       password: data.password,
     });
     const { token, user } = response.data;
-    console.log(user)
     return { token, user };
   } catch (error: any) {
     console.error('Error login in', error.response?.data || error.message);

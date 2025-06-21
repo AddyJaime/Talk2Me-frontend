@@ -21,10 +21,10 @@ const conversationsSlice = createSlice({
     setConversations: (state, action: PayloadAction<Conversation[]>) => {
       state.conversations = action.payload;
     },
-    setConversation: (state, action: PayloadAction<Conversation>) => {
+    setConversation: (state, action: PayloadAction<Conversation | null>) => {
       state.conversation = action.payload;
     },
-    adMessage: (state, action: PayloadAction<Message>) => {
+    addMessage: (state, action: PayloadAction<Message>) => {
       if (state.conversation) {
         state.conversation.messages.push(action.payload)
       }
@@ -32,5 +32,5 @@ const conversationsSlice = createSlice({
   },
 });
 
-export const { setConversations, setConversation, adMessage } = conversationsSlice.actions;
+export const { setConversations, setConversation, addMessage } = conversationsSlice.actions;
 export const conversationReducers = conversationsSlice.reducer;

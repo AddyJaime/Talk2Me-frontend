@@ -17,11 +17,13 @@ import { fetchUsers } from '@api/usersApi';
 import { useDispatch } from 'react-redux';
 import { setUsers } from 'redux/users/usersSlice';
 import UserAvatar from 'react-native-user-avatar';
+import { createConversation } from '@/api/conversationApi';
+import { setConversation } from '@/redux/conversations/conversationsSlice';
 
 export const SearchUserScreen: React.FC = () => {
   const [searchUser, setsearchUser] = useState('');
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
-  const users = useSelector((state: RootState) => state.users.users);
+  const { users, user } = useSelector((state: RootState) => state.users);
   const dispatch = useDispatch();
   const [isRefreshing, setIsRefreshing] = useState(false);
 
@@ -29,14 +31,24 @@ export const SearchUserScreen: React.FC = () => {
     const fetchData = async () => {
       try {
         const data = await fetchUsers();
-        console.log(data);
         dispatch(setUsers(data ?? []));
       } catch (error) {
         console.log('error getting users', error);
       }
     };
+
     fetchData();
   }, []);
+
+  const onPress = async (id: number) => {
+    try {
+      const conversation = await createConversation(user.id, id);
+      dispatch(setConversation(conversation));
+      navigation.navigate('Chat');
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <View style={styles.container}>
@@ -71,10 +83,7 @@ export const SearchUserScreen: React.FC = () => {
             }
           >
             {users.map((user: User) => (
-              <TouchableOpacity
-                onPress={() => navigation.navigate('Chat')}
-                key={user.id}
-              >
+              <TouchableOpacity onPress={() => onPress(user.id)} key={user.id}>
                 <View style={styles.usersBox}>
                   <View style={styles.circleDimention}>
                     <UserAvatar size={50} name={user.fullName} />

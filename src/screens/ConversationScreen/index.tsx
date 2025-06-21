@@ -1,5 +1,5 @@
 import React, { useEffect, useLayoutEffect, useState } from 'react';
-import { View, Text, Image, TouchableOpacity } from 'react-native';
+import { View, Text, Image, TouchableOpacity, ScrollView } from 'react-native';
 import styles from './styles';
 import { TextInput } from 'react-native';
 import { Conversation, RootStackParamList } from '@types';
@@ -17,6 +17,7 @@ import {
 } from 'redux/conversations/conversationsSlice';
 import logo from '@assets/images/ChatGPT Image 14 jun 2025, 01_46_15 p.m..png';
 import UserAvatar from 'react-native-user-avatar';
+import { RefreshControl } from 'react-native-gesture-handler';
 
 export const ConversationScreen: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -24,6 +25,7 @@ export const ConversationScreen: React.FC = () => {
   const conversations = useSelector(
     (state: RootState) => state.conversations.conversations,
   );
+  const [isRefreshing, setIsRefreshing] = useState(false);
 
   const [searchTerm, setSearchTerm] = useState('');
 
@@ -55,19 +57,24 @@ export const ConversationScreen: React.FC = () => {
       )
     : [];
 
-  useEffect(() => {
-    const getData = async () => {
-      const data = await fetchConversations();
+  const getData = async () => {
+    const data = await fetchConversations();
+    dispatch(setConversations(data));
+  };
 
-      dispatch(setConversations(data));
-    };
+  useEffect(() => {
     getData();
   }, []);
 
+  const onRefresh = () => {
+    setIsRefreshing(true);
+    getData();
+
+    setTimeout(() => setIsRefreshing(false), 2000);
+  };
+
   const onPress = async (id: number) => {
     try {
-      console.log(id);
-
       const conversation = await fetchConversation(id);
       dispatch(setConversation(conversation));
       navigation.navigate('Chat');
@@ -77,61 +84,70 @@ export const ConversationScreen: React.FC = () => {
   };
 
   return (
-    <View style={styles.container}>
-      <TextInput
-        style={styles.input}
-        placeholder="Search..."
-        placeholderTextColor="#b2bec3"
-        value={searchTerm}
-        onChangeText={setSearchTerm}
-      />
+    <ScrollView
+      style={{ flex: 1 }}
+      refreshControl={
+        <RefreshControl onRefresh={onRefresh} refreshing={isRefreshing} />
+      }
+    >
+      <View style={styles.container}>
+        <TextInput
+          style={styles.input}
+          placeholder="Search..."
+          placeholderTextColor="#b2bec3"
+          value={searchTerm}
+          onChangeText={setSearchTerm}
+        />
 
-      {filteredChats.length === 0 ? (
-        <Text style={styles.noChatsText}>No chats found</Text>
-      ) : (
-        filteredChats.map((chat: Conversation) => (
-          <TouchableOpacity
-            onPress={() => onPress(chat.id)}
-            style={styles.chatsBox}
-            key={chat.id}
-          >
-            <View style={styles.rowBetween}>
-              <UserAvatar
-                style={styles.avatar}
-                size={40}
-                name={chat.participant.fullName}
-              />
+        {filteredChats.length === 0 ? (
+          <Text style={styles.noChatsText}>No chats found</Text>
+        ) : (
+          filteredChats.map((chat: Conversation) => (
+            <TouchableOpacity
+              onPress={() => onPress(chat.id)}
+              style={styles.chatsBox}
+              key={chat.id}
+            >
+              <View style={styles.rowBetween}>
+                <UserAvatar
+                  style={styles.avatar}
+                  size={40}
+                  name={chat.participant.fullName}
+                />
 
-              <View style={{ flex: 1 }}>
-                <View style={styles.rowBetween}>
-                  <Text style={styles.name}>{chat.participant.fullName}</Text>
-                  <Text style={styles.time}>
-                    {moment(chat.messages[0].createdAt).fromNow()}
-                  </Text>
-                </View>
+                <View style={{ flex: 1 }}>
+                  <View style={styles.rowBetween}>
+                    <Text style={styles.name}>{chat.participant.fullName}</Text>
+                    <Text style={styles.time}>
+                      {moment(chat?.messages[0]?.createdAt).fromNow()}
+                    </Text>
+                  </View>
 
-                <View style={styles.rowBetween}>
-                  <Text
-                    style={styles.message}
-                    numberOfLines={1}
-                    // Si el texto es muy largo para la línea, muestra puntos suspensivos al final, así:
-                    // "Hola, mucho gus..."
-                    ellipsizeMode="tail"
-                  >
-                    {chat.messages[0].text}
-                  </Text>
+                  <View style={styles.rowBetween}>
+                    <Text
+                      style={styles.message}
+                      numberOfLines={1}
+                      // Si el texto es muy largo para la línea, muestra puntos suspensivos al final, así:
+                      // "Hola, mucho gus..."
+                      ellipsizeMode="tail"
+                    >
+                      {chat?.messages[0]?.text}
+                    </Text>
 
-                  {chat.unreadCount > 0 && (
-                    <View style={styles.circule}>
-                      <Text style={styles.circuleText}>{chat.unreadCount}</Text>
-                    </View>
-                  )}
+                    {chat.unreadCount > 0 && (
+                      <View style={styles.circule}>
+                        <Text style={styles.circuleText}>
+                          {chat.unreadCount}
+                        </Text>
+                      </View>
+                    )}
+                  </View>
                 </View>
               </View>
-            </View>
-          </TouchableOpacity>
-        ))
-      )}
-    </View>
+            </TouchableOpacity>
+          ))
+        )}
+      </View>
+    </ScrollView>
   );
 };

@@ -38,7 +38,6 @@ export const LoginScreen: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
 
   const authState = useSelector((state: RootState) => state.auth);
-  console.log(authState);
   const onSubmit = async (data: any) => {
     try {
       const { token, user } = await loginUser(data);

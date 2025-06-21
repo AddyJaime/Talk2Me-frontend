@@ -1,11 +1,9 @@
+import { Message } from "react-hook-form";
 import { io } from "socket.io-client";
 
 const SOCKET_URL = 'http://10.0.0.50:3000'
 
-export const socket = io(SOCKET_URL, {
-  transports: ['websocket'],
-  autoConnect: false
-})
+export const socket = io(SOCKET_URL)
 
 export const connectSocket = () => {
   if (!socket.connected) {
@@ -14,6 +12,7 @@ export const connectSocket = () => {
   }
 }
 
+// voy a poner esto aqui opcional antuan
 export const disconnectedSocket = () => {
   if (socket.connected) {
     socket.disconnect()
@@ -22,7 +21,7 @@ export const disconnectedSocket = () => {
 
 }
 
-export const emitMessage = (message: any) => {
+export const emitMessage = (message: Message) => {
   if (socket.connected) {
     socket.emit("New_Message", message)
     console.log("Messange sent via socket:", message)

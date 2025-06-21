@@ -14,13 +14,19 @@ import {
 } from 'socket/socket';
 
 import { useDispatch } from 'react-redux';
-import { adMessage } from '@/redux/conversations/conversationsSlice';
+import {
+  addMessage,
+  setConversation,
+} from '@/redux/conversations/conversationsSlice';
+import { Message } from '@/types';
+import { useNavigation } from '@react-navigation/native';
 
 // para chatear
 export const ChatsScreen: React.FC = () => {
   const scrollRef = useRef<ScrollView>(null);
   const [text, setMessage] = useState('');
   const dispatch = useDispatch();
+  const navigation = useNavigation();
 
   // aqui debo usar el user activo y tomarlo del redux para saber quien es que esta acttivo
   const userId = 1;
@@ -29,9 +35,9 @@ export const ChatsScreen: React.FC = () => {
   );
   useEffect(() => {
     connectSocket();
-    listenForMessages(async (message) => {
+    listenForMessages(async (message: Message) => {
       console.log('Message recvedi', message);
-      dispatch(adMessage(message));
+      dispatch(addMessage(message));
     });
 
     return () => {
@@ -61,17 +67,28 @@ export const ChatsScreen: React.FC = () => {
     }
   };
 
+  useEffect(() => {
+    navigation.addListener('blur', () => {
+      console.log({ isFocused: false });
+      dispatch(setConversation(null));
+    });
+
+    navigation.addListener('focus', () => {
+      console.log({ isFocused: true });
+    });
+  }, []);
+
   return (
     <View style={{ flex: 1 }}>
       <ScrollView ref={scrollRef} style={{ flex: 1 }}>
-        {conversation?.messages.map((message) => (
+        {conversation?.messages?.map((message) => (
           <View
             key={message.id}
             style={[
               styles.messagesDisplay,
               {
                 alignItems:
-                  message.senderId === userId ? 'flex-end' : 'flex-start',
+                  message?.senderId === userId ? 'flex-end' : 'flex-start',
               },
             ]}
           >
