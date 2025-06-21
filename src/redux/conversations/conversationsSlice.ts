@@ -1,9 +1,10 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Conversation } from "@types";
+import { Conversation, Message } from "@types";
 
 interface ConversationsState {
   conversations: Conversation[];
   conversation?: Conversation | null;
+
 
 }
 
@@ -23,8 +24,13 @@ const conversationsSlice = createSlice({
     setConversation: (state, action: PayloadAction<Conversation>) => {
       state.conversation = action.payload;
     },
+    adMessage: (state, action: PayloadAction<Message>) => {
+      if (state.conversation) {
+        state.conversation.messages.push(action.payload)
+      }
+    }
   },
 });
 
-export const { setConversations, setConversation } = conversationsSlice.actions;
+export const { setConversations, setConversation, adMessage } = conversationsSlice.actions;
 export const conversationReducers = conversationsSlice.reducer;

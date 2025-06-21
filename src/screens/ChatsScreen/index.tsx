@@ -3,37 +3,63 @@ import { View, Text, ScrollView, TextInput, Button } from 'react-native';
 import styles from './style';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/redux/store';
-import { useNavigation } from '@react-navigation/native';
-import { Message } from '@/types';
+
 import { sendMessagestoBackend } from '@/api/chatApi';
+import {
+  connectSocket,
+  disconnectedSocket,
+  emitMessage,
+  listenForMessages,
+  removeMessageListener,
+} from 'socket/socket';
+
+import { useDispatch } from 'react-redux';
+import { adMessage } from '@/redux/conversations/conversationsSlice';
 
 // para chatear
 export const ChatsScreen: React.FC = () => {
-  const isFocused = useNavigation().isFocused();
   const scrollRef = useRef<ScrollView>(null);
   const [text, setMessage] = useState('');
+  const dispatch = useDispatch();
+
   // aqui debo usar el user activo y tomarlo del redux para saber quien es que esta acttivo
   const userId = 1;
   const { conversation } = useSelector(
     (state: RootState) => state.conversations,
   );
+  useEffect(() => {
+    connectSocket();
+    listenForMessages(async (message) => {
+      console.log('Message recvedi', message);
+      dispatch(adMessage(message));
+    });
 
-  const sendMessage = async (data: Message) => {
+    return () => {
+      removeMessageListener();
+      disconnectedSocket();
+    };
+  }, []);
+
+  const sendMessage = async () => {
+    if (!text.trim() || !conversation) return;
+
+    const messageToSend = {
+      text: text,
+      senderId: userId,
+      receiverId: conversation?.receiverId ?? 0,
+      conversationId: conversation.id ?? 0,
+      createdAt: Date(),
+      updatedAt: Date(),
+    };
+
     try {
-      const backendData = await sendMessagestoBackend(data);
-      console.log(backendData);
+      const backendData = await sendMessagestoBackend(messageToSend);
+      emitMessage(backendData);
+      setMessage('');
     } catch (error) {
-      console.log({ Error: 'error sending message' });
+      console.log({ Error: 'Error sending message', error });
     }
   };
-
-  useEffect(() => {
-    if (conversation) {
-    }
-
-    scrollRef?.current?.scrollToEnd();
-    // console.log(JSON.stringify({ conversation }, null, 2));
-  }, [conversation, isFocused]);
 
   return (
     <View style={{ flex: 1 }}>
@@ -77,23 +103,10 @@ export const ChatsScreen: React.FC = () => {
           placeholder="Type..."
           value={text}
         />
-        <Button
-          onPress={() => {
-            const messageToSend = {
-              text: text,
-              senderId: userId,
-              receiverId: conversation?.receiverId ?? 0,
-              conversationId: conversation?.id ?? 0,
-              createdAt: Date(),
-              updatedAt: Date(),
-            };
-            sendMessage(messageToSend);
-          }}
-          title="send"
-          color="white"
-        />
+        <Button onPress={sendMessage} title="send" color="white" />
       </View>
     </View>
   );
 };
+
 // que quiero lograr, o
