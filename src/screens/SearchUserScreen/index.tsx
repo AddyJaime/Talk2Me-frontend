@@ -33,7 +33,7 @@ export const SearchUserScreen: React.FC = () => {
         const data = await fetchUsers();
         dispatch(setUsers(data ?? []));
       } catch (error) {
-        console.log('error getting users', error);
+        console.log('Error getting users', error);
       }
     };
 
