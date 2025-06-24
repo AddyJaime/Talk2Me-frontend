@@ -63,7 +63,7 @@ export const ChatsScreen: React.FC = () => {
       emitMessage(backendData);
       setMessage('');
     } catch (error) {
-      console.log({ Error: 'Error sending message', error });
+      console.log({ Error: 'Error sending Message', error });
     }
   };
 
