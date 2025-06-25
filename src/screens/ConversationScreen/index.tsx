@@ -1,23 +1,36 @@
+// React & React Native
 import React, { useEffect, useLayoutEffect, useState } from 'react';
-import { View, Text, Image, TouchableOpacity, ScrollView } from 'react-native';
-import styles from './styles';
-import { TextInput } from 'react-native';
-import { Conversation, RootStackParamList } from '@types';
-import { fetchConversation, fetchConversations } from '@api/conversationApi';
-import { useDispatch } from 'react-redux';
-import { AppDispatch, RootState } from 'redux/store';
-import { useSelector } from 'react-redux';
+import {
+  View,
+  Text,
+  Image,
+  TouchableOpacity,
+  ScrollView,
+  TextInput,
+} from 'react-native';
+import { RefreshControl } from 'react-native-gesture-handler';
+
+// External libaries
+import { Ionicons } from '@expo/vector-icons';
 import moment from 'moment';
+import UserAvatar from 'react-native-user-avatar';
+import { useDispatch, useSelector } from 'react-redux';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 
-import { Ionicons } from '@expo/vector-icons';
+// types
+import { Conversation, RootStackParamList } from '@types';
+import { AppDispatch, RootState } from 'redux/store';
+
+// API & Redux
+import { fetchConversation, fetchConversations } from '@api/conversationApi';
 import {
   setConversation,
   setConversations,
 } from 'redux/conversations/conversationsSlice';
+
+// Styles and Assets
+import styles from './styles';
 import logo from '@assets/images/ChatGPT Image 14 jun 2025, 01_46_15 p.m..png';
-import UserAvatar from 'react-native-user-avatar';
-import { RefreshControl } from 'react-native-gesture-handler';
 
 export const ConversationScreen: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -26,9 +39,9 @@ export const ConversationScreen: React.FC = () => {
     (state: RootState) => state.conversations.conversations,
   );
   const [isRefreshing, setIsRefreshing] = useState(false);
-
   const [searchTerm, setSearchTerm] = useState('');
 
+  /// Layout: Header config
   useLayoutEffect(() => {
     navigation.setOptions({
       headerLeft: () => <Image style={styles.logo} source={logo} />,
@@ -43,45 +56,40 @@ export const ConversationScreen: React.FC = () => {
         </TouchableOpacity>
       ),
     });
-  });
+  }, [navigation]);
 
-  const filteredChats = Array.isArray(conversations)
-    ? conversations.filter(
-        (conversation) =>
-          conversation.participant.fullName.includes(
-            searchTerm.toLowerCase(),
-          ) ||
-          conversation.participant.email
-            .toLowerCase()
-            .includes(searchTerm.toLowerCase()),
-      )
-    : [];
-
-  const getData = async () => {
+  // Fetch conversations
+  const loadConversations = async () => {
     const data = await fetchConversations();
     dispatch(setConversations(data));
   };
-
   useEffect(() => {
-    getData();
+    loadConversations();
   }, []);
 
-  const onRefresh = () => {
+  // Pull to refresh
+  const onRefresh = async () => {
     setIsRefreshing(true);
-    getData();
-
-    setTimeout(() => setIsRefreshing(false), 2000);
+    await loadConversations();
+    setIsRefreshing(false);
   };
 
-  const onPress = async (id: number) => {
+  // Open a conversation
+  const handleOpenConversation = async (id: number) => {
     try {
       const conversation = await fetchConversation(id);
       dispatch(setConversation(conversation));
       navigation.navigate('Chat');
     } catch (error) {
-      console.log(error);
+      console.log('Error loading conversation:', error);
     }
   };
+
+  // Filter conversations
+  const filteredChats =
+    conversations?.filter((conversation) =>
+      conversation.participant.fullName.includes(searchTerm.toLowerCase()),
+    ) || [];
 
   return (
     <ScrollView
@@ -104,7 +112,7 @@ export const ConversationScreen: React.FC = () => {
         ) : (
           filteredChats.map((chat: Conversation) => (
             <TouchableOpacity
-              onPress={() => onPress(chat.id)}
+              onPress={() => handleOpenConversation(chat.id)}
               style={styles.chatsBox}
               key={chat.id}
             >

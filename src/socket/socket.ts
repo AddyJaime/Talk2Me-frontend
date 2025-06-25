@@ -12,7 +12,7 @@ export const connectSocket = () => {
   }
 }
 
-// voy a poner esto aqui opcional antuan
+
 export const disconnectedSocket = () => {
   if (socket.connected) {
     socket.disconnect()

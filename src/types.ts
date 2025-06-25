@@ -63,7 +63,10 @@ export type Conversation = {
   participant: participant;
   messages: Message[];
   online: string,
-  unreadCount: number
+  unreadCount: number,
+
+
+
 }
 
 export type Chat = {

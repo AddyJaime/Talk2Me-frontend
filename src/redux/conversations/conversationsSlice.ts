@@ -26,7 +26,7 @@ const conversationsSlice = createSlice({
     },
     addMessage: (state, action: PayloadAction<Message>) => {
       if (state.conversation) {
-        state.conversation.messages.push(action.payload)
+        state.conversation?.messages?.push(action.payload)
       }
     }
   },

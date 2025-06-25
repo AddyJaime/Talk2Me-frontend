@@ -14,19 +14,16 @@ import {
 } from 'socket/socket';
 
 import { useDispatch } from 'react-redux';
-import {
-  addMessage,
-  setConversation,
-} from '@/redux/conversations/conversationsSlice';
+import { addMessage } from '@/redux/conversations/conversationsSlice';
 import { Message } from '@/types';
-import { useNavigation } from '@react-navigation/native';
+// import { useNavigation } from '@react-navigation/native';
 
 // para chatear
 export const ChatsScreen: React.FC = () => {
   const scrollRef = useRef<ScrollView>(null);
   const [text, setMessage] = useState('');
   const dispatch = useDispatch();
-  const navigation = useNavigation();
+  // const navigation = useNavigation();
 
   // aqui debo usar el user activo y tomarlo del redux para saber quien es que esta acttivo
   const userId = 1;
@@ -36,7 +33,7 @@ export const ChatsScreen: React.FC = () => {
   useEffect(() => {
     connectSocket();
     listenForMessages(async (message: Message) => {
-      console.log('Message recvedi', message);
+      console.log('Message receive', message);
       dispatch(addMessage(message));
     });
 
@@ -67,16 +64,16 @@ export const ChatsScreen: React.FC = () => {
     }
   };
 
-  useEffect(() => {
-    navigation.addListener('blur', () => {
-      console.log({ isFocused: false });
-      dispatch(setConversation(null));
-    });
+  // useEffect(() => {
+  //   navigation.addListener('blur', () => {
+  //     console.log({ isFocused: false });
+  //     dispatch(setConversation(null));
+  //   });
 
-    navigation.addListener('focus', () => {
-      console.log({ isFocused: true });
-    });
-  }, []);
+  //   navigation.addListener('focus', () => {
+  //     console.log({ isFocused: true });
+  //   });
+  // }, []);
 
   return (
     <View style={{ flex: 1 }}>
