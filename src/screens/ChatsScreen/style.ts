@@ -19,12 +19,16 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   textInput: {
-    width: '100%',
-    height: 45,
-    paddingHorizontal: 15,
-    borderRadius: 25,
-    backgroundColor: 'lightgray',
-  }
+    flex: 1,
+    backgroundColor: '#f1f2f6',
+    borderRadius: 20,
+    paddingVertical: 10,
+    fontSize: 16,
+
+    paddingHorizontal: 10,
+    margin: 20
+  },
+
 });
 
 export default styles

@@ -1,5 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { View, Text, ScrollView, TextInput, Button } from 'react-native';
+import {
+  View,
+  Text,
+  ScrollView,
+  TextInput,
+  Button,
+  KeyboardAvoidingView,
+  Platform,
+} from 'react-native';
 import styles from './style';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/redux/store';
@@ -16,6 +24,8 @@ import {
 import { useDispatch } from 'react-redux';
 import { addMessage } from '@/redux/conversations/conversationsSlice';
 import { Message } from '@/types';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import { Ionicons } from '@expo/vector-icons';
 // import { useNavigation } from '@react-navigation/native';
 
 // para chatear
@@ -76,8 +86,16 @@ export const ChatsScreen: React.FC = () => {
   // }, []);
 
   return (
-    <View style={{ flex: 1 }}>
-      <ScrollView ref={scrollRef} style={{ flex: 1 }}>
+    <KeyboardAvoidingView
+      style={{ flex: 1 }}
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      keyboardVerticalOffset={100}
+    >
+      <ScrollView
+        ref={scrollRef}
+        style={{ flex: 1 }}
+        keyboardShouldPersistTaps="handled"
+      >
         {conversation?.messages?.map((message) => (
           <View
             key={message.id}
@@ -105,10 +123,12 @@ export const ChatsScreen: React.FC = () => {
       </ScrollView>
       <View
         style={{
-          width: '100%',
-          height: 100,
-          padding: 20,
-          backgroundColor: 'red',
+          flexDirection: 'row',
+          alignItems: 'center',
+          // padding: 10,
+          backgroundColor: '#fff',
+          borderTopWidth: 1,
+          borderTopColor: '#eee',
         }}
       >
         <TextInput
@@ -117,10 +137,14 @@ export const ChatsScreen: React.FC = () => {
           placeholder="Type..."
           value={text}
         />
-        <Button onPress={sendMessage} title="send" color="white" />
+        <TouchableOpacity onPress={sendMessage} style={{ marginRight: 8 }}>
+          <Ionicons name="send" size={24} color="#007AFF" />
+        </TouchableOpacity>
       </View>
-    </View>
+    </KeyboardAvoidingView>
   );
 };
 
-// que quiero lograr, o
+{
+  /* // que quiero lograr, o */
+}
