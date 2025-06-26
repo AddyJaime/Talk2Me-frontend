@@ -1,24 +1,32 @@
-import React, { useEffect, useState } from 'react';
+// React & React Native
 import {
   View,
   TouchableOpacity,
   Text,
   ScrollView,
   RefreshControl,
+  TextInput,
 } from 'react-native';
-import styles from './style';
-import { Ionicons } from '@expo/vector-icons';
+import React, { useEffect, useState } from 'react';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
-import { RootStackParamList, User } from '@types';
-import { TextInput } from 'react-native-gesture-handler';
-import { useSelector } from 'react-redux';
-import { RootState } from 'redux/store';
-import { fetchUsers } from '@api/usersApi';
-import { useDispatch } from 'react-redux';
-import { setUsers } from 'redux/users/usersSlice';
+
+// External libaries
 import UserAvatar from 'react-native-user-avatar';
+import { Ionicons } from '@expo/vector-icons';
+
+// types
+import { RootStackParamList, User } from '@types';
+
+// API & Redux
+import { useDispatch, useSelector } from 'react-redux';
 import { createConversation } from '@/api/conversationApi';
+import { fetchUsers } from '@api/usersApi';
+import { RootState } from 'redux/store';
+import { setUsers } from 'redux/users/usersSlice';
 import { setConversation } from '@/redux/conversations/conversationsSlice';
+
+//  Styles and Assets
+import styles from './style';
 
 export const SearchUserScreen: React.FC = () => {
   const [searchUser, setsearchUser] = useState('');
@@ -27,20 +35,20 @@ export const SearchUserScreen: React.FC = () => {
   const dispatch = useDispatch();
   const [isRefreshing, setIsRefreshing] = useState(false);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const data = await fetchUsers();
-        dispatch(setUsers(data ?? []));
-      } catch (error) {
-        console.log('Error getting users', error);
-      }
-    };
+  const fetchData = async () => {
+    try {
+      const data = await fetchUsers();
+      dispatch(setUsers(data ?? []));
+    } catch (error) {
+      console.log('Error getting users', error);
+    }
+  };
 
+  useEffect(() => {
     fetchData();
   }, []);
 
-  const onPress = async (id: number) => {
+  const handleStartConversation = async (id: number) => {
     try {
       const conversation = await createConversation(user.id, id);
       dispatch(setConversation(conversation));
@@ -83,7 +91,10 @@ export const SearchUserScreen: React.FC = () => {
             }
           >
             {users.map((user: User) => (
-              <TouchableOpacity onPress={() => onPress(user.id)} key={user.id}>
+              <TouchableOpacity
+                onPress={() => handleStartConversation(user.id)}
+                key={user.id}
+              >
                 <View style={styles.usersBox}>
                   <View style={styles.circleDimention}>
                     <UserAvatar size={50} name={user.fullName} />
@@ -99,15 +110,3 @@ export const SearchUserScreen: React.FC = () => {
   );
 };
 // siguinete paso aqui agregar un estaod de online o off y por lo menos un avatar falso
-
-// include
-// where
-// Operadores
-// Op.ne: not equal
-// Op.eq: equal
-// Op.like: contiene texto
-// Op.in: array de valores
-// Op.or: uno u otro
-// Op.and: ambos
-// Relaciones
-// params
