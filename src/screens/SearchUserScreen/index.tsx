@@ -86,7 +86,7 @@ export const SearchUserScreen: React.FC = () => {
       </View>
       <View>
         {users.length === 0 ? (
-          <Text>There is not users</Text>
+          <Text>There is not Users</Text>
         ) : (
           <ScrollView
             refreshControl={
