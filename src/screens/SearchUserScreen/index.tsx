@@ -34,6 +34,9 @@ export const SearchUserScreen: React.FC = () => {
   const { users, user } = useSelector((state: RootState) => state.users);
   const dispatch = useDispatch();
   const [isRefreshing, setIsRefreshing] = useState(false);
+  const conversations = useSelector(
+    (state: RootState) => state.conversations.conversations,
+  );
 
   const fetchData = async () => {
     try {
@@ -48,13 +51,21 @@ export const SearchUserScreen: React.FC = () => {
     fetchData();
   }, []);
 
-  const handleStartConversation = async (id: number) => {
+  const handleStartConversation = async (otherUserId: number) => {
     try {
-      const conversation = await createConversation(user.id, id);
-      dispatch(setConversation(conversation));
-      navigation.navigate('Chat');
+      const existingConversation = conversations.filter(
+        (conv) => conv.participant.id === otherUserId,
+      );
+      if (existingConversation.length > 0) {
+        dispatch(setConversation(existingConversation[0]));
+        navigation.navigate('Chat');
+      } else {
+        const conversation = await createConversation(user.id, otherUserId);
+        navigation.navigate('Chat');
+        dispatch(setConversation(conversation));
+      }
     } catch (error) {
-      console.log(error);
+      console.log('Error starting conversation', error);
     }
   };
 
@@ -109,4 +120,3 @@ export const SearchUserScreen: React.FC = () => {
     </View>
   );
 };
-// siguinete paso aqui agregar un estaod de online o off y por lo menos un avatar falso
