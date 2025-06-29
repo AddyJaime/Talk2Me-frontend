@@ -22,26 +22,23 @@ import { useDispatch, useSelector } from 'react-redux';
 import { createConversation } from '@/api/conversationApi';
 import { fetchUsers } from '@api/usersApi';
 import { RootState } from 'redux/store';
-import { setUsers } from 'redux/users/usersSlice';
 import { setConversation } from '@/redux/conversations/conversationsSlice';
 
 //  Styles and Assets
 import styles from './style';
 
 export const SearchUserScreen: React.FC = () => {
-  const [searchUser, setsearchUser] = useState('');
+  const [searchedUsers, setSearchedUsers] = useState<User[]>([]);
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
-  const { users, user } = useSelector((state: RootState) => state.users);
+  const { user } = useSelector((state: RootState) => state.users);
   const dispatch = useDispatch();
+
   const [isRefreshing, setIsRefreshing] = useState(false);
-  const conversations = useSelector(
-    (state: RootState) => state.conversations.conversations,
-  );
 
   const fetchData = async () => {
     try {
-      const data = await fetchUsers();
-      dispatch(setUsers(data ?? []));
+      // const data = await fetchUsers();
+      // dispatch(setUsers(data ?? []));
     } catch (error) {
       console.log('Error getting users', error);
     }
@@ -53,19 +50,30 @@ export const SearchUserScreen: React.FC = () => {
 
   const handleStartConversation = async (otherUserId: number) => {
     try {
-      const existingConversation = conversations.filter(
-        (conv) => conv.participant.id === otherUserId,
-      );
-      if (existingConversation.length > 0) {
-        dispatch(setConversation(existingConversation[0]));
-        navigation.navigate('Chat');
-      } else {
-        const conversation = await createConversation(user.id, otherUserId);
-        navigation.navigate('Chat');
-        dispatch(setConversation(conversation));
-      }
+      // const existingConversation = conversations.filter(
+      //   (conv) => conv.participant.id === otherUserId,
+      // );
+      // if (existingConversation.length > 0) {
+      //   dispatch(setConversation(existingConversation[0]));
+      //   navigation.navigate('Chat');
+      // } else {
+      const conversation = await createConversation(user.id, otherUserId);
+      console.log(JSON.stringify({ conversation }, null, 2));
+
+      navigation.navigate('Chat');
+      dispatch(setConversation(conversation));
+      // }
     } catch (error) {
       console.log('Error starting conversation', error);
+    }
+  };
+
+  const onChangeText = async (value: string) => {
+    if (value) {
+      const data = await fetchUsers(value, user.id);
+      setSearchedUsers(data);
+    } else {
+      setSearchedUsers([]);
     }
   };
 
@@ -80,42 +88,38 @@ export const SearchUserScreen: React.FC = () => {
           style={styles.input}
           placeholder="Search Users"
           placeholderTextColor={'gray'}
-          value={searchUser}
-          onChangeText={setsearchUser}
+          // value={searchUser}
+          onChangeText={(value) => onChangeText(value.toLowerCase())}
         />
       </View>
       <View>
-        {users.length === 0 ? (
-          <Text>There is not Users</Text>
-        ) : (
-          <ScrollView
-            refreshControl={
-              <RefreshControl
-                onRefresh={() => {
-                  setIsRefreshing(true);
-                  setTimeout(() => {
-                    setIsRefreshing(false);
-                  }, 2000);
-                }}
-                refreshing={isRefreshing}
-              />
-            }
-          >
-            {users.map((user: User) => (
-              <TouchableOpacity
-                onPress={() => handleStartConversation(user.id)}
-                key={user.id}
-              >
-                <View style={styles.usersBox}>
-                  <View style={styles.circleDimention}>
-                    <UserAvatar size={50} name={user.fullName} />
-                  </View>
-                  <Text style={styles.usersName}>{user.fullName}</Text>
+        <ScrollView
+          refreshControl={
+            <RefreshControl
+              onRefresh={() => {
+                setIsRefreshing(true);
+                setTimeout(() => {
+                  setIsRefreshing(false);
+                }, 2000);
+              }}
+              refreshing={isRefreshing}
+            />
+          }
+        >
+          {searchedUsers.map((user: User) => (
+            <TouchableOpacity
+              onPress={() => handleStartConversation(user.id)}
+              key={user.id}
+            >
+              <View style={styles.usersBox}>
+                <View style={styles.circleDimention}>
+                  <UserAvatar size={50} name={user.fullName} />
                 </View>
-              </TouchableOpacity>
-            ))}
-          </ScrollView>
-        )}
+                <Text style={styles.usersName}>{user.fullName}</Text>
+              </View>
+            </TouchableOpacity>
+          ))}
+        </ScrollView>
       </View>
     </View>
   );

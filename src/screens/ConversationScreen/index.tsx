@@ -35,11 +35,14 @@ import logo from '@assets/images/foto.png';
 export const ConversationScreen: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
+  const { user } = useSelector((state: RootState) => state.users);
+
   const conversations = useSelector(
     (state: RootState) => state.conversations.conversations,
   );
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
+  const [filteredChats, setFilteredChats] = useState<Conversation[]>([]);
 
   /// Layout: Header config
   useLayoutEffect(() => {
@@ -60,11 +63,13 @@ export const ConversationScreen: React.FC = () => {
 
   // Fetch conversations
   const loadConversations = async () => {
-    const data = await fetchConversations();
+    const data = await fetchConversations(user.id);
     dispatch(setConversations(data));
   };
   useEffect(() => {
-    loadConversations();
+    navigation.addListener('focus', async () => {
+      await loadConversations();
+    });
   }, []);
 
   // Pull to refresh
@@ -86,14 +91,19 @@ export const ConversationScreen: React.FC = () => {
   };
 
   // Filter conversations
-  const filteredChats =
-    conversations?.filter((conversation) =>
-      conversation.participant.fullName.includes(searchTerm.toLowerCase()),
-    ) || [];
+
+  useEffect(() => {
+    const _filteredChats = conversations.filter((conversation) => {
+      return conversation.participant.fullName
+        .toLowerCase()
+        .includes(searchTerm.toLowerCase());
+    });
+    setFilteredChats(_filteredChats);
+  }, [searchTerm]);
 
   return (
     <ScrollView
-      style={{ flex: 1 }}
+      style={{ flex: 1, backgroundColor: 'white' }}
       refreshControl={
         <RefreshControl onRefresh={onRefresh} refreshing={isRefreshing} />
       }
@@ -104,7 +114,7 @@ export const ConversationScreen: React.FC = () => {
           placeholder="Search..."
           placeholderTextColor="#b2bec3"
           value={searchTerm}
-          onChangeText={setSearchTerm}
+          onChangeText={(value) => setSearchTerm(value)}
         />
 
         {filteredChats.length === 0 ? (

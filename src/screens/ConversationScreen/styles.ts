@@ -3,7 +3,7 @@ import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f8f9fa',
+    backgroundColor: 'white',
     paddingHorizontal: 10,
   },
   input: {
@@ -34,6 +34,8 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 2 },
     shadowRadius: 4,
     elevation: 2,
+    borderWidth: 0.5,
+    borderColor: "rgba(68, 68, 68, 0.15)"
   },
   rowBetween: {
     flexDirection: 'row',

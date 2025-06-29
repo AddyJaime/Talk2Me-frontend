@@ -13,9 +13,9 @@ export const createConversation = async (senderId: number, receiverId: number): 
 };
 
 
-export const fetchConversations = async (): Promise<Conversation[] | []> => {
+export const fetchConversations = async (id: number): Promise<Conversation[] | []> => {
   try {
-    const response = await API.get("/conversations");
+    const response = await API.get(`/conversations/user/${id}`);
     return response.data;
   } catch (error) {
     console.log({ fetchConversations: error });

@@ -9,7 +9,6 @@ import {
   Animated,
   StyleSheet,
   Easing,
-  SafeAreaView,
 } from 'react-native';
 import React, { useEffect, useRef, useState } from 'react';
 
@@ -40,7 +39,6 @@ import { Ionicons } from '@expo/vector-icons';
 // Styles
 import styles from './style';
 import startdustImagine from '../../assets/images/stardust.png';
-
 export const ChatsScreen: React.FC = () => {
   const scrollRef = useRef<ScrollView>(null);
   const [text, setMessage] = useState('');
@@ -100,7 +98,7 @@ export const ChatsScreen: React.FC = () => {
   };
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <View style={{ flex: 1 }}>
       <AnimatedImage
         source={startdustImagine}
         style={{
@@ -154,7 +152,7 @@ export const ChatsScreen: React.FC = () => {
             borderTopWidth: 1,
             borderTopColor: '#eee',
             paddingTop: 4,
-            paddingBottom: 4,
+            paddingBottom: focused ? 5 : 35,
             paddingHorizontal: 12,
           }}
         >
@@ -184,6 +182,6 @@ export const ChatsScreen: React.FC = () => {
           </TouchableOpacity>
         </View>
       </KeyboardAvoidingView>
-    </SafeAreaView>
+    </View>
   );
 };
