@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+// React and React Native
 import {
   View,
   Text,
@@ -6,12 +6,22 @@ import {
   TextInput,
   KeyboardAvoidingView,
   Platform,
+  Animated,
+  StyleSheet,
+  Easing,
+  SafeAreaView,
 } from 'react-native';
-import styles from './style';
-import { useSelector } from 'react-redux';
-import { RootState } from '@/redux/store';
+import React, { useEffect, useRef, useState } from 'react';
 
+// Redux
+import { useSelector, useDispatch } from 'react-redux';
+import { RootState } from '@/redux/store';
+import { addMessage } from '@/redux/conversations/conversationsSlice';
+
+// API
 import { sendMessagestoBackend } from '@/api/chatApi';
+
+// Socket.io
 import {
   connectSocket,
   disconnectedSocket,
@@ -20,25 +30,41 @@ import {
   removeMessageListener,
 } from 'socket/socket';
 
-import { useDispatch } from 'react-redux';
-import { addMessage } from '@/redux/conversations/conversationsSlice';
+// Types
 import { Message } from '@/types';
+
+// External API
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { Ionicons } from '@expo/vector-icons';
-// import { useNavigation } from '@react-navigation/native';
 
-// para chatear
+// Styles
+import styles from './style';
+import startdustImagine from '../../assets/images/stardust.png';
+
 export const ChatsScreen: React.FC = () => {
   const scrollRef = useRef<ScrollView>(null);
   const [text, setMessage] = useState('');
   const dispatch = useDispatch();
-  // const navigation = useNavigation();
+  const [focused, setFocused] = useState(false);
+  const AnimatedImage = Animated.Image;
+  const translateX = useRef(new Animated.Value(0)).current;
 
-  // aqui debo usar el user activo y tomarlo del redux para saber quien es que esta acttivo
   const userId = 1;
   const { conversation } = useSelector(
     (state: RootState) => state.conversations,
   );
+
+  useEffect(() => {
+    Animated.loop(
+      Animated.timing(translateX, {
+        toValue: -100,
+        duration: 8000,
+        easing: Easing.linear,
+        useNativeDriver: true,
+      }),
+    ).start();
+  }, []);
+
   useEffect(() => {
     connectSocket();
     listenForMessages(async (message: Message) => {
@@ -73,77 +99,91 @@ export const ChatsScreen: React.FC = () => {
     }
   };
 
-  // useEffect(() => {
-  //   navigation.addListener('blur', () => {
-  //     console.log({ isFocused: false });
-  //     dispatch(setConversation(null));
-  //   });
-
-  //   navigation.addListener('focus', () => {
-  //     console.log({ isFocused: true });
-  //   });
-  // }, []);
-
   return (
-    <KeyboardAvoidingView
-      style={{ flex: 1 }}
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-      keyboardVerticalOffset={100}
-    >
-      <ScrollView
-        ref={scrollRef}
+    <SafeAreaView style={{ flex: 1 }}>
+      <AnimatedImage
+        source={startdustImagine}
+        style={{
+          ...StyleSheet.absoluteFillObject,
+          zIndex: -1,
+          transform: [{ translateX }],
+        }}
+        resizeMode="cover"
+      />
+      <KeyboardAvoidingView
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        keyboardVerticalOffset={100}
         style={{ flex: 1 }}
-        keyboardShouldPersistTaps="handled"
       >
-        {conversation?.messages?.map((message) => (
-          <View
-            key={message.id}
-            style={[
-              styles.messagesDisplay,
-              {
-                alignItems:
-                  message?.senderId === userId ? 'flex-end' : 'flex-start',
-              },
-            ]}
-          >
+        <ScrollView
+          ref={scrollRef}
+          style={{ flex: 1, marginTop: 10 }}
+          keyboardShouldPersistTaps="handled"
+        >
+          {conversation?.messages?.map((message) => (
             <View
+              key={message.id}
               style={[
-                styles.messagesColor,
+                styles.messagesDisplay,
                 {
-                  backgroundColor:
-                    message.senderId === userId ? 'green' : 'gray',
+                  alignItems:
+                    message?.senderId === userId ? 'flex-end' : 'flex-start',
                 },
               ]}
             >
-              <Text style={styles.text}>{message.text}</Text>
+              <View
+                style={[
+                  styles.messagesColor,
+                  {
+                    backgroundColor:
+                      message.senderId === userId ? 'green' : 'gray',
+                  },
+                ]}
+              >
+                <Text style={styles.text}>{message.text}</Text>
+              </View>
             </View>
-          </View>
-        ))}
-      </ScrollView>
-      <View
-        style={{
-          flexDirection: 'row',
-          alignItems: 'center',
-          // padding: 10,
-          backgroundColor: '#fff',
-          borderTopWidth: 1,
-          borderTopColor: '#eee',
-        }}
-      >
-        <TextInput
-          onChangeText={setMessage}
-          style={styles.textInput}
-          placeholder="Type..."
-          value={text}
-        />
-        <TouchableOpacity onPress={sendMessage} style={{ marginRight: 8 }}>
-          <Ionicons name="send" size={24} color="#007AFF" />
-        </TouchableOpacity>
-      </View>
-    </KeyboardAvoidingView>
+          ))}
+        </ScrollView>
+
+        <View
+          style={{
+            flexDirection: 'row',
+            alignItems: 'center',
+            backgroundColor: '#f9f9f9',
+            borderTopWidth: 1,
+            borderTopColor: '#eee',
+            paddingTop: 4,
+            paddingBottom: 4,
+            paddingHorizontal: 12,
+          }}
+        >
+          <TextInput
+            onFocus={() => setFocused(true)}
+            onBlur={() => setFocused(false)}
+            onChangeText={setMessage}
+            style={[
+              styles.textInput,
+              focused && { borderColor: '#007AFF', borderWidth: 1 },
+            ]}
+            placeholder="Type..."
+            placeholderTextColor="#999"
+            value={text}
+          />
+          <TouchableOpacity
+            onPress={sendMessage}
+            style={{
+              marginRight: 8,
+              backgroundColor: '#007AFF',
+              borderRadius: 20,
+              padding: 10,
+              marginLeft: 6,
+            }}
+          >
+            <Ionicons name="send" size={24} color="#fff" />
+          </TouchableOpacity>
+        </View>
+      </KeyboardAvoidingView>
+    </SafeAreaView>
   );
 };
-
-{
-  /* // que quiero lograr, o */
-}

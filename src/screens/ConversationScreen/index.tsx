@@ -30,7 +30,7 @@ import {
 
 // Styles and Assets
 import styles from './styles';
-import logo from '@assets/images/ChatGPT Image 14 jun 2025, 01_46_15 p.m..png';
+import logo from '@assets/images/foto.png';
 
 export const ConversationScreen: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
