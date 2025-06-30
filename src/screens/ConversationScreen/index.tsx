@@ -28,7 +28,7 @@ import {
   setConversations,
 } from 'redux/conversations/conversationsSlice';
 
-// Styles and Assets
+// Styles and ASSETS
 import styles from './styles';
 import logo from '@assets/images/foto.png';
 
