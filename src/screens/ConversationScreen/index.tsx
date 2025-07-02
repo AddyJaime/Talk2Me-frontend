@@ -67,11 +67,11 @@ export const ConversationScreen: React.FC = () => {
     dispatch(setConversations(data));
   };
   // discoment tomo
-  // useEffect(() => {
-  //   navigation.addListener('focus', async () => {
-  //     await loadConversations();
-  //   });
-  // }, []);
+  useEffect(() => {
+    navigation.addListener('focus', async () => {
+      await loadConversations();
+    });
+  }, []);
 
   // Pull to refresh
   const onRefresh = async () => {

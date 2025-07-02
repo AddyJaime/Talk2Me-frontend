@@ -44,7 +44,8 @@ export const ChatsScreen: React.FC = () => {
   const [text, setMessage] = useState('');
   const dispatch = useDispatch();
   const [focused, setFocused] = useState(false);
-  const AnimatedImage = Animated.Image;
+  const { Image: AnimatedImage } = Animated;
+
   const translateX = useRef(new Animated.Value(0)).current;
 
   const userId = 1;
@@ -52,7 +53,7 @@ export const ChatsScreen: React.FC = () => {
     (state: RootState) => state.conversations,
   );
 
-  useEffect(() => {
+  const startLoopAnimation = () => {
     Animated.loop(
       Animated.timing(translateX, {
         toValue: -100,
@@ -61,6 +62,10 @@ export const ChatsScreen: React.FC = () => {
         useNativeDriver: true,
       }),
     ).start();
+  };
+
+  useEffect(() => {
+    startLoopAnimation();
   }, []);
 
   useEffect(() => {
