@@ -66,12 +66,18 @@ export const ConversationScreen: React.FC = () => {
     const data = await fetchConversations(user.id);
     dispatch(setConversations(data));
   };
-  // discoment tomo
-  useEffect(() => {
-    navigation.addListener('focus', async () => {
-      await loadConversations();
-    });
+
+  useLayoutEffect(() => {
+    loadConversations();
   }, []);
+
+  // useEffect(() => {
+  //   const unsubscribe = navigation.addListener('focus', async () => {
+  //     await loadConversations();
+  //   });
+
+  //   return unsubscribe;
+  // }, []);
 
   // Pull to refresh
   const onRefresh = async () => {
@@ -92,7 +98,6 @@ export const ConversationScreen: React.FC = () => {
   };
 
   // Filter conversations
-
   useEffect(() => {
     const _filteredChats = conversations.filter((conversation) => {
       return conversation.participant.fullName
@@ -100,7 +105,8 @@ export const ConversationScreen: React.FC = () => {
         .includes(searchTerm.toLowerCase());
     });
     setFilteredChats(_filteredChats);
-  }, [searchTerm]);
+    // cuando la app carga react lee las dependecisas de este useffect
+  }, [conversations, searchTerm]);
 
   return (
     <ScrollView
