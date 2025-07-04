@@ -1,5 +1,5 @@
+// React & React Native
 import React from 'react';
-// react components
 import { View, Image, TouchableOpacity, Text, StatusBar } from 'react-native';
 
 // hooks
@@ -25,25 +25,23 @@ import { loginUser } from '@api/authApi';
 import ClearableInput from '@components/ClearableInput/ClearableInput';
 import { useAsyncStorage } from '@hooks';
 
-import { AppDispatch, RootState } from '../../redux/store';
+import { AppDispatch } from '../../redux/store';
 import { login } from 'redux/auth/authSlice';
 import { useDispatch } from 'react-redux';
-import { useSelector } from 'react-redux';
+import { LoginForm } from '../../types';
 
 export const LoginScreen: React.FC = () => {
-  const { control, handleSubmit, reset } = useForm();
+  const { control, handleSubmit, reset } = useForm<LoginForm>();
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
   const { setItem } = useAsyncStorage();
 
   const dispatch = useDispatch<AppDispatch>();
 
-  const authState = useSelector((state: RootState) => state.auth);
-  const onSubmit = async (data: any) => {
+  const onSubmit = async (data: LoginForm) => {
     try {
       const { token, user } = await loginUser(data);
 
       await setItem('authToken', { token, user });
-
       dispatch(login(user));
 
       reset({

@@ -24,8 +24,6 @@ const Navigation = () => {
       try {
         const authData = await getItem('authToken');
 
-        console.log(authData);
-
         if (authData?.token && authData?.user) {
           dispatch(setUser(authData.user));
           dispatch(login(authData.user));

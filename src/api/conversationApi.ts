@@ -33,12 +33,3 @@ export const fetchConversation = async (id: number): Promise<Conversation | null
   }
 }
 
-// export const fetchConversationBetweenTwoPeople = async (senderId: number, receiverId: number): Promise<Conversation | []> => {
-//   try {
-//     const response = await API.get(`/conversations/sender/${senderId}/receiver/${receiverId}`);
-//     return response.data;
-//   } catch (error) {
-//     console.log({ fetchConversationBetweenTwoPeople: error });
-//     return []
-//   }
-// };

@@ -7,7 +7,7 @@ export { SearchUserScreen } from "./SearchUserScreen"
 export { SettingScreen } from "./SettingScreen"
 export { SignUpScreen } from "./SignUpScreen"
 export { SplashScreen } from "./SplashScreen"
-export { StatusScreen } from "./StatusScreen"
+export { UserProfile } from "./UserProfile"
 
 
 

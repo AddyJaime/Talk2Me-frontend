@@ -67,6 +67,7 @@ export type Conversation = {
 
 
 
+
 }
 
 export type Chat = {
@@ -78,6 +79,6 @@ export type Chat = {
   unreadCount: number
 }
 export type User = {
-  id: number,
+  id: number | null,
   fullName: string
 }

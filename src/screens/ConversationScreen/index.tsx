@@ -1,5 +1,5 @@
 // React & React Native
-import React, { useEffect, useLayoutEffect, useState } from 'react';
+import React, { useMemo, useLayoutEffect, useState } from 'react';
 import {
   View,
   Text,
@@ -42,7 +42,7 @@ export const ConversationScreen: React.FC = () => {
   );
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
-  const [filteredChats, setFilteredChats] = useState<Conversation[]>([]);
+  // const [filteredChats, setFilteredChats] = useState<Conversation[]>([]);
 
   /// Layout: Header config
   useLayoutEffect(() => {
@@ -98,15 +98,15 @@ export const ConversationScreen: React.FC = () => {
   };
 
   // Filter conversations
-  useEffect(() => {
-    const _filteredChats = conversations.filter((conversation) => {
-      return conversation.participant.fullName
+  const filteredChats = useMemo(() => {
+    return conversations.filter((conversation) =>
+      conversation.participant.fullName
         .toLowerCase()
-        .includes(searchTerm.toLowerCase());
-    });
-    setFilteredChats(_filteredChats);
-    // cuando la app carga react lee las dependecisas de este useffect
+        .includes(searchTerm.toLowerCase()),
+    );
   }, [conversations, searchTerm]);
+
+  // cuando la app carga react lee las dependecisas de este useffect
 
   return (
     <ScrollView

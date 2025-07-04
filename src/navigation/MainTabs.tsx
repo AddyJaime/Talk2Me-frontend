@@ -1,5 +1,5 @@
 import React from 'react';
-import { ConversationScreen, SettingScreen, StatusScreen } from '@/screens';
+import { ConversationScreen, SettingScreen, UserProfile } from '@/screens';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
@@ -17,12 +17,12 @@ const MainTabs: React.FC = () => {
               iconName = 'chatbubbles-outline';
             } else if (route.name === 'Setting') {
               iconName = 'time-outline';
-            } else if (route.name === 'Status') {
-              iconName = 'settings-outline';
+            } else if (route.name === 'UserProfile') {
+              iconName = 'person-circle-outline';
             }
             return <Ionicons name={iconName} size={30} color={color} />;
           },
-          tabBarActiveTintColor: '#4CAF50',
+          tabBarActiveTintColor: '#0f2034',
           tabBarInactiveTintColor: 'gray',
         };
       }}
@@ -41,9 +41,9 @@ const MainTabs: React.FC = () => {
         component={SettingScreen}
       />
       <Tab.Screen
-        name="Status"
+        name="UserProfile"
         options={{ headerShown: false }}
-        component={StatusScreen}
+        component={UserProfile}
       />
     </Tab.Navigator>
   );

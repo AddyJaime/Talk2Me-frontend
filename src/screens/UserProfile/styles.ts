@@ -10,6 +10,10 @@ const styles = StyleSheet.create({
     marginHorizontal: 18,
     fontSize: 35,
 
+  },
+  avatar: {
+
+    width: 100
   }
 });
 
