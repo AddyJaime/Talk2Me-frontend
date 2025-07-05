@@ -7,43 +7,20 @@ import { sendMessagestoBackend } from '@/api/chatApi';
 
 // Socket.io
 import { emitMessage } from 'socket/socket';
-
 import { addMessage } from "@/redux/conversations/conversationsSlice"
 import { useDispatch } from "react-redux"
 import { removeMessageListener } from "@/socket/socket"
 
 
-import { useSelector } from "react-redux";
-import { RootState } from "@/redux/store";
-import { useState } from "react";
-
-
-
 const useChatSocket = () => {
   const dispatch = useDispatch()
-  const [text, setMessage] = useState('');
-  const { conversation } = useSelector(
-    (state: RootState) => state.conversations,
-  );
 
-  const userId = 1;
-
-  const sendMessage = async () => {
-    if (!text.trim() || !conversation) return;
-
-    const messageToSend = {
-      text: text,
-      senderId: userId,
-      receiverId: conversation?.receiverId ?? 0,
-      conversationId: conversation.id ?? 0,
-      createdAt: Date(),
-      updatedAt: Date(),
-    };
+  const sendMessage = async (messageToSend: Message) => {
 
     try {
       const backendData = await sendMessagestoBackend(messageToSend);
       emitMessage(backendData);
-      setMessage('');
+
     } catch (error) {
       console.log({ Error: 'Error sending Message', error });
     }
@@ -55,7 +32,7 @@ const useChatSocket = () => {
       console.log('Message receive', message);
       dispatch(addMessage(message));
     })
-    // esta funcion se ejecuta una vez que el componente se desmonta
+
     return () => {
       removeMessageListener()
       disconnectedSocket()

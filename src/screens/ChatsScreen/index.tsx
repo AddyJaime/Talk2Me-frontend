@@ -30,7 +30,6 @@ import startdustImagine from '../../assets/images/stardust.png';
 import useChatSocket from '@/hooks/useChatSocket';
 
 export const ChatsScreen: React.FC = () => {
-  useChatSocket();
   const sendMessage = useChatSocket();
   const scrollRef = useRef<ScrollView>(null);
   const [text, setMessage] = useState('');
@@ -130,7 +129,19 @@ export const ChatsScreen: React.FC = () => {
             value={text}
           />
           <TouchableOpacity
-            onPress={sendMessage}
+            onPress={() => {
+              if (!text.trim() || !conversation) return;
+              const messageToSend = {
+                text: text,
+                senderId: userId,
+                receiverId: conversation?.receiverId ?? 0,
+                conversationId: conversation?.id ?? 0,
+                createdAt: new Date().toISOString(),
+                updatedAt: new Date().toISOString(),
+              };
+              sendMessage(messageToSend);
+              setMessage('');
+            }}
             style={{
               marginRight: 8,
               backgroundColor: '#007AFF',
