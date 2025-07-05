@@ -13,24 +13,10 @@ import {
 import React, { useEffect, useRef, useState } from 'react';
 
 // Redux
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { RootState } from '@/redux/store';
-import { addMessage } from '@/redux/conversations/conversationsSlice';
-
-// API
-import { sendMessagestoBackend } from '@/api/chatApi';
-
-// Socket.io
-import {
-  connectSocket,
-  disconnectedSocket,
-  emitMessage,
-  listenForMessages,
-  removeMessageListener,
-} from 'socket/socket';
 
 // Types
-import { Message } from '@/types';
 
 // External API
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -39,13 +25,17 @@ import { Ionicons } from '@expo/vector-icons';
 // Styles
 import styles from './style';
 import startdustImagine from '../../assets/images/stardust.png';
+
+// hooks
+import useChatSocket from '@/hooks/useChatSocket';
+
 export const ChatsScreen: React.FC = () => {
+  useChatSocket();
+  const sendMessage = useChatSocket();
   const scrollRef = useRef<ScrollView>(null);
   const [text, setMessage] = useState('');
-  const dispatch = useDispatch();
   const [focused, setFocused] = useState(false);
   const { Image: AnimatedImage } = Animated;
-
   const translateX = useRef(new Animated.Value(0)).current;
 
   const userId = 1;
@@ -67,40 +57,6 @@ export const ChatsScreen: React.FC = () => {
   useEffect(() => {
     startLoopAnimation();
   }, []);
-
-  useEffect(() => {
-    connectSocket();
-    listenForMessages(async (message: Message) => {
-      console.log('Message receive', message);
-      dispatch(addMessage(message));
-    });
-
-    return () => {
-      removeMessageListener();
-      disconnectedSocket();
-    };
-  }, []);
-
-  const sendMessage = async () => {
-    if (!text.trim() || !conversation) return;
-
-    const messageToSend = {
-      text: text,
-      senderId: userId,
-      receiverId: conversation?.receiverId ?? 0,
-      conversationId: conversation.id ?? 0,
-      createdAt: Date(),
-      updatedAt: Date(),
-    };
-
-    try {
-      const backendData = await sendMessagestoBackend(messageToSend);
-      emitMessage(backendData);
-      setMessage('');
-    } catch (error) {
-      console.log({ Error: 'Error sending Message', error });
-    }
-  };
 
   return (
     <View style={{ flex: 1 }}>
