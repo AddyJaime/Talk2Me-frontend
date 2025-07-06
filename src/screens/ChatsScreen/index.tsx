@@ -7,16 +7,12 @@ import {
   KeyboardAvoidingView,
   Platform,
   Animated,
-  StyleSheet,
-  Easing,
 } from 'react-native';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 
 // Redux
 import { useSelector } from 'react-redux';
 import { RootState } from '@/redux/store';
-
-// Types
 
 // External API
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -28,6 +24,8 @@ import startdustImagine from '../../assets/images/stardust.png';
 
 // hooks
 import useChatSocket from '@/hooks/useChatSocket';
+import useAnimation from '@/hooks/useAnimation';
+import colors from '@/styles/colors';
 
 export const ChatsScreen: React.FC = () => {
   const sendMessage = useChatSocket();
@@ -35,47 +33,33 @@ export const ChatsScreen: React.FC = () => {
   const [text, setMessage] = useState('');
   const [focused, setFocused] = useState(false);
   const { Image: AnimatedImage } = Animated;
-  const translateX = useRef(new Animated.Value(0)).current;
+  const translateX = useAnimation();
 
   const userId = 1;
   const { conversation } = useSelector(
     (state: RootState) => state.conversations,
   );
 
-  const startLoopAnimation = () => {
-    Animated.loop(
-      Animated.timing(translateX, {
-        toValue: -100,
-        duration: 8000,
-        easing: Easing.linear,
-        useNativeDriver: true,
-      }),
-    ).start();
-  };
-
-  useEffect(() => {
-    startLoopAnimation();
-  }, []);
-
   return (
-    <View style={{ flex: 1 }}>
+    <View style={styles.container}>
       <AnimatedImage
         source={startdustImagine}
-        style={{
-          ...StyleSheet.absoluteFillObject,
-          zIndex: -1,
-          transform: [{ translateX }],
-        }}
+        style={[
+          styles.backgroundImage,
+          {
+            transform: [{ translateX }],
+          },
+        ]}
         resizeMode="cover"
       />
       <KeyboardAvoidingView
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
         keyboardVerticalOffset={100}
-        style={{ flex: 1 }}
+        style={styles.container}
       >
         <ScrollView
           ref={scrollRef}
-          style={{ flex: 1, marginTop: 10 }}
+          style={styles.scrollView}
           keyboardShouldPersistTaps="handled"
         >
           {conversation?.messages?.map((message) => (
@@ -98,31 +82,30 @@ export const ChatsScreen: React.FC = () => {
                   },
                 ]}
               >
-                <Text style={styles.text}>{message.text}</Text>
+                <Text style={styles.messageText}>{message.text}</Text>
               </View>
             </View>
           ))}
         </ScrollView>
 
         <View
-          style={{
-            flexDirection: 'row',
-            alignItems: 'center',
-            backgroundColor: '#f9f9f9',
-            borderTopWidth: 1,
-            borderTopColor: '#eee',
-            paddingTop: 4,
-            paddingBottom: focused ? 5 : 35,
-            paddingHorizontal: 12,
-          }}
+          style={[
+            styles.inputContainer,
+            {
+              paddingBottom: focused ? 5 : 35,
+            },
+          ]}
         >
           <TextInput
             onFocus={() => setFocused(true)}
             onBlur={() => setFocused(false)}
             onChangeText={setMessage}
             style={[
-              styles.textInput,
-              focused && { borderColor: '#007AFF', borderWidth: 1 },
+              styles.messageInput,
+              focused && {
+                borderColor: colors.buttonBackgroundColor,
+                borderWidth: 1,
+              },
             ]}
             placeholder="Type..."
             placeholderTextColor="#999"
@@ -142,13 +125,7 @@ export const ChatsScreen: React.FC = () => {
               sendMessage(messageToSend);
               setMessage('');
             }}
-            style={{
-              marginRight: 8,
-              backgroundColor: '#007AFF',
-              borderRadius: 20,
-              padding: 10,
-              marginLeft: 6,
-            }}
+            style={styles.sendButton}
           >
             <Ionicons name="send" size={24} color="#fff" />
           </TouchableOpacity>
