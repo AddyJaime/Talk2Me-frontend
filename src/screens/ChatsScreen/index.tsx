@@ -8,7 +8,7 @@ import {
   Platform,
   Animated,
 } from 'react-native';
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 // Redux
 import { useSelector } from 'react-redux';
@@ -39,6 +39,12 @@ export const ChatsScreen: React.FC = () => {
   const { conversation } = useSelector(
     (state: RootState) => state.conversations,
   );
+  // tirarle un ojo a esto
+  useEffect(() => {
+    if (scrollRef.current && conversation?.messages?.length) {
+      scrollRef.current.scrollToEnd({ animated: true });
+    }
+  }, [conversation?.messages]);
 
   return (
     <View style={styles.container}>
@@ -78,7 +84,9 @@ export const ChatsScreen: React.FC = () => {
                   styles.messagesColor,
                   {
                     backgroundColor:
-                      message.senderId === userId ? 'green' : 'gray',
+                      message.senderId === userId
+                        ? colors.chatSentBubble
+                        : colors.chatReceivedBubble,
                   },
                 ]}
               >

@@ -3,7 +3,10 @@ const colors = {
   inputBorderColor: '#eee',
   buttonBackgroundColor: '#007AFF',
   chatMessageText: "white",
-  messageInputBGColor: '#f0f0f0'
+  messageInputBGColor: '#f0f0f0',
+  chatSentBubble: 'green',
+  chatReceivedBubble: 'gray'
+
 
 }
 
