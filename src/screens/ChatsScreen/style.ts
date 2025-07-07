@@ -46,13 +46,13 @@ const styles = StyleSheet.create({
   messageInput: {
     flex: 1,
     backgroundColor: colors.messageInputBGColor,
-    paddingVertical: 10,
-    paddingHorizontal: 15,
-    borderRadius: 25,
-    padding: 12,
-    fontSize: 16,
-    marginVertical: 10,
-    marginLeft: 10,
+    paddingVertical: spacing.md,
+    paddingHorizontal: spacing.xl,
+    borderRadius: spacing.xxl,
+    padding: spacing.md,
+    fontSize: spacing.xl,
+    marginVertical: spacing.md,
+    marginLeft: spacing.md,
 
   },
 

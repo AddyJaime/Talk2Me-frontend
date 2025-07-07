@@ -1,11 +1,10 @@
 const spacing = {
-  xs: 1,      //extra small 2-4
-  sm: 8,     //small 6-8        
-  md: 12,     //medium 10-12
-  lg: 20,     // large 16-20
-  xl: 15,    //extra large 24-32
-  xxl: 25,
+  xs: 2,    // extra small (2–4)
+  sm: 8,    // small (6–8)
+  md: 12,   // medium (10–12)
+  lg: 15,   // large (14–16)
+  xl: 20,   // extra large (18–24)
+  xxl: 25,  // double extra large (24–32)
+};
 
-}
-
-export default spacing
+export default spacing;
