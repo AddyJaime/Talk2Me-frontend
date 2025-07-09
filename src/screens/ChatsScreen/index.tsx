@@ -115,7 +115,7 @@ export const ChatsScreen: React.FC = () => {
                 borderWidth: 1,
               },
             ]}
-            placeholder="Type..."
+            placeholder="Type here..."
             placeholderTextColor="#999"
             value={text}
           />
