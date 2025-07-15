@@ -6,11 +6,17 @@ import UserAvatar from 'react-native-user-avatar';
 export const UserProfile: React.FC = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [name, setName] = useState('');
+  const [tempName, setTempName] = useState('');
 
   const opennModal = () => {
     setIsModalVisible(true);
   };
   const closeModal = () => {
+    setName(tempName);
+    setIsModalVisible(false);
+  };
+
+  const cancelModal = () => {
     setIsModalVisible(false);
   };
 
@@ -25,19 +31,18 @@ export const UserProfile: React.FC = () => {
         </TouchableOpacity>
       </View>
       <Modal visible={isModalVisible} style={styles.modalContainer}>
-        <TouchableOpacity onPress={closeModal}>
+        <TouchableOpacity onPress={cancelModal}>
           <Text style={styles.cancelbutton}>Cancel</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={closeModal}>
           <Text style={styles.saveButton}>Save</Text>
         </TouchableOpacity>
         <TextInput
-          onChangeText={setName}
-          value={name}
+          onChangeText={setTempName}
+          value={tempName}
           style={styles.name}
         ></TextInput>
       </Modal>
     </View>
   );
 };
-
-// yo lo que quiero es cuando le de al boton save se actulaize el nombre en ell otro lado
-// cuando el usuario escriba en el text input quiero atrapar lo que el escriba
