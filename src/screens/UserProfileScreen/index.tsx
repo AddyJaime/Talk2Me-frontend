@@ -11,6 +11,7 @@ export const UserProfile: React.FC = () => {
   const opennModal = () => {
     setIsModalVisible(true);
   };
+
   const closeModal = () => {
     setName(tempName);
     setIsModalVisible(false);
