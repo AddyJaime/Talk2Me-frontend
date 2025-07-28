@@ -33,10 +33,10 @@ export const UserProfile: React.FC = () => {
       </View>
       <Modal visible={isModalVisible} style={styles.modalContainer}>
         <TouchableOpacity onPress={cancelModal}>
-          <Text style={styles.cancelbutton}>Cancel</Text>
+          <Text style={styles.cancelbutton}>cancel</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={closeModal}>
-          <Text style={styles.saveButton}>Save</Text>
+          <Text style={styles.saveButton}>save</Text>
         </TouchableOpacity>
         <TextInput
           onChangeText={setTempName}
