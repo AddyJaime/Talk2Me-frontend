@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
     fontSize: 35,
   },
   avatar: {
-    width: 100
+    width: 101
   },
   name: {
     backgroundColor: "gray",
