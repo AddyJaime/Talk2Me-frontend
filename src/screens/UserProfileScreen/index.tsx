@@ -15,7 +15,7 @@ export const UserProfile: React.FC = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [editing, setEditing] = useState<EditingField>(null);
   const [temp, setTemp] = useState('');
-
+  // field representa los tipos que acabo de definir alla arriba
   const openEdit = (field: EditingField) => {
     setEditing(field);
     setTemp(field === 'name' ? name : about);
