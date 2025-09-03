@@ -13,11 +13,11 @@ const MainTabs: React.FC = () => {
         return {
           tabBarIcon: ({ color }) => {
             let iconName;
-            if (route.name === 'Conversations') {
+            if (route.name === 'Chats') {
               iconName = 'chatbubbles-outline';
             } else if (route.name === 'Setting') {
               iconName = 'time-outline';
-            } else if (route.name === 'UserProfile') {
+            } else if (route.name === 'Profile') {
               iconName = 'person-circle-outline';
             }
             return <Ionicons name={iconName} size={30} color={color} />;
@@ -28,7 +28,7 @@ const MainTabs: React.FC = () => {
       }}
     >
       <Tab.Screen
-        name="Conversations"
+        name="Chats"
         options={{
           headerStyle: { backgroundColor: '#fff', shadowOpacity: 0 },
           headerTitle: '',
@@ -41,7 +41,7 @@ const MainTabs: React.FC = () => {
         component={SettingScreen}
       />
       <Tab.Screen
-        name="UserProfile"
+        name="Profile"
         options={{ headerShown: false }}
         component={UserProfile}
       />

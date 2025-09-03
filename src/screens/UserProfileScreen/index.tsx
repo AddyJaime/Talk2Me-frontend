@@ -46,7 +46,7 @@ export const UserProfile: React.FC = () => {
 
     if (!result.canceled && result.assets?.[0]?.uri) {
       setAvatarUri(result.assets[0].uri);
-      // TODO: subir avatar a tu backend o storage
+      // TODO: subir avatar a el backend o storage
     }
   };
 

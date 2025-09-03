@@ -22,6 +22,19 @@ export const SettingScreen: React.FC = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Settings</Text>
+
+      <TouchableOpacity style={styles.section}>
+        <Text style={styles.sectionText}>Account</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity style={styles.section}>
+        <Text style={styles.sectionText}>Privacy</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity style={styles.section}>
+        <Text style={styles.sectionText}>Notification</Text>
+      </TouchableOpacity>
+
       <TouchableOpacity style={styles.button} onPress={handleLogout}>
         <Text style={styles.buttonText}>Sign out</Text>
       </TouchableOpacity>
