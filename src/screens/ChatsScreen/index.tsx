@@ -40,11 +40,17 @@ export const ChatsScreen: React.FC = () => {
     (state: RootState) => state.conversations,
   );
   // tirarle un ojo a esto
+  const [messges, setMessages] = useState(conversation?.messages || []);
   useEffect(() => {
     if (scrollRef.current && conversation?.messages?.length) {
       scrollRef.current.scrollToEnd({ animated: true });
     }
   }, [conversation?.messages]);
+
+  const onPress = async (messageToSend: any) => {
+    const newMessage = await sendMessage(messageToSend);
+    setMessages([...messges, newMessage]);
+  };
 
   return (
     <View style={styles.container}>
@@ -68,7 +74,7 @@ export const ChatsScreen: React.FC = () => {
           style={styles.scrollView}
           keyboardShouldPersistTaps="handled"
         >
-          {conversation?.messages?.map((message) => (
+          {messges.map((message) => (
             <View
               key={message.id}
               style={[
@@ -130,7 +136,7 @@ export const ChatsScreen: React.FC = () => {
                 createdAt: new Date().toISOString(),
                 updatedAt: new Date().toISOString(),
               };
-              sendMessage(messageToSend);
+              onPress(messageToSend);
               setMessage('');
             }}
             style={styles.sendButton}

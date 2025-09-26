@@ -21,6 +21,8 @@ const useChatSocket = () => {
       const backendData = await sendMessagestoBackend(messageToSend);
       emitMessage(backendData);
 
+      return backendData
+
     } catch (error) {
       console.log({ Error: 'Error sending Message', error });
     }
