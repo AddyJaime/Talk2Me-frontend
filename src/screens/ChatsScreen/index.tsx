@@ -39,7 +39,7 @@ export const ChatsScreen: React.FC = () => {
   const { conversation } = useSelector(
     (state: RootState) => state.conversations,
   );
-  // tirarle un ojo a esto
+
   const [messges, setMessages] = useState(conversation?.messages || []);
   useEffect(() => {
     if (scrollRef.current && conversation?.messages?.length) {
