@@ -1,3 +1,4 @@
+// other components
 import { connectSocket, disconnectedSocket, listenForMessages } from "@/socket/socket"
 import { Message } from "@/types"
 import { useEffect } from "react"
