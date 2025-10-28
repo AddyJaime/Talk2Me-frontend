@@ -14,7 +14,8 @@
     "ios": {
       "supportsTablet": true,
       "jsEngine": "jsc",
-      "newArchEnabled": false
+      "newArchEnabled": false,
+      "bundleIdentifier": "com.app.test"
     },
     "android": {
       "adaptiveIcon": {
