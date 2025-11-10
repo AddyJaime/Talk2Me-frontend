@@ -4,7 +4,7 @@ const colors = {
   buttonBackgroundColor: '#007AFF',
   chatMessageText: "white",
   messageInputBGColor: '#f0f0f0',
-  chatSentBubble: 'green',
+  chatSentBubble: 'blue',
   chatReceivedBubble: 'gray'
 
 
