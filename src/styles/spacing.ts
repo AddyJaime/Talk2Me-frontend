@@ -5,6 +5,7 @@ const spacing = {
   lg: 15,   // large (14–16)
   xl: 20,   // extra large (18–24)
   xxl: 25,  // double extra large (24–32)
+  // hello wordl
 };
 
 export default spacing;

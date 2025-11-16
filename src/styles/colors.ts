@@ -6,8 +6,6 @@ const colors = {
   messageInputBGColor: '#f0f0f0',
   chatSentBubble: 'blue',
   chatReceivedBubble: 'gray'
-
-
 }
 
 

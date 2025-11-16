@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import React, { useEffect, useRef, useState } from 'react';
 
-// Redux
+
 import { useSelector } from 'react-redux';
 import { RootState } from '@/redux/store';
 

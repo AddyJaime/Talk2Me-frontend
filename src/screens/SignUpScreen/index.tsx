@@ -5,10 +5,9 @@ import { View, Text, Image, TouchableOpacity, StatusBar } from 'react-native';
 
 // hooks
 import { Controller, useForm } from 'react-hook-form';
-
 // Styles
-import styles from '@screens/SignUpScreen/styles';
 
+import styles from '@screens/SignUpScreen/styles';
 // images
 import talk2meBgOff from '@assets/images/Talk2me-Background-Off.png';
 import backgroundImage from '@assets/images/background.png';
